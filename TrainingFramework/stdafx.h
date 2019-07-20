@@ -6,10 +6,13 @@
 #pragma once
 
 #include "targetver.h"
+#include "HandyString.h"
+#include "SceneManager.h"
+#include "ResourceManager.h"
 
 #include <stdio.h>
 #include <tchar.h>
-
-
+#include <iostream>
+using namespace std;
 
 // TODO: reference additional headers your program requires here

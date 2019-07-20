@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Texture.h"
-#include <iostream>
 
 Texture::Texture()
 {
@@ -8,7 +7,6 @@ Texture::Texture()
 
 Texture::Texture(char * filename)
 {
-	int width, height, bpp;
 	char * imageData = LoadTGA(filename, &width, &height, &bpp);
 	if (imageData == NULL) { std::cout << "Image reading error\n"; return; }
 	this->filename = filename;

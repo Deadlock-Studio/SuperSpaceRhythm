@@ -19,11 +19,14 @@ int Init ( ESContext *esContext )
 {
 	glClearColor ( 1.0f, 1.0f, 1.0f, 1.0f );
 
+	SceneManager::CreateInstance();
+	ResourceManager::CreateInstance();
+
 	//Load scene
+	ResourceManager::GetInstance()->LoadEngineResources();
 	SceneManager::GetInstance()->LoadScene("../Resources/Scenes/Demo5.scn");
 	SceneManager::GetInstance()->UseCamera(0);
-	SceneManager::GetInstance()->PrintAll();
-	//SceneManager::GetInstance()->cameraList.at(0)->Print();
+	//SceneManager::GetInstance()->PrintAll();
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
@@ -43,6 +46,8 @@ void Draw ( ESContext *esContext )
 void Update ( ESContext *esContext, float deltaTime )
 {
 	SceneManager::GetInstance()->Update(deltaTime);
+
+	//TODO control component
 	Camera * cam = SceneManager::GetInstance()->usedCamera;
 	Vector3 zero = Vector3(0, 0, 0);
 
@@ -112,8 +117,6 @@ void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 
 void CleanUp()
 {
-	//glDeleteBuffers(1, &vboId);
-
 	SceneManager::DestroyInstance();
 	ResourceManager::DestroyInstance();
 }
@@ -125,9 +128,6 @@ int _tmain(int argc, _TCHAR* argv[])
     esInitContext ( &esContext );
 
 	esCreateWindow ( &esContext, "Hello Triangle", Globals::screenWidth, Globals::screenHeight, ES_WINDOW_RGB | ES_WINDOW_DEPTH);
-
-	SceneManager::CreateInstance();
-	ResourceManager::CreateInstance();
 
 	if ( Init ( &esContext ) != 0 )
 		return 0;

@@ -8,21 +8,6 @@ Model::Model()
 {
 }
 
-float height(float x, float z) {
-	ResourceManager * resource = ResourceManager::GetInstance();
-
-	int mapX = (int)(x + 64);
-	int mapZ = (int)(z + 64);
-
-	int mapPoint = 0;
-	float heightValue = 0;
-	
-	if (mapX > 127) mapX = 127;
-	if (mapZ > 127) mapZ = 127;
-
-	return ((unsigned int)resource->heightmap[mapX + mapZ * 128] / (float)255) * resource->height;
-}
-
 Model::Model(char * filename)
 {
 	FILE * f;
@@ -38,24 +23,12 @@ Model::Model(char * filename)
 			offset = zero;
 
 			// 0. pos:[0.134000, 1.020300, -0.083900];
-			//norm:[0.662725, 0.317712, -0.678126];
-			//binorm:[0.014559, 0.899903, 0.435847];
-			//tgt:[-0.748721, 0.298719, -0.591763];
 			//uv:[0.611900, 0.886700];
 			fscanf(f, "%*d. ");
 			float x, y, z;
 			fscanf(f, "pos:[%f, %f, %f]; ", &x, &y, &z);
-			if (!HandyString::getFileName(string(filename)).compare("Terrain")) {
-				offset.y += height(x, z);
-			}
 			ver.pos.x = x + offset.x; ver.pos.y = y + offset.y; ver.pos.z = z + offset.z;
-			fscanf(f, "norm:[%f, %f, %f]; ", &x, &y, &z);
-			ver.normal.x = x; ver.normal.y = y; ver.normal.z = z;
-			fscanf(f, "binorm:[%f, %f, %f]; ", &x, &y, &z);
-			ver.binormal.x = x; ver.binormal.y = y; ver.binormal.z = z;
-			fscanf(f, "tgt:[%f, %f, %f]; ", &x, &y, &z);
-			ver.tangent.x = x; ver.tangent.y = y; ver.tangent.z = z;
-			fscanf(f, "uv:[%f, %f]; \n", &x, &y);
+			fscanf(f, "uv:[%f, %f];\n", &x, &y);
 			ver.uv.x = x; ver.uv.y = y;
 
 			verticesList[i] = ver;

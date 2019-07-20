@@ -1,6 +1,8 @@
 #pragma once
+#include "Model.h"
+#include "Texture.h"
+#include "Shaders.h"
 #include <vector>
-#include "Object.h"
 
 class ResourceManager
 {
@@ -16,8 +18,6 @@ public:
 	{
 		if (ms_pInstance == NULL)
 			ms_pInstance = new ResourceManager;
-		for (int i = 0; i < 128 * 128; i++)
-			GetInstance()->heightmap[i] = 0;
 	}
 	static ResourceManager * GetInstance()
 	{
@@ -33,25 +33,25 @@ public:
 		}
 	}
 
+	void LoadEngineResources();
 	int LoadNFG(char * filename);
 	int LoadTGA(char * filename);
 	int LoadShaders(char *verFile, char *fragFile);
-	int LoadCubeTGA(char * filename);
-	int LoadRaw(char * filename);
+
+	Model * GetSquare() { return GetModel(squareId); }
 	Model * GetModel(int modelID);
 	Texture * GetTexture(int textureID);
-	CubeTexture * GetCubeTexture(int cubetextID);
 	Shaders * GetShaders(int shadersID);
+
 	void DeleteAll();
 
 protected:
 	static ResourceManager * ms_pInstance;
 
 public:
-	float height = 10.0f;
-	BYTE heightmap[128*128];
-	std::vector<Model *> modelMap;
-	std::vector<Texture *> textureMap;
-	std::vector<Shaders *> shaderMap;
-	std::vector<CubeTexture *> cubeTextMap;
+	vector<Model *> modelMap{};
+	vector<Texture *> textureMap{};
+	vector<Shaders *> shaderMap{};
+
+	int squareId = -1;
 };

@@ -9,6 +9,7 @@ public:
 	~Texture();
 
 	GLuint texId;
+	int width, height, bpp;
 	char * filename;
 };
 

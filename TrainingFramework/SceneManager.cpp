@@ -1,9 +1,6 @@
 #include "stdafx.h"
-#include "SceneManager.h"
-#include "ResourceManager.h"
 #include <iostream>
 #include <fstream>
-#include "HandyString.h"
 
 using namespace std;
 
@@ -11,110 +8,73 @@ SceneManager * SceneManager::ms_pInstance = NULL;
 
 void SceneManager::LoadScene(char * filename)
 {
+	shaders = new Shaders("../Resources/Shaders/CommonShaderVS.vs", 
+		"../Resources/Shaders/CommonShaderFS.fs");
+
 	sceneName = strdup(HandyString::getFileName(string(filename)).c_str());
-	ResourceManager * resource = ResourceManager::GetInstance();
 
 	string line;
 	ifstream file(filename);
 	if (file.is_open())
 	{
 		while (getline(file, line)) {
+			//TODO check invalid input
 			int id;
-			if (line.compare("") == 0) break;
-			if (sscanf(line.c_str(), "OBJECT %d\n", &id)) {
-				//New object, read until EoL
-				Object * obj = new Object();
-
-				float x, y, z;
-				getline(file, line);
-				sscanf(line.c_str(), "POS: %f, %f, %f\n", &x, &y, &z);
-				obj->setPosition(x, y, z);
-				getline(file, line);
-				sscanf(line.c_str(), "ROT: %f, %f, %f\n", &x, &y, &z);
-				obj->setRotation(x, y, z);
-				getline(file, line);
-				sscanf(line.c_str(), "SCA: %f, %f, %f\n", &x, &y, &z);
-				obj->setScale(x, y, z);
-
-				getline(file, line);
-				sscanf(line.c_str(), "EXT:\n");
-
-				int modelCount = 0, verShaderCount = 0, fragShaderCount = 0, heightmapCount = 0;
-				char * verFile,  * fragFile;
-
-				while (getline(file, line)) {
-					if (line.compare("") == 0) break;
-					if (!HandyString::getFileExt(line).compare("nfg")) {
-						//Model
-						if (++modelCount > 1) { cout << "An Object can only have one model\n"; delete obj; return; }
-						obj->modelID = resource->LoadNFG(strdup(line.c_str()));
-					}
-					else if (!HandyString::getFileExt(line).compare("tga")) {
-						if (!HandyString::getTypeFolder(line).compare("Textures")) {
-							//Texture
-							bool exist = false;
-							int text = resource->LoadTGA(strdup(line.c_str()));
-							for (std::vector<int>::iterator it = obj->textureID.begin(); it != obj->textureID.end(); ++it) {
-								if (*(it) == text) exist = true;
-							} 
-							if (!exist) obj->textureID.push_back(text);
-						}	
-						else if (!HandyString::getTypeFolder(line).compare("CubeTextures")) {
-							//CubeTexture
-							bool exist = false;
-
-							int cube = resource->LoadCubeTGA(strdup(line.c_str()));
-							for (std::vector<int>::iterator it = obj->cubeTextureID.begin(); it != obj->cubeTextureID.end(); ++it) {
-								if (*(it) == cube) exist = true;
-							}
-							if (!exist) obj->cubeTextureID.push_back(cube);
-						}
-					}
-					else if (!HandyString::getFileExt(line).compare("raw")) {
-						//Heightmap
-						if (++heightmapCount > 1) { cout << "An Object can only have one height map\n"; delete obj; return; }
-						resource->LoadRaw(strdup(line.c_str()));
-					}
-					else if (!HandyString::getFileExt(line).compare("vs")) {
-						//Vertex Shader
-						if (++verShaderCount > 1) { cout << "An Object can only have one vertex shader\n"; delete obj; return; }
-						verFile = strdup(line.c_str());
-					}
-					else if (!HandyString::getFileExt(line).compare("fs")) {
-						//Fragment Shader
-						if (++fragShaderCount > 1) { cout << "An Object can only have one fragment shader\n"; delete obj; return; }
-						fragFile = strdup(line.c_str());
-					}
-				}
-
-				if (verShaderCount == 1 && fragShaderCount == 1)
-					obj->shadersID = resource->LoadShaders(verFile, fragFile);
-				obj->initMatrix();
-				objectList.push_back(obj);
-			}
-			else if (sscanf(line.c_str(), "CAMERA %d\n", &id)) {
+			if (line.compare("") == 0) continue;
+			if (sscanf(line.c_str(), "CAMERA %d", &id)) {
 				//New Camera
 				Camera * cam = new Camera();
 
 				float x;
 				getline(file, line);
-				sscanf(line.c_str(), "NEAR: %f\n", &x);
+				sscanf(line.c_str(), "NEAR: %f", &x);
 				cam->nearPlane = x;
 				getline(file, line);
-				sscanf(line.c_str(), "FAR: %f\n", &x);
+				sscanf(line.c_str(), "FAR: %f", &x);
 				cam->farPlane = x;
 				getline(file, line);
-				sscanf(line.c_str(), "FOV: %f\n", &x);
+				sscanf(line.c_str(), "FOV: %f", &x);
 				cam->fov = x;
 				getline(file, line);
-				sscanf(line.c_str(), "SPEED: %f\n", &x);
+				sscanf(line.c_str(), "SPEED: %f", &x);
 				cam->speed = x;
 				getline(file, line);
-				sscanf(line.c_str(), "ROTSPEED: %f\n", &x);
+				sscanf(line.c_str(), "ROTSPEED: %f", &x);
 				cam->rotSpeed = x;
 
 				cam->InitCamera();
 				cameraList.push_back(cam);
+			}
+			else if (sscanf(line.c_str(), "OBJECT %d", &id)) {
+				//New Object
+				GameObject * obj = new GameObject();
+				getline(file, line);
+				sscanf(line.c_str(), "COMPONENT:");
+				while (getline(file, line)) {
+					if (!line.compare("")) break;
+					else if (!line.compare("TRANSFORM")) {
+						float x, y, z;
+						getline(file, line);
+						sscanf(line.c_str(), "pos: %f, %f, %f", &x, &y, &z);
+						Vector3 position = Vector3(x, y, z);
+						getline(file, line);
+						sscanf(line.c_str(), "rot: %f, %f, %f", &x, &y, &z);
+						Vector3 rotation = Vector3(x, y, z);
+						getline(file, line);
+						sscanf(line.c_str(), "scl: %f, %f, %f", &x, &y, &z);
+						Vector3 scale = Vector3(x, y, z);
+						obj->updateTransform(position, rotation, scale);
+					}
+					else if (!line.compare("SPRITE")) {
+						getline(file, line);
+						SpriteRenderer * sprRender = new SpriteRenderer(strdup(line.c_str()));
+						obj->AddComponent(sprRender);
+					}
+					else if (!line.compare("ANIMATION")) {
+
+					}
+				}
+				objectList.push_back(obj);
 			}
 		}
 		file.close();
@@ -125,31 +85,30 @@ void SceneManager::LoadScene(char * filename)
 
 void SceneManager::PrintAll()
 {
-	for (std::vector<Object*>::iterator it = objectList.begin(); it != objectList.end(); ++it) {
+	for (std::vector<GameObject*>::iterator it = objectList.begin(); it != objectList.end(); ++it) {
 		(*it)->Print();
+		cout << "\n";
 	}
 }
 
 void SceneManager::DrawAll()
 {
-	if (usedCamera == NULL) { cout << "No camera selected.\n"; }
+	if (usedCamera == NULL) { cout << "No camera selected.\n"; return; }
 
-	for (std::vector<Object*>::iterator it = objectList.begin(); it != objectList.end(); ++it) {
-		(*it)->Draw(usedCamera);
+	for (std::vector<GameObject*>::iterator it = objectList.begin(); it != objectList.end(); ++it) {
+		(*it)->Draw();
 	}
 }
 
 void SceneManager::DeleteAll()
 {
-	for (std::vector<Object*>::iterator it = objectList.begin(); it != objectList.end(); ++it) {
+	for (std::vector<GameObject*>::iterator it = objectList.begin(); it != objectList.end(); ++it) {
 		delete *it;
 	}
 
 	for (std::vector<Camera*>::iterator it = cameraList.begin(); it != cameraList.end(); ++it) {
 		delete *it;
 	}
-
-	usedCamera = NULL;
 }
 
 void SceneManager::UseCamera(int camNum)
@@ -160,6 +119,8 @@ void SceneManager::UseCamera(int camNum)
 void SceneManager::Update(float deltaTime)
 {
 	time += deltaTime;
-	if (deltaTime > 3000)
-		deltaTime -= 3000;
+
+	for (std::vector<GameObject*>::iterator it = objectList.begin(); it != objectList.end(); ++it) {
+		(*it)->Update();
+	}
 }
