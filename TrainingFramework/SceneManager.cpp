@@ -96,7 +96,8 @@ void SceneManager::DrawAll()
 	if (usedCamera == NULL) { cout << "No camera selected.\n"; return; }
 
 	for (std::vector<GameObject*>::iterator it = objectList.begin(); it != objectList.end(); ++it) {
-		(*it)->Draw();
+		if ((*it)->isActive)
+			(*it)->Draw();
 	}
 }
 
@@ -121,6 +122,7 @@ void SceneManager::Update(float deltaTime)
 	time += deltaTime;
 
 	for (std::vector<GameObject*>::iterator it = objectList.begin(); it != objectList.end(); ++it) {
-		(*it)->Update();
+		if ((*it)->isActive)
+			(*it)->Update();
 	}
 }

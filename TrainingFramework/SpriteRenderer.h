@@ -12,10 +12,8 @@ public:
 
 	void Draw() override;
 
-	int pixelsPerUnit = 100;
-private:
 	Matrix scaleMatrix;
 	int textureId = -1;
-	int modelId;
+	int pixelsPerUnit = 100;
 };
 

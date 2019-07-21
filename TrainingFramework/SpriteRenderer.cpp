@@ -31,9 +31,9 @@ void SpriteRenderer::Draw()
 
 	ResourceManager * resource = ResourceManager::GetInstance();
 	Camera * cam = SceneManager::GetInstance()->usedCamera;
-	Transform * objTrans = ((GameObject*)parentObj)->GetComponent<Transform>();
+	Transform * objTrans = ((GameObject*)parentObj)->transform;
 
-	Matrix mvp = objTrans->getModelMatrix() * scaleMatrix * cam->m_view * cam->m_perspective;
+	Matrix mvp = objTrans->m_model * scaleMatrix * cam->m_view * cam->m_perspective;
 	
 	Model * model = resource->GetSquare();
 	Texture * text = resource->GetTexture(textureId);

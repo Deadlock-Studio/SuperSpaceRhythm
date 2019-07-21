@@ -4,6 +4,7 @@
 #include "Shaders.h"
 #include "Camera.h"
 #include "Component.h"
+#include "Transform.h"
 #include <vector>
 using namespace std;
 
@@ -31,10 +32,9 @@ public:
 	//Debug
 	void Print();
 
-private:
-	vector<Component *> componentList{};
-	vector<ComponentType> typeList{};
 	bool isActive = true;
+	Transform * transform = NULL;
+	vector<Component *> componentList{};
 };
 
 template<typename CheckType>
