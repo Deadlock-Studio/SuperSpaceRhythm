@@ -16,7 +16,7 @@ void Camera::InitCamera()
 	float aspect = (GLfloat)Globals::screenWidth / (GLfloat)Globals::screenHeight;
 	m_perspective.SetPerspective(fov, aspect, nearPlane, farPlane);
 
-	position = Vector3(0.0, 1.5, 5.0);
+	position = Vector3(0.0, 0, 5);
 	cameraDirection = Vector3(0.0, 0.0, -1.0);
 	cameraUp = Vector3(0.0, 1.0, 0.0);
 

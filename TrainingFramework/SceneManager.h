@@ -1,7 +1,7 @@
 #pragma once
-#include <vector>
-#include "Object.h"
+#include "SpriteRenderer.h"
 #include "Camera.h"
+#include "GameObject.h"
 
 class SceneManager
 {
@@ -43,8 +43,9 @@ protected:
 	static SceneManager * ms_pInstance;
 
 public:
+	Shaders * shaders;
 	float time = 0;
-	std::vector<Object *> objectList;
+	std::vector<GameObject *> objectList;
 	std::vector<Camera *> cameraList;
 	Camera * usedCamera = NULL;
 	char * sceneName;
