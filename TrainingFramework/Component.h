@@ -1,7 +1,6 @@
 #pragma once
 
 enum ComponentType {
-	TRANSFORM,
 	SPRITE,
 };
 

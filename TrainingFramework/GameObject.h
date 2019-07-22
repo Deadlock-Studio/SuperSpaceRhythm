@@ -28,6 +28,8 @@ public:
 
 	template <typename CheckType>
 	CheckType * GetComponent();
+
+	void setActive(bool state) { isActive = state; }
 	
 	//Debug
 	void Print();

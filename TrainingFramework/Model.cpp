@@ -66,5 +66,5 @@ Model::Model(char * filename)
 
 Model::~Model()
 {
-
+	free(filename);
 }

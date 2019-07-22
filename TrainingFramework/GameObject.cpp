@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "GameObject.h"
 #include "Transform.h"
-#include "ResourceManager.h"
-#include "SceneManager.h"
 
 GameObject::GameObject()
 {
@@ -12,6 +10,12 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
+	delete transform;
+	
+	for (std::vector<Component *>::iterator it = componentList.begin(); it != componentList.end(); ++it) {
+		delete *it;
+	}
+	componentList.clear();
 }
 
 void GameObject::updateTransform(Vector3 position, Vector3 rotation, Vector3 scale)

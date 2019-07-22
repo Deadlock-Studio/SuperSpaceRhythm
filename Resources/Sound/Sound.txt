@@ -1,0 +1,6 @@
+MUSIC 1
+FILE ../Resources/Sound/Music/cinderella_step.ogg
+MAP 484 ../Resources/Sound/Music/cinderella_step.ogg.txt
+
+SFX 1
+FILE ../Resources/Sound/Sfx/hit.ogg

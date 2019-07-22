@@ -4,7 +4,6 @@
 
 Transform::Transform()
 {
-	type = TRANSFORM;
 	m_model.SetIdentity();
 }
 

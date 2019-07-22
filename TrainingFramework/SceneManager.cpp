@@ -106,10 +106,18 @@ void SceneManager::DeleteAll()
 	for (std::vector<GameObject*>::iterator it = objectList.begin(); it != objectList.end(); ++it) {
 		delete *it;
 	}
+	objectList.clear();
 
 	for (std::vector<Camera*>::iterator it = cameraList.begin(); it != cameraList.end(); ++it) {
 		delete *it;
 	}
+	cameraList.clear();
+
+	usedCamera = NULL;
+	delete shaders;
+	free(sceneName);
+
+	ResourceManager::GetInstance()->DeleteAll();
 }
 
 void SceneManager::UseCamera(int camNum)

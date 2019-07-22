@@ -8,8 +8,17 @@ ROTSPEED: 3.14
 OBJECT 0
 COMPONENT:
 TRANSFORM
-pos: 0, 0, -100
+pos: 0, 0, -5
 rot: 0, 0, 0
 scl: 1, 1, 1
 SPRITE
 ../Resources/Textures/player_princess.tga
+
+OBJECT 1
+COMPONENT:
+TRANSFORM
+pos: 0, -1, -5
+rot: 0, 0, 0
+scl: 1, 1, 1
+SPRITE
+../Resources/Textures/beat_grid_demo.tga

@@ -29,4 +29,5 @@ Texture::Texture(char * filename)
 
 Texture::~Texture()
 {
+	free(filename);
 }

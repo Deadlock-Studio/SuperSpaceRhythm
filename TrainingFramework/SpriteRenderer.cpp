@@ -33,7 +33,8 @@ void SpriteRenderer::Draw()
 	Camera * cam = SceneManager::GetInstance()->usedCamera;
 	Transform * objTrans = ((GameObject*)parentObj)->transform;
 
-	Matrix mvp = objTrans->m_model * scaleMatrix * cam->m_view * cam->m_perspective;
+	//Matrix mvp = objTrans->m_model * scaleMatrix * cam->m_view * cam->m_perspective;
+	Matrix mvp = (objTrans->m_model * scaleMatrix) * cam->m_view * cam->m_perspective;
 	
 	Model * model = resource->GetSquare();
 	Texture * text = resource->GetTexture(textureId);
@@ -41,6 +42,7 @@ void SpriteRenderer::Draw()
 
 	glUseProgram(shaders->program);
 
+	//Model, uv
 	glBindBuffer(GL_ARRAY_BUFFER, model->vboId);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, model->iboId);
 
@@ -50,7 +52,11 @@ void SpriteRenderer::Draw()
 	glEnableVertexAttribArray(shaders->uvLoc);
 	glVertexAttribPointer(shaders->uvLoc, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(Vector3) * 1));
 
+	//MvP matrix
 	glUniformMatrix4fv(shaders->mvpLoc, 1, GL_FALSE, (GLfloat*)&mvp.m[0][0]);
+
+	//Texture
+	glBindTexture(GL_TEXTURE_2D, text->texId);
 
 	glUniform1i(shaders->textureLoc, 0);
 

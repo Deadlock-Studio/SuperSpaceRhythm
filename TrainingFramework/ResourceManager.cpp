@@ -67,13 +67,16 @@ void ResourceManager::DeleteAll()
 	for (std::vector<Model*>::iterator it = modelMap.begin(); it != modelMap.end(); ++it) {
 		delete *it;
 	}
+	modelMap.clear();
 
 	for (std::vector<Texture*>::iterator it = textureMap.begin(); it != textureMap.end(); ++it) {
 		delete *it;
 	}
+	textureMap.clear();
 
 	for (std::vector<Shaders*>::iterator it = shaderMap.begin(); it != shaderMap.end(); ++it) {
 		delete *it;
 	}
+	shaderMap.clear();
 }
 

@@ -20,3 +20,6 @@
 
 //Reset
 #define R_MASK (1 << 13)
+
+//Beat hit
+#define E_MASK (1 << 14)

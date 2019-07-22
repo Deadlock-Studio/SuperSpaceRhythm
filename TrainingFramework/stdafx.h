@@ -6,9 +6,12 @@
 #pragma once
 
 #include "targetver.h"
+#include "Globals.h"
 #include "HandyString.h"
 #include "SceneManager.h"
 #include "ResourceManager.h"
+#include "InputManager.h"
+#include "SoundManager.h"
 
 #include <stdio.h>
 #include <tchar.h>

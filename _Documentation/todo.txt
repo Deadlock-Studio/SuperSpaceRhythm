@@ -1,0 +1,13 @@
+orth
+animation
+sound
+physic
+inputmanger
+logic
+gamestates
+menu
+
+luxury:
+replace char * with string, we have the technology
+bind key
+adjust volume
