@@ -33,7 +33,6 @@ void SpriteRenderer::Draw()
 	Camera * cam = SceneManager::GetInstance()->usedCamera;
 	Transform * objTrans = ((GameObject*)parentObj)->transform;
 
-	//Matrix mvp = objTrans->m_model * scaleMatrix * cam->m_view * cam->m_perspective;
 	Matrix mvp = (objTrans->m_model * scaleMatrix) * cam->m_view * cam->m_perspective;
 	
 	Model * model = resource->GetSquare();

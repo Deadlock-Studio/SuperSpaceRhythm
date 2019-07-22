@@ -1,8 +1,5 @@
-orth
 animation
-sound
 physic
-inputmanger
 logic
 gamestates
 menu
