@@ -561,13 +561,13 @@ Matrix & Matrix::SetPerspective(GLfloat fovY, GLfloat aspect, GLfloat nearPlane,
 Matrix & Matrix::SetOrtho(GLfloat right, GLfloat left, GLfloat bottom, GLfloat top, GLfloat zNear, GLfloat zFar)
 {
 
-	m[0][0] = -2 / (right - left);
+	m[0][0] = 2 / (right - left);
 	m[0][1] = 0;
 	m[0][2] = 0;
 	m[0][3] = 0;
 
 	m[1][0] = 0;
-	m[1][1] = -2 / (top - bottom);
+	m[1][1] = 2 / (top - bottom);
 	m[1][2] = 0;
 	m[1][3] = 0;
 
@@ -576,8 +576,8 @@ Matrix & Matrix::SetOrtho(GLfloat right, GLfloat left, GLfloat bottom, GLfloat t
 	m[2][2] = -2 / (zFar - zNear);
 	m[2][3] = 0;
 
-	m[3][0] = (right + left) / (right - left);
-	m[3][1] = (top + bottom) / (top - bottom);
+	m[3][0] = -(right + left) / (right - left);
+	m[3][1] = -(top + bottom) / (top - bottom);
 	m[3][2] = -(zFar + zNear) / (zFar - zNear);
 	m[3][3] = 1;
 
