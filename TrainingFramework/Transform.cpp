@@ -40,6 +40,13 @@ void Transform::updateTransform(Vector3 position, Vector3 rotation, Vector3 scal
 	CalculateMatrix();
 }
 
+void Transform::addToPosition(float x, float y)
+{
+	this->position.x += x;
+	this->position.y += y;
+	CalculateMatrix();
+}
+
 void Transform::setPosition(float x, float y, float z)
 {
 	position.x = x; position.y = y; position.z = z;

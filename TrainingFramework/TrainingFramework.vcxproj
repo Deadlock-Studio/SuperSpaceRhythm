@@ -93,8 +93,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Control.cpp" />
     <ClCompile Include="HandyString.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -113,8 +115,10 @@
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Control.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="HandyString.h" />
     <ClInclude Include="InputManager.h" />
@@ -133,10 +137,10 @@
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Resources\Models\witch.nfg" />
-    <None Include="..\Resources\Shaders\TriangleShaderFS.fs" />
-    <None Include="..\Resources\Shaders\TriangleShaderVS.vs" />
     <None Include="..\Readme.doc" />
+    <None Include="..\Resources\Models\Square.nfg" />
+    <None Include="..\Resources\Shaders\CommonShaderFS.fs" />
+    <None Include="..\Resources\Shaders\CommonShaderVS.vs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utilities\Utilities.vcxproj">
@@ -145,7 +149,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\Resources\Textures\Witch.tga" />
+    <Image Include="..\Resources\Textures\beat_grid2_demo.tga" />
+    <Image Include="..\Resources\Textures\beat_grid3_demo.tga" />
+    <Image Include="..\Resources\Textures\beat_grid_demo.tga" />
+    <Image Include="..\Resources\Textures\boss_ghost.tga" />
+    <Image Include="..\Resources\Textures\player_princess.tga" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Resources\Templates\Template1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -17,7 +17,7 @@ public:
 	/*
 	* System Methods
 	*/
-	void Update();
+	void Update(float deltaTime);
 	void Draw();
 
 	/*
@@ -41,6 +41,18 @@ public:
 
 template<typename CheckType>
 CheckType * GameObject::GetComponent()
+{
+	if (!componentList.empty())
+		for (std::vector<Component *>::iterator it = componentList.begin(); it != componentList.end(); ++it) {
+			if (dynamic_cast<CheckType *>(*it) != NULL) {
+				return (CheckType*)(*it);
+			}
+		}
+	return NULL;
+}
+
+template<typename CheckType>
+CheckType * GameObject::CheckComponent()
 {
 	if (!componentList.empty())
 		for (std::vector<Component *>::iterator it = componentList.begin(); it != componentList.end(); ++it) {

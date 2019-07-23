@@ -12,11 +12,11 @@ Model::Model(char * filename)
 {
 	FILE * f;
 	f = fopen(filename, "r");
-	this->filename = filename;
+	this->filename = strdup(filename);
 
 	if (f) {
 		fscanf(f, "NrVertices: %d\n", &nVertices);
-		Vertex * verticesList = new Vertex[nVertices];
+		verticesList = new Vertex[nVertices];
 		Vertex ver;
 		Vector3 offset; Vector3 zero = Vector3(0, 0, 0);
 		for (int i = 0; i < nVertices; i++) {
@@ -36,7 +36,7 @@ Model::Model(char * filename)
 
 		fscanf(f, "NrIndices: %d\n", &nIndices);
 
-		int * indicesList = new int[nIndices];
+		indicesList = new int[nIndices];
 
 		for (int i = 0; i < nIndices /3; i++) {
 			fscanf(f, "%*d. ");
@@ -55,8 +55,7 @@ Model::Model(char * filename)
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, iboId);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(int)*nIndices, indicesList, GL_STATIC_DRAW);
 
-		delete[] verticesList;
-		delete[] indicesList;
+		
 	}
 	else {
 		printf("Model file not available\n");
@@ -66,5 +65,7 @@ Model::Model(char * filename)
 
 Model::~Model()
 {
+	delete[] verticesList;
+	delete[] indicesList;
 	free(filename);
 }

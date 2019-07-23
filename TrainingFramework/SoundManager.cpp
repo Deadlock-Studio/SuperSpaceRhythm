@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include <vector>
+#include <iostream>
 #include "SoundManager.h"
 #include "SFML/Audio.hpp"
 #include "ResourceManager.h"
@@ -96,3 +97,9 @@ SoundManager::Sfx* SoundManager::getSfx(char* filename) {
 };
 
 void SoundManager::Calibrate() {};
+
+void SoundManager::BeatKeeper(Track* track) {
+	beattime = track->beatmap[1] - track->beatmap[0];
+	sf::Time temp = track->music.getPlayingOffset();
+	printf("%f %d\n", temp.asSeconds(), count++);
+}

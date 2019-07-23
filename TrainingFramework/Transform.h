@@ -13,6 +13,7 @@ public:
 	*/
 	void CalculateMatrix();
 	void updateTransform(Vector3 position, Vector3 rotation, Vector3 scale);
+	void addToPosition(float x, float y);
 
 	/*
 	* Getters/Setters

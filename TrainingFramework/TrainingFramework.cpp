@@ -7,6 +7,8 @@
 
 int keyMap = 0;
 bool hit = FALSE;
+float timer = 0;
+int frame = 0;
 
 int Init ( ESContext *esContext )
 {
@@ -17,17 +19,24 @@ int Init ( ESContext *esContext )
 	ResourceManager::CreateInstance();
 	InputManager::CreateInstance();
 	SoundManager::CreateInstance();
+	InputManager::CreateInstance();
 
 	//Load scene
 	ResourceManager::GetInstance()->LoadEngineResources();
-	SceneManager::GetInstance()->LoadScene("../Resources/Scenes/Demo5.scn");
+	SceneManager::GetInstance()->LoadScene("../Resources/Templates/Template1.txt");
 	SceneManager::GetInstance()->UseCamera(0);
 	//SceneManager::GetInstance()->PrintAll();
+	SceneManager::GetInstance()->SpawnObject(SceneManager::GetInstance()->getObjectInstance("player"), 0, 0, 1);
+
+	SceneManager::GetInstance()->SpawnObject(SceneManager::GetInstance()->getObjectInstance("beat"), 70, 35, 1);
+	SceneManager::GetInstance()->SpawnObject(SceneManager::GetInstance()->getObjectInstance("beat"), 10, 35, 1);
+	SceneManager::GetInstance()->SpawnObject(SceneManager::GetInstance()->getObjectInstance("grid"), 70, 35, 1);
+
 
 	//Load sound
 	SoundManager::GetInstance()->Init();
-	//SoundManager::GetInstance()->getTrack("cinderella_step")->music.play();
-
+	SoundManager::GetInstance()->getTrack("cinderella_step")->music.play();
+	SoundManager::GetInstance()->getTrack("cinderella_step")->music.setVolume(0);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	
@@ -45,8 +54,17 @@ void Draw ( ESContext *esContext )
 
 void Update ( ESContext *esContext, float deltaTime )
 {
+	frame += 1;
 	SceneManager::GetInstance()->Update(deltaTime);
-
+	//SoundManager::GetInstance()->BeatKeeper(SoundManager::GetInstance()->getTrack("cinderella_step"));
+	timer += deltaTime;
+	if (timer > 1) {
+		printf("fps: %d\n", frame);
+		timer = 0;
+		frame = 0;
+		sf::Time temp = SoundManager::GetInstance()->getTrack("cinderella_step")->music.getPlayingOffset();
+		printf("song pos: %f\n", temp.asSeconds());
+	}
 }
 
 void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
@@ -61,6 +79,7 @@ void CleanUp()
 	SceneManager::DestroyInstance();
 	ResourceManager::DestroyInstance();
 	SoundManager::DestroyInstance();
+	InputManager::DestroyInstance();
 }
 
 int _tmain(int argc, _TCHAR* argv[])

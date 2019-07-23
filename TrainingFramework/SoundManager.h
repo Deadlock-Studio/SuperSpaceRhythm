@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Audio.hpp"
 #include <vector>
+#define LEEWAY 20/100
 
 class SoundManager
 {
@@ -50,13 +51,16 @@ public:
 	Track* getTrack(char* filename);
 	Sfx* getSfx(char* filename);
 	void Calibrate();
+	void BeatKeeper(Track* track);
 
 protected:
 	static SoundManager * ms_pInstance;
 
 public:
 	float offset;
+	float beattime;
 	std::vector<Track*> MusicList;
 	std::vector<Sfx*> SfxList;
+	int count = 0;
 };
 

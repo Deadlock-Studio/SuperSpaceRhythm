@@ -5,6 +5,12 @@
 
 class SceneManager
 {
+public:
+	typedef struct ObjectInstance {
+		char* name;
+		GameObject* blueprint;
+		std::vector<GameObject *> InstanceList{};
+	}ObjectInstance;
 protected:
 	SceneManager() {}
 	~SceneManager() {}
@@ -34,10 +40,12 @@ public:
 
 	void LoadScene(char * filename);
 	void PrintAll();
+	void SpawnObject(ObjectInstance* ins, float x, float y, float z);
 	void DrawAll();
 	void DeleteAll();
 	void UseCamera(int camNum);
 	void Update(float deltaTime);
+	ObjectInstance* getObjectInstance(char* name);
 
 protected:
 	static SceneManager * ms_pInstance;
@@ -45,7 +53,7 @@ protected:
 public:
 	Shaders * shaders;
 	float time = 0;
-	std::vector<GameObject *> objectList;
+	std::vector<ObjectInstance *> objectList;
 	std::vector<Camera *> cameraList;
 	Camera * usedCamera = NULL;
 	char * sceneName;

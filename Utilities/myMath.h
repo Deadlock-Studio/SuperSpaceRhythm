@@ -32,6 +32,8 @@ public:
 	//access to elements
 	GLfloat operator [] (unsigned int idx);
 
+	void Print();
+
 	//data members
 	GLfloat x;
 	GLfloat y;
@@ -152,7 +154,7 @@ public:
 	Matrix & SetTranslation(Vector3 &vec);
 
 	Matrix & SetPerspective(GLfloat fovY, GLfloat aspect, GLfloat nearPlane, GLfloat farPlane);
-	Matrix & SetOrtho(GLfloat right, GLfloat left, GLfloat bottom, GLfloat top, GLfloat zNear, GLfloat zFar);
+	Matrix & SetOrtho(GLfloat left, GLfloat right, GLfloat top, GLfloat bottom, GLfloat zNear, GLfloat zFar);
 
 	Matrix Transpose();
 

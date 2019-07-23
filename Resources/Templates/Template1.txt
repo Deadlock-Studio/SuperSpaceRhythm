@@ -1,0 +1,48 @@
+CAMERA 0
+NEAR: 0.1
+FAR: 500.0
+FOV: 1.0
+SPEED: 5
+ROTSPEED: 3.14
+
+OBJECT 0
+NAME beat
+COMPONENT:
+TRANSFORM
+pos: 0, 0, 1
+rot: 0, 0, 0
+scl: 10, 10, 10
+SPRITE
+../Resources/Textures/beat_grid_demo.tga
+
+OBJECT 1
+NAME player
+COMPONENT:
+TRANSFORM
+pos: 0, 10, 1
+rot: 0, 0, 0
+scl: 1, 1, 1
+ANIMATION
+anim: 0, 0, 25, 100, 100, 100
+../Resources/Textures/player_princess.tga
+CONTROL
+
+OBJECT 2
+NAME ring
+COMPONENT:
+TRANSFORM
+pos: 30, 20, 1
+rot: 0, 0, 0
+scl: 10, 10, 10
+SPRITE
+../Resources/Textures/beat_grid2_demo.tga
+
+OBJECT 3
+NAME grid
+COMPONENT:
+TRANSFORM
+pos: 40, 20, 1
+rot: 0, 0, 0
+scl: 10, 10, 10
+SPRITE
+../Resources/Textures/beat_grid3_demo.tga

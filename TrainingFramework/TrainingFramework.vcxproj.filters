@@ -43,6 +43,15 @@
     <Filter Include="Header Files\ResourceType">
       <UniqueIdentifier>{4950f380-264b-45b0-a65d-c622c58528a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\Models">
+      <UniqueIdentifier>{9e118571-c7a3-47a2-b0cb-6538aac801a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures">
+      <UniqueIdentifier>{957f293a-dddc-47e5-97e4-0fe8aefd1910}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Templates">
+      <UniqueIdentifier>{47327844-564e-4c51-b217-7d077425ed03}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -89,6 +98,12 @@
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>Source Files\Singleton</Filter>
+    </ClCompile>
+    <ClCompile Include="Control.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -146,22 +161,45 @@
     <ClInclude Include="SoundManager.h">
       <Filter>Header Files\Singleton</Filter>
     </ClInclude>
+    <ClInclude Include="Control.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Resources\Shaders\TriangleShaderFS.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\TriangleShaderVS.vs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
     <None Include="..\Readme.doc" />
-    <None Include="..\Resources\Models\witch.nfg">
-      <Filter>Resources</Filter>
+    <None Include="..\Resources\Shaders\CommonShaderFS.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\CommonShaderVS.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Models\Square.nfg">
+      <Filter>Resources\Models</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\Resources\Textures\Witch.tga">
-      <Filter>Resources</Filter>
+    <Image Include="..\Resources\Textures\beat_grid_demo.tga">
+      <Filter>Resources\Textures</Filter>
     </Image>
+    <Image Include="..\Resources\Textures\beat_grid2_demo.tga">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Textures\beat_grid3_demo.tga">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Textures\boss_ghost.tga">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Textures\player_princess.tga">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Resources\Templates\Template1.txt">
+      <Filter>Resources\Templates</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -29,6 +29,7 @@ void GameObject::AddComponent(Component * comp)
 {
 	componentList.push_back(comp);
 	comp->parentObj = this;
+	comp->parentTrans = this->transform;
 }
 
 void GameObject::Print()
@@ -36,10 +37,10 @@ void GameObject::Print()
 	
 }
 
-void GameObject::Update()
+void GameObject::Update(float deltaTime)
 {
 	for (std::vector<Component *>::iterator it = componentList.begin(); it != componentList.end(); ++it) {
-		(*it)->Update();
+		(*it)->Update(deltaTime);
 	}
 }
 
