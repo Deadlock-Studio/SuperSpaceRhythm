@@ -105,14 +105,14 @@ void Boss::Update(float deltaTime)
 	//	timer = 0;
 	//}
 
-	//if (SoundManager::GetInstance()->enemySignal == 1)
-	//{
-	//	BulletManager::GetInstance()->Cross(transform->position);
-	//}
+	/*if (SoundManager::GetInstance()->enemySignal == 1 || SoundManager::GetInstance()->enemySignal == 2)
+	{
+		BulletManager::GetInstance()->Triangle(transform->position);
+	}*/
 
 	if (SoundManager::GetInstance()->enemySignal == 2)
 	{
-		BulletManager::GetInstance()->Circle(transform->position);
+		BulletManager::GetInstance()->Triangle(transform->position);
 	}
 
 	if (activeState != NULL)
