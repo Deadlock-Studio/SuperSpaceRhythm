@@ -178,11 +178,11 @@ void GameManager::LoadDebugRoom(float deltaTime)
 		Vector3(1, 1, 1),
 		Vector3());
 
-	//Spawn("boss",
-	//	SceneManager::GetInstance()->GetBlueprintByName("boss"),
-	//	Vector3(640, 360, PLAYER_LAYER),
-	//	Vector3(1, 1, 1),
-	//	Vector3());
+	Spawn("boss",
+		SceneManager::GetInstance()->GetBlueprintByName("boss"),
+		Vector3(700, 500, PLAYER_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
 
 	//Spawn("hp",
 	//	SceneManager::GetInstance()->GetBlueprintByName("health_potion"),
