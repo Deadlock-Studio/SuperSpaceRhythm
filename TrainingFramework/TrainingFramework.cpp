@@ -83,6 +83,7 @@ void Key(ESContext *esContext, unsigned char key, bool bIsPressed)
 
 void TouchActionMove(ESContext *esContext, int x, int y)
 {
+	//cout << "mouse move "<< "x:" << x+SceneManager::GetInstance()->usedCamera->position.x << " " << "y:" << y+ SceneManager::GetInstance()->usedCamera->position.y << endl;
 	InputManager::GetInstance()->MousePosition((float)x, (float)y);
 }
 

@@ -9,12 +9,15 @@ public:
 	MobNecro(Blueprint* blueprint, Vector3 pos, Vector3 scale, Vector3 rotation);
 	~MobNecro();
 
+	void CalculateVelocity(float mX, float mY);
+
 	void AddComponent(Component* comp);
 	void SetState(void(MobNecro::* state)()) {
 		activeState = state;
 	}
 
 	void PlayAnimation(int key);
+	float mX, mY, x, y, velX, velY, distance;
 	void Idle();
 	void Spawn();
 	void Death();

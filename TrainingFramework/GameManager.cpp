@@ -210,7 +210,7 @@ void GameManager::LoadDebugRoom(float deltaTime)
 	//	Vector3(1, 1, 1),
 	//	Vector3());
 
-	Spawn("mobExplode",
+	/*Spawn("mobExplode",
 		SceneManager::GetInstance()->GetBlueprintByName("mob_explode"),
 		Vector3(600, 200, MOB_LAYER),
 		Vector3(1, 1, 1),
@@ -219,7 +219,7 @@ void GameManager::LoadDebugRoom(float deltaTime)
 		SceneManager::GetInstance()->GetBlueprintByName("mob_explode_bullet"),
 		Vector3(500, 200, MOB_LAYER),
 		Vector3(1, 1, 1),
-		Vector3());
+		Vector3());*/
 	Spawn("mobShoot",
 		SceneManager::GetInstance()->GetBlueprintByName("mob_mask"),
 		Vector3(700, 200, MOB_LAYER),

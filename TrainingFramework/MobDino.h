@@ -15,8 +15,10 @@ public:
 	}
 
 	void PlayAnimation(int key);
+	float mX, mY, x, y, velX, velY, distance;
 	void Idle();
 	void Spawn();
+	void CalculateVelocity(float mX, float mY);
 	void Death();
 	void Update(float deltaTime) override;
 	void checkCollision(GameObject* tempObj);

@@ -37,10 +37,23 @@ void MobShoot::Init()
 	//collide with what
 	filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE| WALL | EXPLOSION | BOSS | TNT_BOX | MOB | MOB_RED | MOB_BLUE;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
+	srand(time(NULL));
+	mX = -69 + (std::rand() % (1347 - (-69) + 1));
+	mY = -101 + (std::rand() % (811 - (-101) + 1));
+	CalculateVelocity(mX, mY);
 
 }
 
-
+void MobShoot::CalculateVelocity(float mX, float mY)
+{
+	x = transform->position.x;
+	y = transform->position.y;
+	distance = sqrt(pow((mX - x), 2) + pow((mY - y), 2));
+	float speed;
+	speed = 0.5f * MOVE_SPEED;
+	velX = ((mX - x) * speed / distance);
+	velY = ((mY - y) * speed / distance);
+}
 
 
 void MobShoot::AddComponent(Component * comp)
@@ -99,8 +112,15 @@ void MobShoot::Update(float deltaTime)
 
 	b2Vec2 bodyPos = GetComponent<Collision2D>()->body->GetPosition();
 	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, transform->position.z);
-	AddToPosition(0.0f, 0.0f);
-	//SceneManager::GetInstance()->SpawnBullet(transform->position.x, transform->position.y, (GameManager::GetInstance())->player->transform->position.x, (GameManager::GetInstance())->player->transform->position.y, "pBullet_blue");
+	if (abs(transform->position.x - mX) <= 10 && abs(transform->position.y - mY) <= 10)
+	{
+		srand(time(NULL));
+		mX = -69 + (std::rand() % (1347 - (-69) + 1));
+		mY = -101 + (std::rand() % (811 - (-101) + 1));
+		CalculateVelocity(mX, mY);
+	}
+	else
+		AddToPosition(velX, velY);
 	GameObject::Update(deltaTime);
 }
 
