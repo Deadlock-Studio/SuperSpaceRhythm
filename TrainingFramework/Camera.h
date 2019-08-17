@@ -9,6 +9,7 @@ public:
 	void InitCamera();
 	void UpdateCamera();
 	void LookAt();
+	void UpdatePosition(float x, float y, float deltaTime);
 
 	float nearPlane;
 	float farPlane;
@@ -21,6 +22,8 @@ public:
 	Vector3 cameraRight;
 	Vector3 cameraUp;
 
+	Matrix m_direction;
+	Matrix m_translation;
 	Matrix m_perspective;
 	Matrix m_view;
 };

@@ -1,18 +1,18 @@
 #pragma once
-
-enum ComponentType {
-	SPRITE,
-};
+#include <iostream>
 
 class Component
 {
 public:
 	Component();
-	~Component();
+	virtual ~Component();
 
-	virtual void Update() {};
+	virtual void Update(float deltaTime) {};
+	virtual void LateUpdate(float deltaTime) {};
 	virtual void Draw() {};
-	ComponentType type;
+	virtual Component * Clone() { return NULL; };
+	bool isActive = true;
 	void * parentObj = NULL;
+	void * parentTrans = NULL;
 };
 

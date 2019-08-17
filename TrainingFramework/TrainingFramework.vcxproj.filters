@@ -19,102 +19,249 @@
     <Filter Include="Resources\Shaders">
       <UniqueIdentifier>{2282dbff-09d2-4dc5-9e1d-e8b68f4514a1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Components">
-      <UniqueIdentifier>{45a23847-65d2-47db-96df-f0bbf87a7489}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Components">
-      <UniqueIdentifier>{e8970b6c-c6a5-49c3-a51e-b01884d66464}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Singleton">
-      <UniqueIdentifier>{134382b5-f36c-484d-9385-54129bf96dd2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Singleton">
-      <UniqueIdentifier>{1e05d9c8-1df0-4ea9-b192-c860090b0320}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Global">
       <UniqueIdentifier>{e1fdbd01-384d-4def-a99e-6c51a3966f16}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Global">
       <UniqueIdentifier>{577b64df-1ba8-481b-a7ae-f3ccc37f9929}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\ResourceType">
+    <Filter Include="Resources\Models">
+      <UniqueIdentifier>{9e118571-c7a3-47a2-b0cb-6538aac801a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures">
+      <UniqueIdentifier>{957f293a-dddc-47e5-97e4-0fe8aefd1910}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Templates">
+      <UniqueIdentifier>{47327844-564e-4c51-b217-7d077425ed03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects">
+      <UniqueIdentifier>{0a90ec99-30dc-41c7-ae98-7424b28fcceb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ResourceTypes">
+      <UniqueIdentifier>{4950f380-264b-45b0-a65d-c622c58528a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Singletons">
+      <UniqueIdentifier>{134382b5-f36c-484d-9385-54129bf96dd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ResourceTypes">
       <UniqueIdentifier>{4c09aa9b-286a-4e15-aa39-0a69537ae7ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\ResourceType">
-      <UniqueIdentifier>{4950f380-264b-45b0-a65d-c622c58528a7}</UniqueIdentifier>
+    <Filter Include="Source Files\Singletons">
+      <UniqueIdentifier>{1e05d9c8-1df0-4ea9-b192-c860090b0320}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{5d4fa91b-4edb-4e83-82ad-25e3e50a1dfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Interface">
+      <UniqueIdentifier>{862512a3-1774-4a07-8683-473542d82c35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Components">
+      <UniqueIdentifier>{e8970b6c-c6a5-49c3-a51e-b01884d66464}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Interface">
+      <UniqueIdentifier>{78c2c06d-306d-4ac4-9875-8d5b23f60581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Text">
+      <UniqueIdentifier>{16ffecd7-ceb2-4979-9dc8-7ea251d86869}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Components">
+      <UniqueIdentifier>{45a23847-65d2-47db-96df-f0bbf87a7489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Text">
+      <UniqueIdentifier>{eab2bf9c-8cfe-4a1e-82cf-4546c783f01c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Music">
+      <UniqueIdentifier>{9efe1a95-e5c7-4d05-b9d9-515ccecc9700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Mob">
+      <UniqueIdentifier>{6eba492d-c578-4b7e-869d-d38edd20e612}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Interactables">
+      <UniqueIdentifier>{4f5fdb4d-7ee8-416f-8f3e-85c27c9571a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Music">
+      <UniqueIdentifier>{0aaf1a02-c99c-4057-983b-b5b615d86084}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Mob">
+      <UniqueIdentifier>{cb7b754d-851a-42e8-abc9-cb89a440e534}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Interactables">
+      <UniqueIdentifier>{e7e6af8d-7c38-40a5-922a-599d6f1b041e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Effects">
+      <UniqueIdentifier>{62a413ef-96ea-4e5c-bee0-89c3954a3c05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Effects">
+      <UniqueIdentifier>{3a425bcc-fda9-4b0a-9133-71318975a7fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Mob\Melee">
+      <UniqueIdentifier>{614ea21c-f0db-4cd7-aaae-fa8a97b231bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Mob\Range">
+      <UniqueIdentifier>{033d48f0-b50c-46bd-8aa4-7e836086fb24}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TrainingFramework.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>Source Files\Components</Filter>
+      <Filter>Source Files\GameObjects\Components</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
-      <Filter>Source Files\ResourceType</Filter>
+      <Filter>Source Files\ResourceTypes</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>Source Files\ResourceType</Filter>
+      <Filter>Source Files\ResourceTypes</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
-      <Filter>Source Files\Singleton</Filter>
+      <Filter>Source Files\Singletons</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>Source Files\Singleton</Filter>
+      <Filter>Source Files\Singletons</Filter>
     </ClCompile>
     <ClCompile Include="HandyString.cpp">
       <Filter>Source Files\Global</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
-      <Filter>Source Files\Components</Filter>
+      <Filter>Source Files\GameObjects\Components</Filter>
     </ClCompile>
     <ClCompile Include="Shaders.cpp">
-      <Filter>Source Files\ResourceType</Filter>
+      <Filter>Source Files\ResourceTypes</Filter>
     </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameObjects\Components</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files\Singleton</Filter>
+      <Filter>Source Files\Singletons</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
-      <Filter>Source Files\Singleton</Filter>
+      <Filter>Source Files\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="Control.cpp">
+      <Filter>Source Files\GameObjects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\GameObjects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\ResourceTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicManager.cpp">
+      <Filter>Source Files\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision2D.cpp">
+      <Filter>Source Files\GameObjects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Source Files\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="Blueprint.cpp">
+      <Filter>Source Files\GameObjects\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\GameObjects\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Source Files\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="TextManager.cpp">
+      <Filter>Source Files\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="Beat.cpp">
+      <Filter>Source Files\GameObjects\Music</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Source Files\GameObjects\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files\GameObjects\Interactables</Filter>
+    </ClCompile>
+    <ClCompile Include="Crate.cpp">
+      <Filter>Source Files\GameObjects\Interactables</Filter>
+    </ClCompile>
+    <ClCompile Include="Explosion.cpp">
+      <Filter>Source Files\GameObjects\Interactables</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Source Files\GameObjects\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthPotion.cpp">
+      <Filter>Source Files\GameObjects\Interactables</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\GameObjects\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>Source Files\GameObjects\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="TNT.cpp">
+      <Filter>Source Files\GameObjects\Interactables</Filter>
+    </ClCompile>
+    <ClCompile Include="Trap.cpp">
+      <Filter>Source Files\GameObjects\Interactables</Filter>
+    </ClCompile>
+    <ClCompile Include="HP.cpp">
+      <Filter>Source Files\GameObjects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletManager.cpp">
+      <Filter>Source Files\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnEffect.cpp">
+      <Filter>Source Files\GameObjects\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\GameObjects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Mob1.cpp">
+      <Filter>Source Files\GameObjects\Mob\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="MobExplode.cpp">
+      <Filter>Source Files\GameObjects\Mob\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="MobShoot.cpp">
+      <Filter>Source Files\GameObjects\Mob\Range</Filter>
+    </ClCompile>
+    <ClCompile Include="MobExplodeBullet.cpp">
+      <Filter>Source Files\GameObjects\Mob\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="Shield.cpp">
+      <Filter>Source Files\GameObjects\Interactables</Filter>
+    </ClCompile>
+    <ClCompile Include="MobKnight.cpp">
+      <Filter>Source Files\GameObjects\Mob\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="MobWiz.cpp">
+      <Filter>Source Files\GameObjects\Mob\Range</Filter>
+    </ClCompile>
+    <ClCompile Include="MobNecro.cpp">
+      <Filter>Source Files\GameObjects\Mob\Range</Filter>
+    </ClCompile>
+    <ClCompile Include="MobDino.cpp">
+      <Filter>Source Files\GameObjects\Mob\Range</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Vertex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TrainingFramework.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Header Files\GameObjects\Components</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
-      <Filter>Header Files\ResourceType</Filter>
+      <Filter>Header Files\ResourceTypes</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>Header Files\ResourceType</Filter>
+      <Filter>Header Files\ResourceTypes</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
-      <Filter>Header Files\Singleton</Filter>
+      <Filter>Header Files\Singletons</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>Header Files\Singleton</Filter>
+      <Filter>Header Files\Singletons</Filter>
     </ClInclude>
     <ClInclude Include="Globals.h">
       <Filter>Header Files\Global</Filter>
@@ -123,19 +270,16 @@
       <Filter>Header Files\Global</Filter>
     </ClInclude>
     <ClInclude Include="SpriteRenderer.h">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Header Files\GameObjects\Components</Filter>
     </ClInclude>
     <ClInclude Include="Shaders.h">
-      <Filter>Header Files\ResourceType</Filter>
+      <Filter>Header Files\ResourceTypes</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameObjects\Components</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Header Files\Singleton</Filter>
+      <Filter>Header Files\Singletons</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files\Global</Filter>
@@ -144,24 +288,158 @@
       <Filter>Header Files\Global</Filter>
     </ClInclude>
     <ClInclude Include="SoundManager.h">
-      <Filter>Header Files\Singleton</Filter>
+      <Filter>Header Files\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="Control.h">
+      <Filter>Header Files\GameObjects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\GameObjects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\ResourceTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicManager.h">
+      <Filter>Header Files\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision2D.h">
+      <Filter>Header Files\GameObjects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Header Files\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="ContactListener.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionFiltering.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectList.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="TextManager.h">
+      <Filter>Header Files\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="Blueprint.h">
+      <Filter>Header Files\GameObjects\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\GameObjects\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Header Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Header Files\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Beat.h">
+      <Filter>Header Files\GameObjects\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="Mob1.h">
+      <Filter>Header Files\GameObjects\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Header Files\GameObjects\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files\GameObjects\Interactables</Filter>
+    </ClInclude>
+    <ClInclude Include="Crate.h">
+      <Filter>Header Files\GameObjects\Interactables</Filter>
+    </ClInclude>
+    <ClInclude Include="Explosion.h">
+      <Filter>Header Files\GameObjects\Interactables</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>Header Files\GameObjects\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthPotion.h">
+      <Filter>Header Files\GameObjects\Interactables</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\GameObjects\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="TNT.h">
+      <Filter>Header Files\GameObjects\Interactables</Filter>
+    </ClInclude>
+    <ClInclude Include="Trap.h">
+      <Filter>Header Files\GameObjects\Interactables</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>Header Files\GameObjects\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="HP.h">
+      <Filter>Header Files\GameObjects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MobShoot.h">
+      <Filter>Header Files\GameObjects\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletManager.h">
+      <Filter>Header Files\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnEffect.h">
+      <Filter>Header Files\GameObjects\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\GameObjects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MobExplode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MobExplodeBullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MobKnight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shield.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MobWiz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MobNecro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MobDino.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Resources\Shaders\TriangleShaderFS.fs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
-    <None Include="..\Resources\Shaders\TriangleShaderVS.vs">
-      <Filter>Resources\Shaders</Filter>
-    </None>
     <None Include="..\Readme.doc" />
-    <None Include="..\Resources\Models\witch.nfg">
-      <Filter>Resources</Filter>
+    <None Include="..\Resources\Shaders\CommonShaderFS.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\CommonShaderVS.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Models\Square.nfg">
+      <Filter>Resources\Models</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\Resources\Textures\Witch.tga">
-      <Filter>Resources</Filter>
+    <Image Include="..\Resources\Textures\beat_grid_demo.tga">
+      <Filter>Resources\Textures</Filter>
     </Image>
+    <Image Include="..\Resources\Textures\beat_grid2_demo.tga">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Textures\beat_grid3_demo.tga">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Textures\boss_ghost.tga">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+    <Image Include="..\Resources\Textures\player_princess.tga">
+      <Filter>Resources\Textures</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Resources\Templates\Template1.txt">
+      <Filter>Resources\Templates</Filter>
+    </Text>
   </ItemGroup>
 </Project>

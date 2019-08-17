@@ -18,6 +18,7 @@ public:
 	{
 		if (ms_pInstance == NULL)
 			ms_pInstance = new ResourceManager;
+		GetInstance()->LoadEngineResources();
 	}
 	static ResourceManager * GetInstance()
 	{
@@ -39,6 +40,7 @@ public:
 	int LoadShaders(char *verFile, char *fragFile);
 
 	Model * GetSquare() { return GetModel(squareId); }
+	Model * GetSquareTL() { return GetModel(squareTLId); }
 	Model * GetModel(int modelID);
 	Texture * GetTexture(int textureID);
 	Shaders * GetShaders(int shadersID);
@@ -54,4 +56,5 @@ public:
 	vector<Shaders *> shaderMap{};
 
 	int squareId = -1;
+	int squareTLId = -1;
 };

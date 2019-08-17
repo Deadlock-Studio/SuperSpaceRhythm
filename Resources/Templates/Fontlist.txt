@@ -1,0 +1,3 @@
+../Resources/Fonts/COMIC.TTF
+../Resources/Fonts/monogram.ttf
+../Resources/Fonts/monogram_extended.ttf

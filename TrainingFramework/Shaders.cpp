@@ -33,11 +33,15 @@ Shaders::Shaders(char * fileVertexShader, char * fileFragmentShader)
 	*/
 	//Common
 	positionLoc = glGetAttribLocation(program, "a_posL");
+	alphaLoc = glGetUniformLocation(program, "u_alpha");
 	mvpLoc = glGetUniformLocation(program, "u_mvp");
 
 	//Texture2D
 	uvLoc = glGetAttribLocation(program, "a_uv");
 	textureLoc = glGetUniformLocation(program, "u_texture");
+
+	//Font
+	colorLoc = glGetUniformLocation(program, "textColor");
 }
 
 Shaders::~Shaders()

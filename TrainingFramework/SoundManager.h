@@ -1,6 +1,12 @@
 #pragma once
 #include "SFML/Audio.hpp"
+#include "Beat.h"
 #include <vector>
+#include <deque>
+#define GREAT_GATE 0.1f
+#define OK_GATE 0.2f
+#define DEL_GATE 0.5f
+#define SPEED 5
 
 class SoundManager
 {
@@ -8,6 +14,15 @@ public:
 	typedef struct Track {
 		char* songname;
 		float* beatmap;
+		float beattime;
+		float prevBeatTime;
+		bool prevStat;
+		bool prevBeatStat = FALSE;
+		float songTime;
+		int index = 0;
+		float lastPos = 0;
+		int beatnum;
+		float distance;
 		sf::Music music;
 	}Track;
 
@@ -49,14 +64,39 @@ public:
 	void DeleteAll();
 	Track* getTrack(char* filename);
 	Sfx* getSfx(char* filename);
-	void Calibrate();
+	bool CalibrateAudio();
+	bool CalibrateVisual();
+	int RhythmConductor(Track* track, float FrameTime);
+	void safePop(std::deque<Beat*>* queue);
+
+	void SpawnBeatGUI();
 
 protected:
 	static SoundManager * ms_pInstance;
 
 public:
 	float offset;
+	float AudioOffset = 0;
+	float VisualOffset = 0;
+	bool halftime = FALSE;
+	int halftimeCounter = 0;
+	int cal = 0;
+	int signal;
+	int signalPass = 0;
+	int enemySignal = 0;
+	int beatonscreen;
+	float InitPosX;
+	GUI * yeet;
+	GUI* bruh;
+	GUI* meh;
+	std::deque<Beat*> BeatList;
 	std::vector<Track*> MusicList;
 	std::vector<Sfx*> SfxList;
+	bool hit = FALSE;
+	bool destroyed = FALSE;
+	int counter = 0;
+	float timing[20], total = 0;
+	DWORD play, press, begin, time;
+	Beat* calibration;
 };
 

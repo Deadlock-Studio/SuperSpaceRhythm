@@ -15,8 +15,12 @@ public:
 	//Common
 	GLint positionLoc;
 	GLint mvpLoc;
+	GLint alphaLoc;
 
 	//Texture2D
 	GLint uvLoc;
 	GLint textureLoc;
+
+	//Font
+	GLint colorLoc;
 };

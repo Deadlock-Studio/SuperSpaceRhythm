@@ -9,7 +9,7 @@ Transform::Transform()
 
 Transform::Transform(Vector3 position, Vector3 rotation, Vector3 scale) : Transform()
 {
-	updateTransform(position, rotation, scale);
+	UpdateTransform(position, rotation, scale);
 }
 
 Transform::~Transform()
@@ -32,11 +32,36 @@ void Transform::CalculateMatrix()
 	m_model = _scale * _rotate[3] * _trans;
 }
 
-void Transform::updateTransform(Vector3 position, Vector3 rotation, Vector3 scale)
+void Transform::UpdateTransform(Vector3 position, Vector3 rotation, Vector3 scale)
 {
 	this->position = position;
 	this->rotation = rotation;
 	this->scale = scale;
+	CalculateMatrix();
+}
+
+void Transform::UpdatePosition(Vector3 position)
+{
+	this->position = position;
+	CalculateMatrix();
+}
+
+void Transform::UpdateRotation(Vector3 rotation)
+{
+	this->rotation = rotation;
+	CalculateMatrix();
+}
+
+void Transform::UpdateScale(Vector3 scale)
+{
+	this->scale = scale;
+	CalculateMatrix();
+}
+
+void Transform::addToPosition(float x, float y)
+{
+	this->position.x += x;
+	this->position.y += y;
 	CalculateMatrix();
 }
 

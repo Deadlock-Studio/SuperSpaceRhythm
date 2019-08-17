@@ -3,6 +3,7 @@
 #include "myMath.h"
 #include <math.h>
 #include <iostream>
+using namespace std;
 
 //Vector2
 
@@ -83,9 +84,17 @@ Vector2 & Vector2::operator = (Vector2 & vector)
 	return *this;
 }
 
+bool Vector2::operator == (Vector2 & vector) {
+	return (x == vector.x) && (y == vector.y);
+}
+
 GLfloat Vector2::operator [] (unsigned int idx)
 {
 	return (&x)[idx];
+}
+
+void Vector2::Print() {
+	cout << "vec2: " << x << " " << y << endl;
 }
 
 Vector2 Vector2::Modulate(Vector2 & vector)
@@ -561,24 +570,24 @@ Matrix & Matrix::SetPerspective(GLfloat fovY, GLfloat aspect, GLfloat nearPlane,
 Matrix & Matrix::SetOrtho(GLfloat right, GLfloat left, GLfloat bottom, GLfloat top, GLfloat zNear, GLfloat zFar)
 {
 
-	m[0][0] = -2 / (right - left);
-	m[0][1] = 0;
-	m[0][2] = 0;
-	m[0][3] = 0;
-
+	m[0][0] = 2 / (right - left);
 	m[1][0] = 0;
-	m[1][1] = -2 / (top - bottom);
-	m[1][2] = 0;
-	m[1][3] = 0;
-
 	m[2][0] = 0;
-	m[2][1] = 0;
-	m[2][2] = -2 / (zFar - zNear);
-	m[2][3] = 0;
+	m[3][0] = -1 * ((right + left) / (right - left));
 
-	m[3][0] = (right + left) / (right - left);
-	m[3][1] = (top + bottom) / (top - bottom);
-	m[3][2] = -(zFar + zNear) / (zFar - zNear);
+	m[0][1] = 0;
+	m[1][1] = 2 / (top - bottom);
+	m[2][1] = 0;
+	m[3][1] = -1 * ((top + bottom) / (top - bottom));
+
+	m[0][2] = 0;
+	m[1][2] = 0;
+	m[2][2] = -2 / (zFar - zNear);
+	m[3][2] = -1 * ((zFar + zNear) / (zFar - zNear));
+
+	m[0][3] = 0;
+	m[1][3] = 0;
+	m[2][3] = 0;
 	m[3][3] = 1;
 
 	return *this;

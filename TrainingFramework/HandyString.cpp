@@ -5,7 +5,7 @@ int HandyString::find_nth(string & s, size_t n)
 {
 	int pos = 0;
 	int found = -1;
-	for (int i = 0; i < n; i++) {
+	for (size_t i = 0; i < n; i++) {
 		found = s.find("/", pos);
 		pos = found + 1;
 	}

@@ -14,17 +14,18 @@
     <ProjectGuid>{FC024EC8-32F4-4657-A2CB-14D2B3A931F8}</ProjectGuid>
     <RootNamespace>TrainingFramework</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -54,16 +55,16 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(SolutionDir)\Include;$(SolutionDir)\Include\SFML;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sfml-audio-d.lib;sfml-main-d.lib;sfml-system-d.lib;sfml-window-d.lib;libEGL.lib;libGLESv2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-audio-d.lib;sfml-main-d.lib;sfml-system-d.lib;sfml-window-d.lib;libEGL.lib;libGLESv2.lib;Box2D.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
@@ -93,17 +94,49 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Beat.cpp" />
+    <ClCompile Include="Blueprint.cpp" />
+    <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="BulletManager.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Crate.cpp" />
+    <ClCompile Include="Collision2D.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Control.cpp" />
+    <ClCompile Include="Explosion.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="HandyString.cpp" />
+    <ClCompile Include="HealthPotion.cpp" />
+    <ClCompile Include="HP.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Mob1.cpp" />
+    <ClCompile Include="MobDino.cpp" />
+    <ClCompile Include="MobExplode.cpp" />
+    <ClCompile Include="MobExplodeBullet.cpp" />
+    <ClCompile Include="MobKnight.cpp" />
+    <ClCompile Include="MobNecro.cpp" />
+    <ClCompile Include="MobShoot.cpp" />
+    <ClCompile Include="MobWiz.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PhysicManager.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="Room.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Shield.cpp" />
+    <ClCompile Include="SpawnEffect.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
+    <ClCompile Include="Font.cpp" />
+    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="TextManager.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TNT.cpp" />
     <ClCompile Include="TrainingFramework.cpp" />
     <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -111,32 +144,68 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Trap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="Beat.h" />
+    <ClInclude Include="Blueprint.h" />
+    <ClInclude Include="Boss.h" />
+    <ClInclude Include="BulletManager.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Crate.h" />
+    <ClInclude Include="Collision2D.h" />
+    <ClInclude Include="CollisionFiltering.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="ContactListener.h" />
+    <ClInclude Include="Control.h" />
+    <ClInclude Include="Explosion.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="GUI.h" />
     <ClInclude Include="HandyString.h" />
+    <ClInclude Include="HealthPotion.h" />
+    <ClInclude Include="HP.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Mob1.h" />
+    <ClInclude Include="MobDino.h" />
+    <ClInclude Include="MobExplode.h" />
+    <ClInclude Include="MobExplodeBullet.h" />
+    <ClInclude Include="MobKnight.h" />
+    <ClInclude Include="MobNecro.h" />
+    <ClInclude Include="MobShoot.h" />
+    <ClInclude Include="MobWiz.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="ObjectList.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PhysicManager.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="Room.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shaders.h" />
+    <ClInclude Include="Shield.h" />
+    <ClInclude Include="SpawnEffect.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Font.h" />
+    <ClInclude Include="Text.h" />
+    <ClInclude Include="TextManager.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="TrainingFramework.h" />
+    <ClInclude Include="TNT.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="Trap.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Resources\Models\witch.nfg" />
-    <None Include="..\Resources\Shaders\TriangleShaderFS.fs" />
-    <None Include="..\Resources\Shaders\TriangleShaderVS.vs" />
     <None Include="..\Readme.doc" />
+    <None Include="..\Resources\Models\Square.nfg" />
+    <None Include="..\Resources\Shaders\CommonShaderFS.fs" />
+    <None Include="..\Resources\Shaders\CommonShaderVS.vs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utilities\Utilities.vcxproj">
@@ -145,7 +214,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\Resources\Textures\Witch.tga" />
+    <Image Include="..\Resources\Textures\beat_grid2_demo.tga" />
+    <Image Include="..\Resources\Textures\beat_grid3_demo.tga" />
+    <Image Include="..\Resources\Textures\beat_grid_demo.tga" />
+    <Image Include="..\Resources\Textures\boss_ghost.tga" />
+    <Image Include="..\Resources\Textures\player_princess.tga" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Resources\Templates\Template1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,11 +4,12 @@
 
 SpriteRenderer::SpriteRenderer()
 {
-	type = SPRITE;
 }
 
-SpriteRenderer::SpriteRenderer(char * filename) : SpriteRenderer()
+SpriteRenderer::SpriteRenderer(char * filename, int pixelPerUnit)
 {
+	this->pixelsPerUnit = pixelPerUnit;
+
 	ResourceManager * resource = ResourceManager::GetInstance();
 
 	//generate sprite id in resource manager
@@ -17,7 +18,7 @@ SpriteRenderer::SpriteRenderer(char * filename) : SpriteRenderer()
 	//set scale for sprite
 	Texture * text = resource->GetTexture(textureId);
 
-	scaleMatrix.SetScale(text->width/pixelsPerUnit, text->height/pixelsPerUnit, 1);
+	scaleMatrix.SetScale((float)text->width / pixelsPerUnit * GRID_SIZE, (float)text->height / pixelsPerUnit  * GRID_SIZE, 1);
 }
 
 
@@ -33,8 +34,7 @@ void SpriteRenderer::Draw()
 	Camera * cam = SceneManager::GetInstance()->usedCamera;
 	Transform * objTrans = ((GameObject*)parentObj)->transform;
 
-	//Matrix mvp = objTrans->m_model * scaleMatrix * cam->m_view * cam->m_perspective;
-	Matrix mvp = (objTrans->m_model * scaleMatrix) * cam->m_view * cam->m_perspective;
+	Matrix mvp = scaleMatrix * objTrans->m_model * cam->m_view * cam->m_perspective;
 	
 	Model * model = resource->GetSquare();
 	Texture * text = resource->GetTexture(textureId);
@@ -54,6 +54,7 @@ void SpriteRenderer::Draw()
 
 	//MvP matrix
 	glUniformMatrix4fv(shaders->mvpLoc, 1, GL_FALSE, (GLfloat*)&mvp.m[0][0]);
+	glUniform1f(shaders->alphaLoc, alpha);
 
 	//Texture
 	glBindTexture(GL_TEXTURE_2D, text->texId);
@@ -61,4 +62,50 @@ void SpriteRenderer::Draw()
 	glUniform1i(shaders->textureLoc, 0);
 
 	glDrawElements(GL_TRIANGLES, model->nIndices, GL_UNSIGNED_INT, 0);
+}
+
+void SpriteRenderer::LateUpdate(float deltaTime)
+{
+	if (fadeOut) {
+		if (alpha > 0) {
+			alpha -= fadeOut * deltaTime;
+			if (alpha < 0)
+				alpha = 0;
+		}
+	}
+
+	if (fadeIn) {
+		if (alpha < 1) {
+			alpha += fadeIn * deltaTime;
+			if (alpha > 1)
+				alpha = 1;
+		}
+	}
+}
+
+Component * SpriteRenderer::Clone()
+{
+	SpriteRenderer * sprite = new SpriteRenderer();
+	sprite->scaleMatrix = scaleMatrix;
+	sprite->textureId = textureId;
+	sprite->pixelsPerUnit = pixelsPerUnit;
+	return sprite;
+}
+
+void SpriteRenderer::FadeOff()
+{
+	fadeOut = 0;
+	fadeIn = 0;
+}
+
+void SpriteRenderer::FadeIn(float fadeSpeed)
+{
+	fadeOut = 0;
+	fadeIn = fadeSpeed;
+}
+
+void SpriteRenderer::FadeOut(float fadeSpeed)
+{
+	fadeIn = 0;
+	fadeOut = fadeSpeed;
 }

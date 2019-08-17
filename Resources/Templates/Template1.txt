@@ -1,0 +1,789 @@
+CAMERA 0
+NEAR: -10
+FAR: 10
+FOV: 1.0
+SPEED: 5
+ROTSPEED: 3.14
+
+BLUEPRINT 0
+NAME: player
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 736, 32, 32, 1
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 96, 704, 32, 32, 1
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 32, 672, 32, 32, 1
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 64, 640, 32, 32, 1
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 608, 32, 32, 1
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 96, 576, 32, 32, 1
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 544, 32, 32, 1
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 96, 512, 32, 32, 1
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 736, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 704, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 672, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 640, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 608, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 576, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 544, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 512, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 480, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 448, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 416, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 384, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 352, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 320, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 288, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 256, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 224, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 192, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 160, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 128, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 96, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 64, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 32, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 0, 0, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 736, 32, 32, 1
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 224, 704, 32, 32, 1
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 160, 672, 32, 32, 1
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 192, 640, 32, 32, 1
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 608, 32, 32, 1
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 224, 576, 32, 32, 1
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 544, 32, 32, 1
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 224, 512, 32, 32, 1
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 736, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 704, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 672, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 640, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 608, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 576, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 544, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 512, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 480, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 448, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 416, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 384, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 352, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 320, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 288, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 256, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 224, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 192, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 160, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 128, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 96, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 64, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 32, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+ANIMATION
+pixelsPerUnit: 16
+anim: 128, 0, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/player.tga
+CONTROL
+COLLISION
+body: 32, 60, 50, 0
+body_type: DYNAMIC
+
+BLUEPRINT 0
+NAME: boss
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 18
+anim: 0, 196, 66, 98, 3
+anim_spd: 20
+../Resources/Textures/boss_ghost.tga
+ANIMATION
+pixelsPerUnit: 18
+anim: 0, 98, 66, 98, 3
+anim_spd: 20
+../Resources/Textures/boss_ghost.tga
+ANIMATION
+pixelsPerUnit: 18
+anim: 0, 0, 66, 98, 3
+anim_spd: 20
+../Resources/Textures/boss_ghost.tga
+COLLISION
+body: 142, 210, 1000, 0
+body_type: DYNAMIC
+HP
+health: 1000
+
+BLUEPRINT 0
+NAME: health_potion
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 24
+anim: 0, 0, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/potion.tga
+COLLISION
+body: 35, 50, 1, 0
+body_type: DYNAMIC
+
+BLUEPRINT 0
+NAME: trap
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 8
+anim: 48, 0, 16, 16, 1
+anim_spd: 10
+../Resources/Textures/trap.tga
+ANIMATION
+pixelsPerUnit: 8
+anim: 16, 0, 16, 16, 1
+anim_spd: 10
+../Resources/Textures/trap.tga
+ANIMATION
+pixelsPerUnit: 8
+anim: 0, 0, 16, 16, 1
+anim_spd: 10
+../Resources/Textures/trap.tga
+COLLISION
+body: 80, 80, 1, 0
+body_type: STATIC
+
+BLUEPRINT 1
+NAME: demo_room
+COMPONENT:
+SPRITE
+pixelsPerUnit: 24
+../Resources/Textures/demo_room.tga
+
+BLUEPRINT 0
+NAME: bullet
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 24
+anim: 0, 0, 12, 12, 1
+anim_spd: 10
+../Resources/Textures/pBulletRed.tga
+ANIMATION
+pixelsPerUnit: 24
+anim: 0, 0, 12, 12, 1
+anim_spd: 10
+../Resources/Textures/pBulletBlue.tga
+ANIMATION
+pixelsPerUnit: 44
+anim: 0, 0, 22, 22, 1
+anim_spd: 10
+../Resources/Textures/eBullet.tga
+COLLISION
+body: 20, 20, 0, 0
+body_type: DYNAMIC
+
+BLUEPRINT 0
+NAME: mob_white
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 24
+anim: 0, 96, 32, 32, 3
+anim_spd: 20
+../Resources/Textures/mob.tga
+ANIMATION
+pixelsPerUnit: 24
+anim: 0, 0, 32, 32, 3
+anim_spd: 20
+../Resources/Textures/mob.tga
+COLLISION
+body: 54, 45, 1000, 0
+body_type: DYNAMIC
+
+BLUEPRINT 0
+NAME: mob_red
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 24
+anim: 0, 128, 32, 32, 3
+anim_spd: 20
+../Resources/Textures/mob.tga
+ANIMATION
+pixelsPerUnit: 24
+anim: 0, 32, 32, 32, 3
+anim_spd: 20
+../Resources/Textures/mob.tga
+COLLISION
+body: 54, 45, 1000, 0
+body_type: DYNAMIC
+
+BLUEPRINT 0
+NAME: mob_blue
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 24
+anim: 0, 160, 32, 32, 3
+anim_spd: 20
+../Resources/Textures/mob.tga
+ANIMATION
+pixelsPerUnit: 24
+anim: 0, 64, 32, 32, 3
+anim_spd: 20
+../Resources/Textures/mob.tga
+COLLISION
+body: 54, 45, 1000, 0
+body_type: DYNAMIC
+
+BLUEPRINT 0
+NAME: mob_necro
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 8
+anim: 0, 0, 16, 20, 4
+anim_spd: 10
+../Resources/Textures/mob_necro.tga
+ANIMATION
+pixelsPerUnit: 8
+anim: 0, 20, 16, 20, 4
+anim_spd: 10
+../Resources/Textures/mob_necro.tga
+COLLISION
+body: 65, 80, 1000, 0
+body_type: DYNAMIC
+
+BLUEPRINT 0
+NAME: mob_wiz
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 8
+anim: 0, 0, 16, 20, 4
+anim_spd: 10
+../Resources/Textures/mob_wiz.tga
+ANIMATION
+pixelsPerUnit: 8
+anim: 0, 20, 16, 20, 4
+anim_spd: 10
+../Resources/Textures/mob_wiz.tga
+COLLISION
+body: 65, 80, 1000, 0
+body_type: DYNAMIC
+
+
+BLUEPRINT 0
+NAME: mob_dino
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 8
+anim: 0, 0, 16, 20, 4
+anim_spd: 10
+../Resources/Textures/mob_dino.tga
+ANIMATION
+pixelsPerUnit: 8
+anim: 0, 20, 16, 20, 4
+anim_spd: 10
+../Resources/Textures/mob_dino.tga
+COLLISION
+body: 65, 80, 1000, 0
+body_type: DYNAMIC
+
+BLUEPRINT 0
+NAME: mob_mask
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 8
+anim: 0, 0, 16, 16, 4
+anim_spd: 10
+../Resources/Textures/mob_mask.tga
+ANIMATION
+pixelsPerUnit: 8
+anim: 0, 16, 16, 16, 4
+anim_spd: 10
+../Resources/Textures/mob_mask.tga
+COLLISION
+body: 65, 64, 1000, 0
+body_type: DYNAMIC
+
+BLUEPRINT 0
+NAME: mob_explode
+TRANSFORM:
+pos: 300, 300, 1
+rot: 0, 0, 0
+scl: 1, 1, 1
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 7
+anim: 0, 0, 16, 16, 4
+anim_spd: 10
+../Resources/Textures/mob_creeper.tga
+ANIMATION
+pixelsPerUnit: 7
+anim: 0, 16, 16, 16, 4
+anim_spd: 10
+../Resources/Textures/mob_creeper.tga
+ANIMATION
+pixelsPerUnit: 7
+anim: 0, 32, 16, 16, 4
+anim_spd: 10
+../Resources/Textures/mob_creeper.tga
+ANIMATION
+pixelsPerUnit: 7
+anim: 0, 48, 16, 16, 4
+anim_spd: 10
+../Resources/Textures/mob_creeper.tga
+COLLISION
+body: 60, 66, 10000, 0
+body_type: DYNAMIC
+
+BLUEPRINT 0
+NAME: mob_explode_bullet
+TRANSFORM:
+pos: 300, 300, 1
+rot: 0, 0, 0
+scl: 1, 1, 1
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 7
+anim: 0, 0, 16, 16, 4
+anim_spd: 10
+../Resources/Textures/mob_creeper_2.tga
+ANIMATION
+pixelsPerUnit: 7
+anim: 0, 16, 16, 16, 4
+anim_spd: 10
+../Resources/Textures/mob_creeper_2.tga
+ANIMATION
+pixelsPerUnit: 7
+anim: 0, 32, 16, 16, 4
+anim_spd: 10
+../Resources/Textures/mob_creeper_2.tga
+ANIMATION
+pixelsPerUnit: 7
+anim: 0, 48, 16, 16, 4
+anim_spd: 10
+../Resources/Textures/mob_creeper_2.tga
+COLLISION
+body: 60, 66, 10000, 0
+body_type: DYNAMIC
+
+BLUEPRINT 0
+NAME: mob_knight
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 8
+anim: 0, 0, 16, 21, 4
+anim_spd: 10
+../Resources/Textures/mob_knight.tga
+ANIMATION
+pixelsPerUnit: 8
+anim: 0, 21, 16, 21, 4
+anim_spd: 10
+../Resources/Textures/mob_knight.tga
+COLLISION
+body: 65, 80, 1000, 0
+body_type: DYNAMIC
+
+BLUEPRINT 0
+NAME: explosion
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 8
+anim: 0, 0, 48, 48, 8
+anim_spd: 5
+../Resources/Textures/explosion.tga
+COLLISION
+body: 240,240, 1, 0
+body_type: STATIC
+
+BLUEPRINT 0
+NAME: shield
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 7
+anim: 0, 0, 27, 27, 1
+anim_spd: 5
+../Resources/Textures/shield.tga
+COLLISION
+body: 155,155, 1000000000, 0
+body_type: DYNAMIC
+
+BLUEPRINT 0
+NAME: crate
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 10
+anim: 0, 0, 64, 64, 1
+anim_spd: 10
+../Resources/Textures/crate.tga
+ANIMATION
+pixelsPerUnit: 10
+anim: 64, 0, 64, 64, 3
+anim_spd: 10
+../Resources/Textures/crate.tga
+ANIMATION
+pixelsPerUnit: 10
+anim: 256, 0, 64, 64, 1
+anim_spd: 10
+../Resources/Textures/crate.tga
+COLLISION
+body: 68, 78, 100, 0
+body_type: DYNAMIC
+
+BLUEPRINT 0
+NAME: tnt
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 50
+anim: 0, 0, 320, 320, 1
+anim_spd: 10
+../Resources/Textures/tnt.tga
+ANIMATION
+pixelsPerUnit: 50
+anim: 320, 0, 320, 320, 3
+anim_spd: 10
+../Resources/Textures/tnt.tga
+ANIMATION
+pixelsPerUnit: 50
+anim: 256, 0, 320, 320, 1
+anim_spd: 10
+../Resources/Textures/tnt.tga
+COLLISION
+body: 68, 78, 100, 0
+body_type: DYNAMIC
+
+BLUEPRINT 0
+NAME: spawn
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 40
+anim: 0, 0, 88, 110, 4
+anim_spd: 5
+../Resources/Textures/SpawnEffect.tga
+
+BLUEPRINT 1
+NAME: beat-left
+COMPONENT:
+SPRITE
+pixelsPerUnit: 30
+../Resources/Textures/beat_grid_left.tga
+
+BLUEPRINT 2
+NAME: ring
+COMPONENT:
+SPRITE
+pixelsPerUnit: 40
+../Resources/Textures/beat_grid2_demo.tga
+
+BLUEPRINT 3
+NAME: grid
+COMPONENT:
+SPRITE
+pixelsPerUnit: 300
+../Resources/Textures/beat_grid3_demo.tga
+
+BLUEPRINT 6
+NAME: beat-right
+COMPONENT:
+SPRITE
+pixelsPerUnit: 30
+../Resources/Textures/beat_grid_right.tga
+
+BLUEPRINT 7
+NAME: yeet
+COMPONENT:
+SPRITE
+pixelsPerUnit: 400
+../Resources/Textures/yeet.tga
+
+BLUEPRINT 8
+NAME: meh
+COMPONENT:
+SPRITE
+pixelsPerUnit: 400
+../Resources/Textures/meh.tga
+
+BLUEPRINT 9
+NAME: bruh
+COMPONENT:
+SPRITE
+pixelsPerUnit: 400
+../Resources/Textures/bruh.tga
+
+BLUEPRINT 10
+NAME: beat-left-ht
+COMPONENT:
+SPRITE
+pixelsPerUnit: 30
+../Resources/Textures/beat_grid_left_ht.tga
+
+BLUEPRINT 11
+NAME: beat-right-ht
+COMPONENT:
+SPRITE
+pixelsPerUnit: 30
+../Resources/Textures/beat_grid_right_ht.tga
+
+BLUEPRINT 1
+NAME: splash_screen
+COMPONENT:
+SPRITE
+pixelsPerUnit: 40
+../Resources/Image/splash_screen.tga
+
+BLUEPRINT 1
+NAME: play_button
+COMPONENT:
+SPRITE
+pixelsPerUnit: 40
+../Resources/Image/play_button.tga
+BUTTON
+
+BLUEPRINT 1
+NAME: options_button
+COMPONENT:
+SPRITE
+pixelsPerUnit: 40
+../Resources/Image/options.tga
+
+BLUEPRINT 1
+NAME: menu_BG
+COMPONENT:
+SPRITE
+pixelsPerUnit: 40
+../Resources/Image/menu_BG.tga

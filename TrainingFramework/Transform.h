@@ -12,7 +12,11 @@ public:
 	* Methods
 	*/
 	void CalculateMatrix();
-	void updateTransform(Vector3 position, Vector3 rotation, Vector3 scale);
+	void UpdateTransform(Vector3 position, Vector3 rotation, Vector3 scale);
+	void UpdatePosition(Vector3 position);
+	void UpdateRotation(Vector3 rotation);
+	void UpdateScale(Vector3 scale);
+	void addToPosition(float x, float y);
 
 	/*
 	* Getters/Setters
@@ -24,6 +28,9 @@ public:
 	Matrix m_model;
 	Vector3 position;
 	Vector3 rotation;
-	Vector3 scale;
+	Vector3 scale = Vector3(1, 1, 1);
+
+	void * parentObj = NULL;
+
 };
 

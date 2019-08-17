@@ -1,52 +1,35 @@
 #pragma once
-#include "Model.h"
-#include "Texture.h"
-#include "Shaders.h"
-#include "Camera.h"
-#include "Component.h"
 #include "Transform.h"
+#include "Blueprint.h"
 #include <vector>
 using namespace std;
 
-class GameObject
+class GameObject : 
+	public Blueprint
 {
 public:
 	GameObject();
-	~GameObject();
+	GameObject(Blueprint* blueprint, Vector3 pos, Vector3 scale, Vector3 rotation);
+	virtual ~GameObject();
 
 	/*
 	* System Methods
 	*/
-	void Update();
-	void Draw();
+	virtual void Update(float deltaTime);
+	virtual void LateUpdate(float deltaTime);
+	virtual void Draw();
 
 	/*
 	* Component Methods
 	*/
-	void updateTransform(Vector3 position, Vector3 rotation, Vector3 scale);
+	void UpdateTransform(Vector3 position, Vector3 rotation, Vector3 scale);
+	void UpdatePosition(float x, float y, float z);
+	void UpdateRotation(float x, float y, float z);
+	void UpdateScale(float x, float y, float z);
 	void AddComponent(Component * comp);
-
-	template <typename CheckType>
-	CheckType * GetComponent();
-
-	void setActive(bool state) { isActive = state; }
-	
-	//Debug
-	void Print();
-
+	void AddToPosition(float x, float y);
+	virtual void checkCollision(GameObject * tempObj);
+	virtual void Init();
 	bool isActive = true;
 	Transform * transform = NULL;
-	vector<Component *> componentList{};
 };
-
-template<typename CheckType>
-CheckType * GameObject::GetComponent()
-{
-	if (!componentList.empty())
-		for (std::vector<Component *>::iterator it = componentList.begin(); it != componentList.end(); ++it) {
-			if (dynamic_cast<CheckType *>(*it) != NULL) {
-				return (CheckType*)(*it);
-			}
-		}
-	return NULL;
-}

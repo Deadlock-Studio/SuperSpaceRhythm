@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-static class HandyString
+class HandyString
 {
 public:
 	static int find_nth(string &s, size_t n);

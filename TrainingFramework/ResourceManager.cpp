@@ -10,6 +10,7 @@ ResourceManager * ResourceManager::ms_pInstance = NULL;
 void ResourceManager::LoadEngineResources()
 {
 	squareId = ResourceManager::GetInstance()->LoadNFG("../Resources/Models/Square.nfg");
+	squareTLId = ResourceManager::GetInstance()->LoadNFG("../Resources/Models/FontSquare.nfg");
 }
 
 int ResourceManager::LoadNFG(char * filename)

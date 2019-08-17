@@ -1,21 +1,17 @@
 #pragma once
-//Movement
-//
-#define W_MASK (1 << 0)
-#define A_MASK (1 << 1)
-#define S_MASK (1 << 2)
-#define D_MASK (1 << 3)
-#define SPACE_MASK (1 << 4)
-#define SHIFT_MASK (1 << 5)
+#include <map>
 
-//Speed
-#define CTRL_MASK (1 << 6)
-
-//Reset
-#define R_MASK (1 << 7)
-
-//Beat hit test
-#define E_MASK (1 << 8)
+enum Actions {
+	MoveForward,
+	MoveBackWard,
+	MoveLeft,
+	MoveRight,
+	BeatIt,
+	Reform,
+	Shoot,
+	Dash,
+	DebugMode,
+};
 
 class InputManager
 {
@@ -31,6 +27,7 @@ public:
 	{
 		if (ms_pInstance == NULL)
 			ms_pInstance = new InputManager;
+		ms_pInstance->LoadDefault();
 	}
 	static InputManager * GetInstance()
 	{
@@ -45,12 +42,20 @@ public:
 		}
 	}
 
+	void LoadDefault();
 	void keyUpdate(unsigned char key, bool bIsPressed);
-	bool keyDown(unsigned char key);
+	bool ActionCheck(Actions action);
+	void MouseDown(float x, float y);
+	void MouseUp(float x, float y);
+	void MousePosition(float x, float y);
+	bool isMouseDown = false;
+	float mX, mY;
+	float mouseX, mouseY;
 
 protected:
 	static InputManager * ms_pInstance;
 
 public:
 	int keyMap = 0;
+	map<unsigned char, Actions> keyBind;
 };

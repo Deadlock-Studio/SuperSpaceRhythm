@@ -11,5 +11,7 @@ public:
 	GLuint vboId, iboId;
 	unsigned int nVertices, nIndices;
 	char * filename;
+	int * indicesList;
+	Vertex * verticesList;
 };
 
