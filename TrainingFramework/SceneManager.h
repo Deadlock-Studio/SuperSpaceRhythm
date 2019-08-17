@@ -44,6 +44,7 @@ public:
 	/*
 	* File read methods
 	*/
+	void Init();
 	void LoadScene(char * filename);
 	void GetComponent(ifstream & file, Blueprint * blueprint);
 	Camera * GetCam(ifstream & file);

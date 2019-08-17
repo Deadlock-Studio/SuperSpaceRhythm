@@ -4,6 +4,11 @@
 
 TextManager * TextManager::ms_pInstance = NULL;
 
+void TextManager::Init()
+{
+	TextManager::GetInstance()->LoadFont("../Resources/Templates/Fontlist.txt");
+}
+
 void TextManager::LoadFont(char* fileName)
 {
 	string line;

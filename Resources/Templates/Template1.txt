@@ -391,6 +391,23 @@ COLLISION
 body: 80, 80, 1, 0
 body_type: STATIC
 
+BLUEPRINT 0
+NAME: mine
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 12
+anim: 0, 0, 17, 17, 2
+anim_spd: 50
+../Resources/Textures/mine.tga
+ANIMATION
+pixelsPerUnit: 12
+anim: 17, 0, 17, 17, 2
+anim_spd: 5
+../Resources/Textures/mine.tga
+COLLISION
+body: 57, 57, 1, 0
+body_type: STATIC
+
 BLUEPRINT 1
 NAME: demo_room
 COMPONENT:
@@ -421,205 +438,6 @@ body: 20, 20, 0, 0
 body_type: DYNAMIC
 
 BLUEPRINT 0
-NAME: mob_white
-COMPONENT:
-ANIMATION
-pixelsPerUnit: 24
-anim: 0, 96, 32, 32, 3
-anim_spd: 20
-../Resources/Textures/mob.tga
-ANIMATION
-pixelsPerUnit: 24
-anim: 0, 0, 32, 32, 3
-anim_spd: 20
-../Resources/Textures/mob.tga
-COLLISION
-body: 54, 45, 1000, 0
-body_type: DYNAMIC
-
-BLUEPRINT 0
-NAME: mob_red
-COMPONENT:
-ANIMATION
-pixelsPerUnit: 24
-anim: 0, 128, 32, 32, 3
-anim_spd: 20
-../Resources/Textures/mob.tga
-ANIMATION
-pixelsPerUnit: 24
-anim: 0, 32, 32, 32, 3
-anim_spd: 20
-../Resources/Textures/mob.tga
-COLLISION
-body: 54, 45, 1000, 0
-body_type: DYNAMIC
-
-BLUEPRINT 0
-NAME: mob_blue
-COMPONENT:
-ANIMATION
-pixelsPerUnit: 24
-anim: 0, 160, 32, 32, 3
-anim_spd: 20
-../Resources/Textures/mob.tga
-ANIMATION
-pixelsPerUnit: 24
-anim: 0, 64, 32, 32, 3
-anim_spd: 20
-../Resources/Textures/mob.tga
-COLLISION
-body: 54, 45, 1000, 0
-body_type: DYNAMIC
-
-BLUEPRINT 0
-NAME: mob_necro
-COMPONENT:
-ANIMATION
-pixelsPerUnit: 8
-anim: 0, 0, 16, 20, 4
-anim_spd: 10
-../Resources/Textures/mob_necro.tga
-ANIMATION
-pixelsPerUnit: 8
-anim: 0, 20, 16, 20, 4
-anim_spd: 10
-../Resources/Textures/mob_necro.tga
-COLLISION
-body: 65, 80, 1000, 0
-body_type: DYNAMIC
-
-BLUEPRINT 0
-NAME: mob_wiz
-COMPONENT:
-ANIMATION
-pixelsPerUnit: 8
-anim: 0, 0, 16, 20, 4
-anim_spd: 10
-../Resources/Textures/mob_wiz.tga
-ANIMATION
-pixelsPerUnit: 8
-anim: 0, 20, 16, 20, 4
-anim_spd: 10
-../Resources/Textures/mob_wiz.tga
-COLLISION
-body: 65, 80, 1000, 0
-body_type: DYNAMIC
-
-
-BLUEPRINT 0
-NAME: mob_dino
-COMPONENT:
-ANIMATION
-pixelsPerUnit: 8
-anim: 0, 0, 16, 20, 4
-anim_spd: 10
-../Resources/Textures/mob_dino.tga
-ANIMATION
-pixelsPerUnit: 8
-anim: 0, 20, 16, 20, 4
-anim_spd: 10
-../Resources/Textures/mob_dino.tga
-COLLISION
-body: 65, 80, 1000, 0
-body_type: DYNAMIC
-
-BLUEPRINT 0
-NAME: mob_mask
-COMPONENT:
-ANIMATION
-pixelsPerUnit: 8
-anim: 0, 0, 16, 16, 4
-anim_spd: 10
-../Resources/Textures/mob_mask.tga
-ANIMATION
-pixelsPerUnit: 8
-anim: 0, 16, 16, 16, 4
-anim_spd: 10
-../Resources/Textures/mob_mask.tga
-COLLISION
-body: 65, 64, 1000, 0
-body_type: DYNAMIC
-
-BLUEPRINT 0
-NAME: mob_explode
-TRANSFORM:
-pos: 300, 300, 1
-rot: 0, 0, 0
-scl: 1, 1, 1
-COMPONENT:
-ANIMATION
-pixelsPerUnit: 7
-anim: 0, 0, 16, 16, 4
-anim_spd: 10
-../Resources/Textures/mob_creeper.tga
-ANIMATION
-pixelsPerUnit: 7
-anim: 0, 16, 16, 16, 4
-anim_spd: 10
-../Resources/Textures/mob_creeper.tga
-ANIMATION
-pixelsPerUnit: 7
-anim: 0, 32, 16, 16, 4
-anim_spd: 10
-../Resources/Textures/mob_creeper.tga
-ANIMATION
-pixelsPerUnit: 7
-anim: 0, 48, 16, 16, 4
-anim_spd: 10
-../Resources/Textures/mob_creeper.tga
-COLLISION
-body: 60, 66, 10000, 0
-body_type: DYNAMIC
-
-BLUEPRINT 0
-NAME: mob_explode_bullet
-TRANSFORM:
-pos: 300, 300, 1
-rot: 0, 0, 0
-scl: 1, 1, 1
-COMPONENT:
-ANIMATION
-pixelsPerUnit: 7
-anim: 0, 0, 16, 16, 4
-anim_spd: 10
-../Resources/Textures/mob_creeper_2.tga
-ANIMATION
-pixelsPerUnit: 7
-anim: 0, 16, 16, 16, 4
-anim_spd: 10
-../Resources/Textures/mob_creeper_2.tga
-ANIMATION
-pixelsPerUnit: 7
-anim: 0, 32, 16, 16, 4
-anim_spd: 10
-../Resources/Textures/mob_creeper_2.tga
-ANIMATION
-pixelsPerUnit: 7
-anim: 0, 48, 16, 16, 4
-anim_spd: 10
-../Resources/Textures/mob_creeper_2.tga
-COLLISION
-body: 60, 66, 10000, 0
-body_type: DYNAMIC
-
-BLUEPRINT 0
-NAME: mob_knight
-COMPONENT:
-ANIMATION
-pixelsPerUnit: 8
-anim: 0, 0, 16, 21, 4
-anim_spd: 10
-../Resources/Textures/mob_knight.tga
-ANIMATION
-pixelsPerUnit: 8
-anim: 0, 21, 16, 21, 4
-anim_spd: 10
-../Resources/Textures/mob_knight.tga
-COLLISION
-body: 65, 80, 1000, 0
-body_type: DYNAMIC
-
-BLUEPRINT 0
 NAME: explosion
 COMPONENT:
 ANIMATION
@@ -630,18 +448,6 @@ anim_spd: 5
 COLLISION
 body: 240,240, 1, 0
 body_type: STATIC
-
-BLUEPRINT 0
-NAME: shield
-COMPONENT:
-ANIMATION
-pixelsPerUnit: 7
-anim: 0, 0, 27, 27, 1
-anim_spd: 5
-../Resources/Textures/shield.tga
-COLLISION
-body: 155,155, 1000000000, 0
-body_type: DYNAMIC
 
 BLUEPRINT 0
 NAME: crate
@@ -695,95 +501,3 @@ pixelsPerUnit: 40
 anim: 0, 0, 88, 110, 4
 anim_spd: 5
 ../Resources/Textures/SpawnEffect.tga
-
-BLUEPRINT 1
-NAME: beat-left
-COMPONENT:
-SPRITE
-pixelsPerUnit: 30
-../Resources/Textures/beat_grid_left.tga
-
-BLUEPRINT 2
-NAME: ring
-COMPONENT:
-SPRITE
-pixelsPerUnit: 40
-../Resources/Textures/beat_grid2_demo.tga
-
-BLUEPRINT 3
-NAME: grid
-COMPONENT:
-SPRITE
-pixelsPerUnit: 300
-../Resources/Textures/beat_grid3_demo.tga
-
-BLUEPRINT 6
-NAME: beat-right
-COMPONENT:
-SPRITE
-pixelsPerUnit: 30
-../Resources/Textures/beat_grid_right.tga
-
-BLUEPRINT 7
-NAME: yeet
-COMPONENT:
-SPRITE
-pixelsPerUnit: 400
-../Resources/Textures/yeet.tga
-
-BLUEPRINT 8
-NAME: meh
-COMPONENT:
-SPRITE
-pixelsPerUnit: 400
-../Resources/Textures/meh.tga
-
-BLUEPRINT 9
-NAME: bruh
-COMPONENT:
-SPRITE
-pixelsPerUnit: 400
-../Resources/Textures/bruh.tga
-
-BLUEPRINT 10
-NAME: beat-left-ht
-COMPONENT:
-SPRITE
-pixelsPerUnit: 30
-../Resources/Textures/beat_grid_left_ht.tga
-
-BLUEPRINT 11
-NAME: beat-right-ht
-COMPONENT:
-SPRITE
-pixelsPerUnit: 30
-../Resources/Textures/beat_grid_right_ht.tga
-
-BLUEPRINT 1
-NAME: splash_screen
-COMPONENT:
-SPRITE
-pixelsPerUnit: 40
-../Resources/Image/splash_screen.tga
-
-BLUEPRINT 1
-NAME: play_button
-COMPONENT:
-SPRITE
-pixelsPerUnit: 40
-../Resources/Image/play_button.tga
-BUTTON
-
-BLUEPRINT 1
-NAME: options_button
-COMPONENT:
-SPRITE
-pixelsPerUnit: 40
-../Resources/Image/options.tga
-
-BLUEPRINT 1
-NAME: menu_BG
-COMPONENT:
-SPRITE
-pixelsPerUnit: 40
-../Resources/Image/menu_BG.tga

@@ -67,7 +67,7 @@ void MobNecro::Spawn()
 {
 	GameManager::GetInstance()->Spawn("spawn",
 		SceneManager::GetInstance()->GetBlueprintByName("spawn"),
-		Vector3(transform->position.x, transform->position.y, 2),
+		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
 		Vector3(1, 1, 1),
 		Vector3());
 	SetState(&MobNecro::Idle);
@@ -75,6 +75,12 @@ void MobNecro::Spawn()
 
 void MobNecro::Idle()
 {
+	//Transition
+	if (GetComponent<HP>()->dead) {
+		SetState(&MobNecro::Death);
+		return;
+	}
+
 	if (GameManager::GetInstance()->player->transform->position.x <= transform->position.x)
 		PlayAnimation(0);
 	else
@@ -83,6 +89,7 @@ void MobNecro::Idle()
 
 void MobNecro::Death()
 {
+	SceneManager::GetInstance()->addToRemovalList(this);
 }
 
 void MobNecro::Update(float deltaTime)
@@ -103,9 +110,11 @@ void MobNecro::checkCollision(GameObject* tempObj)
 		((TNT*)tempObj)->SetState(&TNT::Destroying);
 	}
 	if (strcmp(tempObj->name, "pBullet_red") == 0) {
+		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
 	}
 	if (strcmp(tempObj->name, "pBullet_blue") == 0) {
+		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
 	}
 }

@@ -75,6 +75,12 @@ void MobShoot::Spawn()
 
 void MobShoot::Idle()
 {
+	//Transition
+	if (GetComponent<HP>()->dead) {
+		SetState(&MobShoot::Death);
+		return;
+	}
+
 	if (GameManager::GetInstance()->player->transform->position.x <= transform->position.x)
 		PlayAnimation(0);
 	else
@@ -83,6 +89,7 @@ void MobShoot::Idle()
 
 void MobShoot::Death()
 {
+	SceneManager::GetInstance()->addToRemovalList(this);
 }
 
 void MobShoot::Update(float deltaTime)
@@ -103,9 +110,11 @@ void MobShoot::checkCollision(GameObject * tempObj)
 		((TNT*)tempObj)->SetState(&TNT::Destroying);
 	}
 	if (strcmp(tempObj->name, "pBullet_red") == 0) {
+		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
 	}
 	if (strcmp(tempObj->name, "pBullet_blue") == 0) {
+		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
 	}
 }

@@ -31,6 +31,7 @@ public:
 		}
 	}
 
+	void Init();
 	void LoadFont(char* fileName);
 	Font* GetFontByName(char* name);
 	void Update(float deltaTime);

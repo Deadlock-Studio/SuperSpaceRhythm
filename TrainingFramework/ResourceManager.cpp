@@ -7,6 +7,11 @@
 
 ResourceManager * ResourceManager::ms_pInstance = NULL;
 
+void ResourceManager::Init()
+{
+	LoadEngineResources();
+}
+
 void ResourceManager::LoadEngineResources()
 {
 	squareId = ResourceManager::GetInstance()->LoadNFG("../Resources/Models/Square.nfg");

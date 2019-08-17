@@ -44,7 +44,6 @@ void MobExplode::Init()
 
 void MobExplode::CalculateVelocity()
 {
-	
 	mX = GameManager::GetInstance()->player->transform->position.x;
 	mY = GameManager::GetInstance()->player->transform->position.y;
 	x = transform->position.x;
@@ -149,7 +148,7 @@ void MobExplode::checkCollision(GameObject * tempObj)
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
 		SetState(&MobExplode::Death);
 	}
-	if (strcmp(tempObj->name, "explosion") == 0) {
+	else if (strcmp(tempObj->name, "explosion") == 0) {
 		SetState(&MobExplode::Death);
 	}
 }

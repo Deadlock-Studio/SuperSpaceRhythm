@@ -1,0 +1,91 @@
+BLUEPRINT 1
+NAME: beat-left
+COMPONENT:
+SPRITE
+pixelsPerUnit: 30
+../Resources/Textures/beat_grid_left.tga
+
+BLUEPRINT 2
+NAME: ring
+COMPONENT:
+SPRITE
+pixelsPerUnit: 40
+../Resources/Textures/beat_grid2_demo.tga
+
+BLUEPRINT 3
+NAME: grid
+COMPONENT:
+SPRITE
+pixelsPerUnit: 300
+../Resources/Textures/beat_grid3_demo.tga
+
+BLUEPRINT 6
+NAME: beat-right
+COMPONENT:
+SPRITE
+pixelsPerUnit: 30
+../Resources/Textures/beat_grid_right.tga
+
+BLUEPRINT 7
+NAME: yeet
+COMPONENT:
+SPRITE
+pixelsPerUnit: 400
+../Resources/Textures/yeet.tga
+
+BLUEPRINT 8
+NAME: meh
+COMPONENT:
+SPRITE
+pixelsPerUnit: 400
+../Resources/Textures/meh.tga
+
+BLUEPRINT 9
+NAME: bruh
+COMPONENT:
+SPRITE
+pixelsPerUnit: 400
+../Resources/Textures/bruh.tga
+
+BLUEPRINT 10
+NAME: beat-left-ht
+COMPONENT:
+SPRITE
+pixelsPerUnit: 30
+../Resources/Textures/beat_grid_left_ht.tga
+
+BLUEPRINT 11
+NAME: beat-right-ht
+COMPONENT:
+SPRITE
+pixelsPerUnit: 30
+../Resources/Textures/beat_grid_right_ht.tga
+
+BLUEPRINT 1
+NAME: splash_screen
+COMPONENT:
+SPRITE
+pixelsPerUnit: 40
+../Resources/Image/splash_screen.tga
+
+BLUEPRINT 1
+NAME: play_button
+COMPONENT:
+SPRITE
+pixelsPerUnit: 40
+../Resources/Image/play_button.tga
+BUTTON
+
+BLUEPRINT 1
+NAME: options_button
+COMPONENT:
+SPRITE
+pixelsPerUnit: 40
+../Resources/Image/options.tga
+
+BLUEPRINT 1
+NAME: menu_BG
+COMPONENT:
+SPRITE
+pixelsPerUnit: 40
+../Resources/Image/menu_BG.tga

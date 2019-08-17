@@ -29,12 +29,8 @@ Component * HP::Clone()
 
 void HP::Damage(float damage)
 {
-	////health -= damage;
-	//char damageText[50];
-	////snprintf(damageText, sizeof(damageText), "%.0f!", damage);
-	////TextManager::GetInstance()->AddText("COMIC",
-	//	damageText, Vector4(0.85, 0.6, 0.5, 1.0),
-	//	((Transform*)parentTrans)->position.x - 100,
-	//	((Transform*)parentTrans)->position.y + 110,
-	//	0.5, 0.5, 3);
+	health -= damage;
+
+	if (health <= 0)
+		dead = true;
 }

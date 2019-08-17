@@ -142,11 +142,9 @@ void Boss::checkCollision(GameObject * tempObj)
 	}
 	//collide with player bullet
 	if (strcmp(tempObj->name, "pBullet_red") == 0) {
-		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
 	}
 	if (strcmp(tempObj->name, "pBullet_blue") == 0) {
-		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
 	}
 	if (strcmp(tempObj->name, "crate") == 0) {

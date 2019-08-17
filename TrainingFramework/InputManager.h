@@ -27,7 +27,6 @@ public:
 	{
 		if (ms_pInstance == NULL)
 			ms_pInstance = new InputManager;
-		ms_pInstance->LoadDefault();
 	}
 	static InputManager * GetInstance()
 	{
@@ -42,6 +41,7 @@ public:
 		}
 	}
 
+	void Init();
 	void LoadDefault();
 	void keyUpdate(unsigned char key, bool bIsPressed);
 	bool ActionCheck(Actions action);
