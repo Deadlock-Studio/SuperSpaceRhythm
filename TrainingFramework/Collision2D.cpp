@@ -66,7 +66,8 @@ void Collision2D::Init()
 	bodyX = ((GameObject*)parentObj)->transform->position.x;
 	bodyY = ((GameObject*)parentObj)->transform->position.y;
 	if (strcmp(((GameObject*)parentObj)->name, "pBullet_blue") == 0 || strcmp(((GameObject*)parentObj)->name, "pBullet_red") == 0 || strcmp(((GameObject*)parentObj)->name, "eBullet") == 0
-		|| strcmp(((GameObject*)parentObj)->name, "shield") == 0) {
+		|| strcmp(((GameObject*)parentObj)->name, "shield") == 0
+		|| strcmp(((GameObject*)parentObj)->name, "mine") == 0) {
 		isBullet = true;
 	}
 	else

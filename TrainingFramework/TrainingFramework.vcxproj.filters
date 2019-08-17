@@ -252,6 +252,9 @@
     <ClCompile Include="MobSlime.cpp">
       <Filter>Source Files\GameObjects\Mob\Melee</Filter>
     </ClCompile>
+    <ClCompile Include="Mine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Transform.h">
@@ -412,6 +415,9 @@
     </ClInclude>
     <ClInclude Include="MobSlime.h">
       <Filter>Header Files\GameObjects\Mob\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="Mine.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
