@@ -28,5 +28,5 @@ public:
 	float x, y, mX, mY, velX, velY;
 	vector<Animation*> animeList{};
 
-	float damage = 30;
+	float damage = 0;
 };

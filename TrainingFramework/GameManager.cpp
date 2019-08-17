@@ -11,44 +11,6 @@ void GameManager::Init()
 	SetState(&GameManager::Loading);
 
 	LoadConstructorMap();
-	
-	camera = SceneManager::GetInstance()->usedCamera;
-
-	splashScreen = Spawn("object",
-		SceneManager::GetInstance()->GetBlueprintByName("splash_screen"),
-		Vector3(640, 360, GUI_LAYER),
-		Vector3(1, 1, 1),
-		Vector3());
-	splashScreen->GetComponent<SpriteRenderer>()->alpha = 0;
-	splashScreen->isActive = false;
-
-	playButton = Spawn("object",
-		SceneManager::GetInstance()->GetBlueprintByName("play_button"),
-		Vector3(640, 350, GUI_LAYER),
-		Vector3(1, 1, 1),
-		Vector3());
-	playButton->GetComponent<SpriteRenderer>()->alpha = 0;
-	playButton->isActive = false;
-
-	optionsButton = Spawn("object",
-		SceneManager::GetInstance()->GetBlueprintByName("options_button"),
-		Vector3(640, 200, GUI_LAYER),
-		Vector3(1, 1, 1),
-		Vector3());
-	optionsButton->GetComponent<SpriteRenderer>()->alpha = 0;
-	optionsButton->isActive = false;
-
-	menuBG = Spawn("object",
-		SceneManager::GetInstance()->GetBlueprintByName("menu_BG"),
-		Vector3(640, 360, BG_LAYER),
-		Vector3(1, 1, 1),
-		Vector3());
-	menuBG->GetComponent<SpriteRenderer>()->alpha = 0;
-	menuBG->isActive = false;
-
-	title = TextManager::GetInstance()->AddText("monogram", "Super Space Rhythm", Vector4(0.776, 0.4039, 0.5529, 1.0), 350, 500, 2, 2);
-	title->color.w = 0;
-	title->isActive = false;
 }
 
 void GameManager::LoadConstructorMap()
@@ -58,10 +20,10 @@ void GameManager::LoadConstructorMap()
 	constructorMap["boss"] = &constructor<Boss>;
 	constructorMap["hp"] = &constructor<HealthPotion>;
 	constructorMap["trap"] = &constructor<Trap>;
-	constructorMap["mine"] = &constructor<Mine>;
 	constructorMap["bomb"] = &constructor<Bomb>;
+	constructorMap["mine"] = &constructor<Mine>;
 	constructorMap["crate"] = &constructor<Crate>;
-	constructorMap["mob"] = &constructor<Mob1>;
+	constructorMap["mob"] = &constructor<MobSlime>;
 	constructorMap["explosion"] = &constructor<Explosion>;
 	constructorMap["tnt"] = &constructor<TNT>;
 	constructorMap["mobShoot"] = &constructor<MobShoot>;
@@ -106,7 +68,49 @@ GameObject* GameManager::Spawn(string constructorName, Blueprint* blueprint, Vec
 //Splash screen and load game resources
 void GameManager::Loading(float deltaTime)
 {
-	
+	camera = SceneManager::GetInstance()->usedCamera;
+
+	splashScreen = Spawn("object",
+		SceneManager::GetInstance()->GetBlueprintByName("splash_screen"),
+		Vector3(640, 360, GUI_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
+	splashScreen->GetComponent<SpriteRenderer>()->alpha = 0;
+	splashScreen->isActive = false;
+
+	playButton = Spawn("object",
+		SceneManager::GetInstance()->GetBlueprintByName("play_button"),
+		Vector3(640, 350, GUI_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
+	playButton->GetComponent<SpriteRenderer>()->alpha = 0;
+	playButton->isActive = false;
+
+	optionsButton = Spawn("object",
+		SceneManager::GetInstance()->GetBlueprintByName("options_button"),
+		Vector3(640, 200, GUI_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
+	optionsButton->GetComponent<SpriteRenderer>()->alpha = 0;
+	optionsButton->isActive = false;
+
+	menuBG = Spawn("object",
+		SceneManager::GetInstance()->GetBlueprintByName("menu_BG"),
+		Vector3(640, 360, BG_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
+	menuBG->GetComponent<SpriteRenderer>()->alpha = 0;
+	menuBG->isActive = false;
+
+	title = TextManager::GetInstance()->AddText("monogram", "Super Space Rhythm", Vector4(0.776, 0.4039, 0.5529, 1.0), 350, 500, 2, 2);
+	title->color.w = 0;
+	title->isActive = false;
+
+	SetState(&GameManager::SplashScreen);
+}
+
+void GameManager::SplashScreen(float deltaTime)
+{
 	//Transitions
 	if (InputManager::GetInstance()->keyMap != 0) {
 		//Skip splash screen
@@ -179,16 +183,12 @@ void GameManager::LoadDebugRoom(float deltaTime)
 		Vector3(640, 360, PLAYER_LAYER),
 		Vector3(1, 1, 1),
 		Vector3());
-	Spawn("bomb",
-		SceneManager::GetInstance()->GetBlueprintByName("bomb"),
-		Vector3(700, 500, MOB_LAYER),
+
+	/*Spawn("boss",
+		SceneManager::GetInstance()->GetBlueprintByName("boss"),
+		Vector3(700, 500, PLAYER_LAYER),
 		Vector3(1, 1, 1),
-		Vector3());
-	//Spawn("boss",
-	//	SceneManager::GetInstance()->GetBlueprintByName("boss"),
-	//	Vector3(700, 500, PLAYER_LAYER),
-	//	Vector3(1, 1, 1),
-	//	Vector3());
+		Vector3());*/
 
 	//Spawn("hp",
 	//	SceneManager::GetInstance()->GetBlueprintByName("health_potion"),
@@ -211,46 +211,46 @@ void GameManager::LoadDebugRoom(float deltaTime)
 	//	Vector3(1, 1, 1),
 	//	Vector3());
 
-	//Spawn("mobExplode",
-	//	SceneManager::GetInstance()->GetBlueprintByName("mob_explode"),
-	//	Vector3(600, 200, MOB_LAYER),
-	//	Vector3(1, 1, 1),
-	//	Vector3());
-	//Spawn("mobExplodeBullet",
-	//	SceneManager::GetInstance()->GetBlueprintByName("mob_explode_bullet"),
-	//	Vector3(500, 200, MOB_LAYER),
-	//	Vector3(1, 1, 1),
-	//	Vector3());
-	//Spawn("mobShoot",
-	//	SceneManager::GetInstance()->GetBlueprintByName("mob_mask"),
-	//	Vector3(700, 200, MOB_LAYER),
-	//	Vector3(1, 1, 1),
-	//	Vector3());
+	Spawn("mobExplode",
+		SceneManager::GetInstance()->GetBlueprintByName("mob_explode"),
+		Vector3(600, 200, MOB_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
+	Spawn("mobExplodeBullet",
+		SceneManager::GetInstance()->GetBlueprintByName("mob_explode_bullet"),
+		Vector3(500, 200, MOB_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
+	Spawn("mobShoot",
+		SceneManager::GetInstance()->GetBlueprintByName("mob_mask"),
+		Vector3(700, 200, MOB_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
 	//Spawn("mobKnight",
 	//	SceneManager::GetInstance()->GetBlueprintByName("mob_knight"),
 	//	Vector3(400, 200, MOB_LAYER),
 	//	Vector3(1, 1, 1),
 	//	Vector3());
-	//Spawn("mobWiz",
-	//	SceneManager::GetInstance()->GetBlueprintByName("mob_wiz"),
-	//	Vector3(300, 200, MOB_LAYER),
-	//	Vector3(1, 1, 1),
-	//	Vector3());
-	//Spawn("mobNecro",
-	//	SceneManager::GetInstance()->GetBlueprintByName("mob_necro"),
-	//	Vector3(200, 200, MOB_LAYER),
-	//	Vector3(1, 1, 1),
-	//	Vector3());
-	//Spawn("mobDino",
-	//	SceneManager::GetInstance()->GetBlueprintByName("mob_dino"),
-	//	Vector3(100, 200, MOB_LAYER),
-	//	Vector3(1, 1, 1),
-	//	Vector3());
-	//Spawn("trap",
-	//	SceneManager::GetInstance()->GetBlueprintByName("trap"),
-	//	Vector3(800, 500, TRAP_LAYER),
-	//	Vector3(1, 1, 1),
-	//	Vector3());
+	Spawn("mobWiz",
+		SceneManager::GetInstance()->GetBlueprintByName("mob_wiz"),
+		Vector3(300, 200, MOB_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
+	Spawn("mobNecro",
+		SceneManager::GetInstance()->GetBlueprintByName("mob_necro"),
+		Vector3(200, 200, MOB_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
+	Spawn("mobDino",
+		SceneManager::GetInstance()->GetBlueprintByName("mob_dino"),
+		Vector3(100, 200, MOB_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
+	Spawn("trap",
+		SceneManager::GetInstance()->GetBlueprintByName("trap"),
+		Vector3(800, 500, TRAP_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
 	Spawn("mine",
 		SceneManager::GetInstance()->GetBlueprintByName("mine"),
 		Vector3(900, 500, TRAP_LAYER),
@@ -266,14 +266,19 @@ void GameManager::LoadDebugRoom(float deltaTime)
 	//	Vector3(550, 500, TRAP_LAYER),
 	//	Vector3(1, 1, 1),
 	//	Vector3());
-	Spawn("crate",
-		SceneManager::GetInstance()->GetBlueprintByName("crate"),
-		Vector3(600, 500, TRAP_LAYER),
-		Vector3(1, 1, 1),
-		Vector3());
+	//Spawn("crate",
+	//	SceneManager::GetInstance()->GetBlueprintByName("crate"),
+	//	Vector3(600, 500, TRAP_LAYER),
+	//	Vector3(1, 1, 1),
+	//	Vector3());
 	Spawn("tnt",
 		SceneManager::GetInstance()->GetBlueprintByName("tnt"),
 		Vector3(750, 700, TRAP_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
+	Spawn("bomb",
+		SceneManager::GetInstance()->GetBlueprintByName("bomb"),
+		Vector3(800, 700, TRAP_LAYER),
 		Vector3(1, 1, 1),
 		Vector3());
 	//Spawn("tnt",
@@ -309,6 +314,25 @@ void GameManager::RoomStart(float deltaTime)
 
 void GameManager::LoadRoom(float deltaTime)
 {
+	player = Spawn("player",
+		SceneManager::GetInstance()->GetBlueprintByName("player"),
+		Vector3(640, 360, PLAYER_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
+
+	room = Spawn("room",
+		SceneManager::GetInstance()->GetBlueprintByName("demo_room"),
+		Vector3(640, 360, ROOM_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
+
+	Spawn("mobWiz",
+		SceneManager::GetInstance()->GetBlueprintByName("mob_wiz"),
+		Vector3(300, 200, MOB_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
+
+	SetState(&GameManager::RoomStart);
 }
 
 //Reset all objects to pos-Init() state

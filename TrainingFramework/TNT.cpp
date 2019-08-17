@@ -38,7 +38,7 @@ void TNT::Init()
 	//type of body
 	filter.categoryBits = CRATE;
 	//collide with what
-	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | BOSS | EXPLOSION | MOB | CRATE | CRATE | MOB | MOB_RED | MOB_BLUE | BULLET_E | WALL;
+	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | BOSS | EXPLOSION | MOB | CRATE | BOMB | MOB | MOB_RED | MOB_BLUE | BULLET_E | WALL;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 
 }

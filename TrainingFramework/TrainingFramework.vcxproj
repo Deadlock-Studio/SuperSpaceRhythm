@@ -114,7 +114,7 @@
     <ClCompile Include="HP.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Mine.cpp" />
-    <ClCompile Include="Mob1.cpp" />
+    <ClCompile Include="MobSlime.cpp" />
     <ClCompile Include="MobDino.cpp" />
     <ClCompile Include="MobExplode.cpp" />
     <ClCompile Include="MobExplodeBullet.cpp" />
@@ -172,7 +172,7 @@
     <ClInclude Include="HP.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Mine.h" />
-    <ClInclude Include="Mob1.h" />
+    <ClInclude Include="MobSlime.h" />
     <ClInclude Include="MobDino.h" />
     <ClInclude Include="MobExplode.h" />
     <ClInclude Include="MobExplodeBullet.h" />

@@ -13,5 +13,6 @@ public:
 	void Damage(float damage);
 
 	float health;
+	bool dead = false;
 };
 

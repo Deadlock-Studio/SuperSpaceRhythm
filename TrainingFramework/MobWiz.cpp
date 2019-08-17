@@ -67,7 +67,7 @@ void MobWiz::Spawn()
 {
 	GameManager::GetInstance()->Spawn("spawn",
 		SceneManager::GetInstance()->GetBlueprintByName("spawn"),
-		Vector3(transform->position.x, transform->position.y, 2),
+		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
 		Vector3(1, 1, 1),
 		Vector3());
 	SetState(&MobWiz::Idle);
@@ -75,6 +75,13 @@ void MobWiz::Spawn()
 
 void MobWiz::Idle()
 {
+	//Transition
+	if (GetComponent<HP>()->dead) {
+		SetState(&MobWiz::Death);
+		return;
+	}
+
+	//State Execution
 	if (GameManager::GetInstance()->player->transform->position.x <= transform->position.x)
 		PlayAnimation(0);
 	else
@@ -83,6 +90,7 @@ void MobWiz::Idle()
 
 void MobWiz::Death()
 {
+	SceneManager::GetInstance()->addToRemovalList(this);
 }
 
 void MobWiz::Update(float deltaTime)
@@ -102,10 +110,12 @@ void MobWiz::checkCollision(GameObject* tempObj)
 	if (strcmp(tempObj->name, "tnt") == 0) {
 		((TNT*)tempObj)->SetState(&TNT::Exploding);
 	}
-	if (strcmp(tempObj->name, "pBullet_red") == 0) {
+	else if (strcmp(tempObj->name, "pBullet_red") == 0) {
+		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
 	}
-	if (strcmp(tempObj->name, "pBullet_blue") == 0) {
+	else if (strcmp(tempObj->name, "pBullet_blue") == 0) {
+		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
 	}
 }

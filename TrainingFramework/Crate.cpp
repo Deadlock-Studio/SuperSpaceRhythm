@@ -37,7 +37,7 @@ void Crate::Init()
 	//type of body
 	filter.categoryBits = CRATE;
 	//collide with what
-	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | BOSS | EXPLOSION | CRATE | CRATE | BULLET_E | MOB | MOB_RED | MOB_BLUE | WALL;
+	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | BOSS | EXPLOSION | CRATE | BULLET_E | MOB | MOB_RED | MOB_BLUE | WALL | BOMB;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 
 }

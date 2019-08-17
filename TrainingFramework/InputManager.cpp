@@ -2,6 +2,11 @@
 
 InputManager * InputManager::ms_pInstance = NULL;
 
+void InputManager::Init()
+{
+	LoadDefault();
+}
+
 void InputManager::LoadDefault()
 {
 	keyBind.insert({ 'W', MoveForward});
