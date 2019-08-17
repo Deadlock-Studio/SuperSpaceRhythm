@@ -391,6 +391,23 @@ COLLISION
 body: 80, 80, 1, 0
 body_type: STATIC
 
+BLUEPRINT 0
+NAME: mine
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 12
+anim: 0, 0, 17, 17, 2
+anim_spd: 50
+../Resources/Textures/mine.tga
+ANIMATION
+pixelsPerUnit: 12
+anim: 17, 0, 17, 17, 2
+anim_spd: 5
+../Resources/Textures/mine.tga
+COLLISION
+body: 57, 57, 1, 0
+body_type: STATIC
+
 BLUEPRINT 1
 NAME: demo_room
 COMPONENT:

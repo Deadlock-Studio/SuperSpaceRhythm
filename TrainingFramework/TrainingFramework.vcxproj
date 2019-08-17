@@ -112,6 +112,7 @@
     <ClCompile Include="HealthPotion.cpp" />
     <ClCompile Include="HP.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Mine.cpp" />
     <ClCompile Include="Mob1.cpp" />
     <ClCompile Include="MobDino.cpp" />
     <ClCompile Include="MobExplode.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="HealthPotion.h" />
     <ClInclude Include="HP.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Mine.h" />
     <ClInclude Include="Mob1.h" />
     <ClInclude Include="MobDino.h" />
     <ClInclude Include="MobExplode.h" />

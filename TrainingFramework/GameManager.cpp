@@ -58,6 +58,7 @@ void GameManager::LoadConstructorMap()
 	constructorMap["boss"] = &constructor<Boss>;
 	constructorMap["hp"] = &constructor<HealthPotion>;
 	constructorMap["trap"] = &constructor<Trap>;
+	constructorMap["mine"] = &constructor<Mine>;
 	constructorMap["crate"] = &constructor<Crate>;
 	constructorMap["mob"] = &constructor<Mob1>;
 	constructorMap["explosion"] = &constructor<Explosion>;
@@ -240,11 +241,16 @@ void GameManager::LoadDebugRoom(float deltaTime)
 		Vector3(100, 200, MOB_LAYER),
 		Vector3(1, 1, 1),
 		Vector3());
-	//Spawn("trap",
-	//	SceneManager::GetInstance()->GetBlueprintByName("trap"),
-	//	Vector3(800, 500, TRAP_LAYER),
-	//	Vector3(1, 1, 1),
-	//	Vector3());
+	Spawn("trap",
+		SceneManager::GetInstance()->GetBlueprintByName("trap"),
+		Vector3(800, 500, TRAP_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
+	Spawn("mine",
+		SceneManager::GetInstance()->GetBlueprintByName("mine"),
+		Vector3(900, 500, TRAP_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
 	//Spawn("crate",
 	//	SceneManager::GetInstance()->GetBlueprintByName("crate"),
 	//	Vector3(500, 500, TRAP_LAYER),

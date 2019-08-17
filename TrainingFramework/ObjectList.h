@@ -19,3 +19,4 @@
 #include"MobDino.h""
 #include"SpawnEffect.h"
 #include"Shield.h"
+#include"Mine.h"

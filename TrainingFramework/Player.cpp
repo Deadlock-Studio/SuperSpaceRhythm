@@ -43,7 +43,7 @@ void Player::Init()
 	//type of body
 	filter.categoryBits = PLAYER;
 	//collide with what
-	filter.maskBits = BOSS | HEALTHPOTION| MOB | MOB_RED | MOB_BLUE | EXPLOSION | TNT_BOX | CRATE | WALL | TRAP | BULLET_E | SHIELD;
+	filter.maskBits = BOSS | HEALTHPOTION| MOB | MOB_RED | MOB_BLUE | EXPLOSION | TNT_BOX | CRATE | WALL | TRAP | BULLET_E | SHIELD | MINE;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 }
 
@@ -214,7 +214,7 @@ void Player::calculateAngle()
 	x = transform->position.x;
 	y = transform->position.y;
 	angle = atan2(y - mouseY, x - mouseX);
-	angle = angle * 180 / PI + 180;
+	angle = float(angle * 180.0f / (float)PI + 180.0f);
 }
 
 void Player::checkCollision(GameObject * tempObj)
@@ -279,6 +279,10 @@ void Player::checkCollision(GameObject * tempObj)
 	if (strcmp(tempObj->name, "eBullet") == 0) {
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
 		SetState(&Player::GetHit);
+
+	}
+	if (strcmp(tempObj->name, "mine") == 0) {
+		((Mine*)tempObj)->SetState(&Mine::Destroying);
 
 	}
 }
