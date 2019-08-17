@@ -43,7 +43,7 @@ void Player::Init()
 	//type of body
 	filter.categoryBits = PLAYER;
 	//collide with what
-	filter.maskBits = BOSS | HEALTHPOTION| MOB | MOB_RED | MOB_BLUE | EXPLOSION | TNT_BOX | CRATE | WALL | TRAP | BULLET_E | SHIELD | MINE;
+	filter.maskBits = BOSS | ITEM| MOB | MOB_RED | MOB_BLUE | EXPLOSION | CRATE | CRATE | WALL | TRAP | BULLET_E | SHIELD | MINE | BOMB;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 }
 
@@ -251,7 +251,7 @@ void Player::checkCollision(GameObject * tempObj)
 	}
 	if (strcmp(tempObj->name, "crate") == 0) {
 		if (GetComponent<Control>()->isDashing) {
-			((Crate*)tempObj)->SetState(&Crate::Destroying);
+			((Crate*)tempObj)->SetState(&Crate::Exploding);
 		}
 	}
 	if (strcmp(tempObj->name, "mob_shoot") == 0 || strcmp(tempObj->name, "mob_knight") == 0) {
@@ -284,8 +284,7 @@ void Player::checkCollision(GameObject * tempObj)
 		((MobKnight*)(tempObj))->SetState(&MobKnight::Stop);
 	}
 	if (strcmp(tempObj->name, "mine") == 0) {
-		((Mine*)tempObj)->SetState(&Mine::Destroying);
-
+		((Mine*)tempObj)->SetState(&Mine::Exploding);
 	}
 }
 

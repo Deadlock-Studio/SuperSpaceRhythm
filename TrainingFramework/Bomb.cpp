@@ -1,12 +1,14 @@
 #include "stdafx.h"
-#include "Shield.h"
+#include "Bomb.h"
+#define BOMB_COOLDOWN 500
+#define BOMB_DELAY 50
 
-Shield::Shield()
+Bomb::Bomb()
 {
-	SetState(&Shield::Idle);
+	SetState(&Bomb::Idle);
 }
 
-Shield::Shield(Blueprint * blueprint, Vector3 pos, Vector3 scale, Vector3 rotation) : Shield()
+Bomb::Bomb(Blueprint* blueprint, Vector3 pos, Vector3 scale, Vector3 rotation) : Bomb()
 {
 	name = _strdup(blueprint->name);
 
@@ -16,59 +18,44 @@ Shield::Shield(Blueprint * blueprint, Vector3 pos, Vector3 scale, Vector3 rotati
 	UpdateScale(scale.x, scale.y, scale.z);
 
 	//Clone components
-	for (vector<Component *>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
+	for (vector<Component*>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
 		AddComponent((*it)->Clone());
 	}
+
 	Init();
 }
 
 
-Shield::~Shield()
+Bomb::~Bomb()
 {
 	b2Body* tempBody = GetComponent<Collision2D>()->body;
 	tempBody->GetWorld()->DestroyBody(tempBody);
 }
 
 
-void Shield::Init()
+void Bomb::Init()
 {
-	shieldDuration = 200;
+	bombCoolDown = BOMB_COOLDOWN;
+	bombDelay = BOMB_DELAY;
+
 	b2Filter filter = GetComponent<Collision2D>()->body->GetFixtureList()->GetFilterData();
 	//type of body
-	filter.categoryBits = SHIELD;
+	filter.categoryBits = BOMB;
 	//collide with what
-	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | BOSS | EXPLOSION | MOB_RED | MOB_BLUE | WALL | EXPLOSION;
-	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
-
-}
-
-void Shield::Destroyed()
-{
-	InitDestroyed();
-	SceneManager::GetInstance()->addToRemovalList(this);
-}
-
-void Shield::InitDestroyed()
-{
-	b2Filter filter = GetComponent<Collision2D>()->body->GetFixtureList()->GetFilterData();
-	//type of body
-	filter.categoryBits = SHIELD;
-	//collide with what
-	filter.maskBits = 0;
+	filter.maskBits = PLAYER | EXPLOSION | WALL | BULLET_RED | BULLET_BLUE| CRATE;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 }
 
-
-void Shield::AddComponent(Component * comp)
+void Bomb::AddComponent(Component* comp)
 {
 	GameObject::AddComponent(comp);
-	if (dynamic_cast<Animation *>(comp) != NULL) {
+	if (dynamic_cast<Animation*>(comp) != NULL) {
 		comp->isActive = false;
 		animeList.push_back((Animation*)comp);
 	}
 }
 
-void Shield::PlayAnimation(int key)
+void Bomb::PlayAnimation(int key)
 {
 	//Deactivate active animation and active this one if its not active
 	if (!animeList.at(key)->isActive) {
@@ -79,39 +66,54 @@ void Shield::PlayAnimation(int key)
 	}
 }
 
-void Shield::Spawn()
+void Bomb::Idle()
 {
-	GameManager::GetInstance()->Spawn("spawn",
-		SceneManager::GetInstance()->GetBlueprintByName("spawn"),
-		Vector3(transform->position.x, transform->position.y, 2),
-		Vector3(1.5, 1.5, 1.5),
-		Vector3());
-	SetState(&Shield::Idle);
+	PlayAnimation(1);
+	bombCoolDown--;
+	if (bombCoolDown <= 0) {
+		SetState(&Bomb::Exploding);
+	}
 }
 
-void Shield::Idle()
+void Bomb::Destroyed()
+{
+	GameManager::GetInstance()->Spawn("explosion",
+		SceneManager::GetInstance()->GetBlueprintByName("explosion"),
+		Vector3(transform->position.x, transform->position.y, PLAYER_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
+	SceneManager::GetInstance()->addToRemovalList(this);
+}
+
+void Bomb::Exploding()
 {
 	PlayAnimation(0);
+	bombDelay--;
+	if (bombDelay <= 0) {
+		SetState(&Bomb::Destroyed);
+	}
 }
 
-
-void Shield::Update(float deltaTime)
+void Bomb::Update(float deltaTime)
 {
 	if (activeState != NULL)
 		(this->*activeState)();
 
 	b2Vec2 bodyPos = GetComponent<Collision2D>()->body->GetPosition();
 	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, 1);
-	AddToPosition(0.0f, 0.0f);
+	//AddToPosition(50.0f, 50.0f);
 
 	GameObject::Update(deltaTime);
 }
 
-void Shield::checkCollision(GameObject * tempObj)
+void Bomb::checkCollision(GameObject* tempObj)
 {
 	if (strcmp(tempObj->name, "pBullet_red") == 0 || strcmp(tempObj->name, "pBullet_blue") == 0) {
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
+		SetState(&Bomb::Exploding);
 	}
+	if (strcmp(tempObj->name, "explosion") == 0) {
+		SetState(&Bomb::Exploding);
+	}
+
 }
-
-

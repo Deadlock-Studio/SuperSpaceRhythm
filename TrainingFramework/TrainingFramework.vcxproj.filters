@@ -255,6 +255,9 @@
     <ClCompile Include="Mine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Source Files\GameObjects\Interactables</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Transform.h">
@@ -418,6 +421,9 @@
     </ClInclude>
     <ClInclude Include="Mine.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Header Files\GameObjects\Interactables</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

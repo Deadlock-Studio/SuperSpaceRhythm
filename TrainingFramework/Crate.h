@@ -17,7 +17,7 @@ public:
 	void PlayAnimation(int key);
 	void Spawn();
 	void Idle();
-	void Destroying();
+	void Exploding();
 	void Destroyed();
 	void Update(float deltaTime) override;
 	void checkCollision(GameObject * tempObj);

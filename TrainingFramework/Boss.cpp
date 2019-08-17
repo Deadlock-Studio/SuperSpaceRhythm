@@ -39,7 +39,7 @@ void Boss::Init()
 	//type of body
 	filter.categoryBits = BOSS;
 	//collide with what
-	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | WALL | EXPLOSION | TNT_BOX | CRATE | MOB | MOB_RED | MOB_BLUE;
+	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | WALL | EXPLOSION | CRATE | CRATE | MOB | MOB_RED | MOB_BLUE;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 }
 
@@ -148,10 +148,10 @@ void Boss::checkCollision(GameObject * tempObj)
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
 	}
 	if (strcmp(tempObj->name, "crate") == 0) {
-		((Crate*)tempObj)->SetState(&Crate::Destroying);
+		((Crate*)tempObj)->SetState(&Crate::Exploding);
 	}
 	if (strcmp(tempObj->name, "tnt") == 0) {
-		((TNT*)tempObj)->SetState(&TNT::Destroying);
+		((TNT*)tempObj)->SetState(&TNT::Exploding);
 	}
 }
 

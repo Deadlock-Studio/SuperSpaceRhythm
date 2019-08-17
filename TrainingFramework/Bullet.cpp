@@ -41,7 +41,7 @@ void Bullet::Init(char* type)
 		//type of body
 		filter.categoryBits = BULLET_RED;
 		//collide with what
-		filter.maskBits = BOSS | WALL | MOB | MOB_RED | TNT_BOX | CRATE | SHIELD;
+		filter.maskBits = BOSS | WALL | MOB | MOB_RED | CRATE;
 		GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 		damage = 15;
 	}
@@ -54,7 +54,7 @@ void Bullet::Init(char* type)
 		//type of body
 		filter.categoryBits = BULLET_BLUE;
 		//collide with what
-		filter.maskBits = BOSS | WALL | MOB | MOB_BLUE | TNT_BOX | CRATE | SHIELD;
+		filter.maskBits = BOSS | WALL | MOB | MOB_BLUE | CRATE | BULLET_BLUE;
 		GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 		damage = 5;
 	}
@@ -66,7 +66,7 @@ void Bullet::Init(char* type)
 		//type of body
 		filter.categoryBits = BULLET_E;
 		//collide with what
-		filter.maskBits = WALL | PLAYER | TNT_BOX | CRATE; //add collision
+		filter.maskBits = WALL | PLAYER | CRATE ; //add collision
 		GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 	}
 
@@ -141,11 +141,11 @@ void Bullet::checkCollision(GameObject* tempObj)
 	}
 	if (strcmp(tempObj->name, "crate") == 0 && (strcmp(name, "pBullet_red") == 0 || strcmp(name, "pBullet_blue") == 0 || strcmp(name, "eBullet") == 0)) {
 		SceneManager::GetInstance()->addToRemovalList(this);
-		((Crate*)tempObj)->SetState(&Crate::Destroying);
+		((Crate*)tempObj)->SetState(&Crate::Exploding);
 	}
 	if (strcmp(tempObj->name, "tnt") == 0 && (strcmp(name, "pBullet_red") == 0 || strcmp(name, "pBullet_blue") == 0 || strcmp(name, "eBullet") == 0)) {
 		SceneManager::GetInstance()->addToRemovalList(this);
-		((TNT*)tempObj)->SetState(&TNT::Destroying);
+		((TNT*)tempObj)->SetState(&TNT::Exploding);
 	}
 	if ((strcmp(tempObj->name, "mob_red") == 0 || strcmp(tempObj->name, "mob_white") == 0 || strcmp(tempObj->name, "mob_shoot") == 0) && strcmp(name, "pBullet_red") == 0) {
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
@@ -159,6 +159,10 @@ void Bullet::checkCollision(GameObject* tempObj)
 	}
 	if (strcmp(tempObj->name, "player") == 0 && strcmp(name, "eBullet") == 0) {
 		SceneManager::GetInstance()->addToRemovalList(this);
+	}
+	if (strcmp(tempObj->name, "bomb") == 0) {
+		SceneManager::GetInstance()->addToRemovalList(this);
+		((Bomb*)tempObj)->SetState(&Bomb::Exploding);
 	}
 	if (strcmp(tempObj->name, "shield") == 0) {
 		SceneManager::GetInstance()->addToRemovalList(this);

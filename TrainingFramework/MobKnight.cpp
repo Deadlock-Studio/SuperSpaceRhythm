@@ -37,7 +37,7 @@ void MobKnight::Init()
 	//type of body
 	filter.categoryBits = MOB;
 	//collide with what
-	filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE | WALL | EXPLOSION | BOSS | TNT_BOX | MOB | MOB_RED | MOB_BLUE | CRATE;
+	filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE | WALL | EXPLOSION | BOSS | MOB | MOB_RED | MOB_BLUE | CRATE;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 
 }
@@ -178,7 +178,7 @@ void MobKnight::Stop() {
 void MobKnight::checkCollision(GameObject* tempObj)
 {
 	if (strcmp(tempObj->name, "tnt") == 0) {
-		((TNT*)tempObj)->SetState(&TNT::Destroying);
+		((TNT*)tempObj)->SetState(&TNT::Exploding);
 	}
 	if (strcmp(tempObj->name, "pBullet_red") == 0) {
 		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);

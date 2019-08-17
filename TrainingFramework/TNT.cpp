@@ -36,9 +36,9 @@ void TNT::Init()
 
 	b2Filter filter = GetComponent<Collision2D>()->body->GetFixtureList()->GetFilterData();
 	//type of body
-	filter.categoryBits = TNT_BOX;
+	filter.categoryBits = CRATE;
 	//collide with what
-	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | BOSS | EXPLOSION | MOB | TNT_BOX | CRATE | MOB | MOB_RED | MOB_BLUE | BULLET_E | WALL;
+	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | BOSS | EXPLOSION | MOB | CRATE | BOMB | MOB | MOB_RED | MOB_BLUE | BULLET_E | WALL;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 
 }
@@ -47,7 +47,7 @@ void TNT::InitDestroyed()
 {
 	b2Filter filter = GetComponent<Collision2D>()->body->GetFixtureList()->GetFilterData();
 	//type of body
-	filter.categoryBits = TNT_BOX;
+	filter.categoryBits = CRATE;
 	//collide with what
 	filter.maskBits = 0;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
@@ -89,7 +89,7 @@ void TNT::Idle()
 	PlayAnimation(0);
 }
 
-void TNT::Destroying()
+void TNT::Exploding()
 {
 	PlayAnimation(1);
 	InitDestroyed();
@@ -132,13 +132,13 @@ void TNT::checkCollision(GameObject * tempObj)
 {
 	if (strcmp(tempObj->name, "pBullet_red") == 0 || strcmp(tempObj->name, "pBullet_blue") == 0 || strcmp(tempObj->name, "eBullet") == 0) {
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
-		SetState(&TNT::Destroying);
+		SetState(&TNT::Exploding);
 	}
 	if (strcmp(tempObj->name, "explosion") == 0) {
-		SetState(&TNT::Destroying);
+		SetState(&TNT::Exploding);
 	}
 	if (strcmp(tempObj->name, "boss") == 0) {
-		SetState(&TNT::Destroying);
+		SetState(&TNT::Exploding);
 	}
 }
 

@@ -37,7 +37,7 @@ void MobExplodeBullet::Init()
 	//type of body
 	filter.categoryBits = MOB;
 	//collide with what
-	filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE | WALL | EXPLOSION | TNT_BOX | BOSS | MOB | MOB_RED | MOB_BLUE | CRATE;
+	filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE | WALL | EXPLOSION | CRATE | BOSS | MOB | MOB_RED | MOB_BLUE | CRATE;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 
 }

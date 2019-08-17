@@ -14,7 +14,7 @@ Room::Room()
 	//type of body
 	filter.categoryBits = WALL;
 	//collide with what
-	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | BOSS | MOB | MOB_BLUE | MOB_RED | BULLET_E | CRATE | TNT_BOX | HEALTHPOTION;
+	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | BOSS | MOB | MOB_BLUE | MOB_RED | BULLET_E | CRATE | ITEM | BOMB;
 	body->GetFixtureList()->SetFilterData(filter);
 
 	//top wall

@@ -20,3 +20,4 @@
 #include"SpawnEffect.h"
 #include"Shield.h"
 #include"Mine.h"
+#include"Bomb.h"
