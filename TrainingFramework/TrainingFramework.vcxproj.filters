@@ -22,9 +22,6 @@
     <Filter Include="Header Files\Global">
       <UniqueIdentifier>{e1fdbd01-384d-4def-a99e-6c51a3966f16}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Global">
-      <UniqueIdentifier>{577b64df-1ba8-481b-a7ae-f3ccc37f9929}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\Models">
       <UniqueIdentifier>{9e118571-c7a3-47a2-b0cb-6538aac801a8}</UniqueIdentifier>
     </Filter>
@@ -97,7 +94,16 @@
     <Filter Include="Source Files\GameObjects\Mob\Melee">
       <UniqueIdentifier>{614ea21c-f0db-4cd7-aaae-fa8a97b231bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameObjects\Mob\Range">
+    <Filter Include="Source Files\Global">
+      <UniqueIdentifier>{577b64df-1ba8-481b-a7ae-f3ccc37f9929}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Mob\Melee">
+      <UniqueIdentifier>{cff837ee-2044-4595-99c9-d1de84cd05bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Mob\Ranged">
+      <UniqueIdentifier>{34e2c3e6-6987-4724-a9b8-9f5ca0fe8f85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Mob\Ranged">
       <UniqueIdentifier>{033d48f0-b50c-46bd-8aa4-7e836086fb24}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -219,14 +225,11 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\GameObjects\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Mob1.cpp">
-      <Filter>Source Files\GameObjects\Mob\Melee</Filter>
-    </ClCompile>
     <ClCompile Include="MobExplode.cpp">
       <Filter>Source Files\GameObjects\Mob\Melee</Filter>
     </ClCompile>
     <ClCompile Include="MobShoot.cpp">
-      <Filter>Source Files\GameObjects\Mob\Range</Filter>
+      <Filter>Source Files\GameObjects\Mob\Ranged</Filter>
     </ClCompile>
     <ClCompile Include="MobExplodeBullet.cpp">
       <Filter>Source Files\GameObjects\Mob\Melee</Filter>
@@ -238,13 +241,16 @@
       <Filter>Source Files\GameObjects\Mob\Melee</Filter>
     </ClCompile>
     <ClCompile Include="MobWiz.cpp">
-      <Filter>Source Files\GameObjects\Mob\Range</Filter>
+      <Filter>Source Files\GameObjects\Mob\Ranged</Filter>
     </ClCompile>
     <ClCompile Include="MobNecro.cpp">
-      <Filter>Source Files\GameObjects\Mob\Range</Filter>
+      <Filter>Source Files\GameObjects\Mob\Ranged</Filter>
     </ClCompile>
     <ClCompile Include="MobDino.cpp">
-      <Filter>Source Files\GameObjects\Mob\Range</Filter>
+      <Filter>Source Files\GameObjects\Mob\Ranged</Filter>
+    </ClCompile>
+    <ClCompile Include="MobSlime.cpp">
+      <Filter>Source Files\GameObjects\Mob\Melee</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -338,9 +344,6 @@
     <ClInclude Include="Beat.h">
       <Filter>Header Files\GameObjects\Music</Filter>
     </ClInclude>
-    <ClInclude Include="Mob1.h">
-      <Filter>Header Files\GameObjects\Mob</Filter>
-    </ClInclude>
     <ClInclude Include="Boss.h">
       <Filter>Header Files\GameObjects\Mob</Filter>
     </ClInclude>
@@ -374,9 +377,6 @@
     <ClInclude Include="HP.h">
       <Filter>Header Files\GameObjects\Components</Filter>
     </ClInclude>
-    <ClInclude Include="MobShoot.h">
-      <Filter>Header Files\GameObjects\Mob</Filter>
-    </ClInclude>
     <ClInclude Include="BulletManager.h">
       <Filter>Header Files\Singletons</Filter>
     </ClInclude>
@@ -387,25 +387,31 @@
       <Filter>Header Files\GameObjects\Components</Filter>
     </ClInclude>
     <ClInclude Include="MobExplode.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameObjects\Mob\Melee</Filter>
     </ClInclude>
     <ClInclude Include="MobExplodeBullet.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameObjects\Mob\Melee</Filter>
     </ClInclude>
     <ClInclude Include="MobKnight.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Shield.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MobWiz.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MobNecro.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameObjects\Mob\Melee</Filter>
     </ClInclude>
     <ClInclude Include="MobDino.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameObjects\Mob\Ranged</Filter>
+    </ClInclude>
+    <ClInclude Include="MobNecro.h">
+      <Filter>Header Files\GameObjects\Mob\Ranged</Filter>
+    </ClInclude>
+    <ClInclude Include="MobWiz.h">
+      <Filter>Header Files\GameObjects\Mob\Ranged</Filter>
+    </ClInclude>
+    <ClInclude Include="MobShoot.h">
+      <Filter>Header Files\GameObjects\Mob\Ranged</Filter>
+    </ClInclude>
+    <ClInclude Include="Shield.h">
+      <Filter>Header Files\GameObjects\Interactables</Filter>
+    </ClInclude>
+    <ClInclude Include="MobSlime.h">
+      <Filter>Header Files\GameObjects\Mob\Melee</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

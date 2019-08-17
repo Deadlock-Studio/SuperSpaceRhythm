@@ -43,6 +43,7 @@ void Bullet::Init(char * type)
 		//collide with what
 		filter.maskBits = BOSS | WALL | MOB | MOB_RED | TNT_BOX | CRATE;
 		GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
+		damage = 15;
 	}
 	else if (strcmp(type, "pBullet_blue") == 0) {
 		PlayAnimation(1);
@@ -55,6 +56,7 @@ void Bullet::Init(char * type)
 		//collide with what
 		filter.maskBits = BOSS | WALL | MOB | MOB_BLUE | TNT_BOX | CRATE | BULLET_BLUE;
 		GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
+		damage = 5;
 	}
 	else if (strcmp(type, "eBullet") == 0) {
 		PlayAnimation(2);

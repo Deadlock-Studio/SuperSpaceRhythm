@@ -18,7 +18,6 @@ public:
 	{
 		if (ms_pInstance == NULL)
 			ms_pInstance = new ResourceManager;
-		GetInstance()->LoadEngineResources();
 	}
 	static ResourceManager * GetInstance()
 	{
@@ -34,6 +33,7 @@ public:
 		}
 	}
 
+	void Init();
 	void LoadEngineResources();
 	int LoadNFG(char * filename);
 	int LoadTGA(char * filename);

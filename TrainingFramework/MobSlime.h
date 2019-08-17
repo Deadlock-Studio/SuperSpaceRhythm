@@ -1,16 +1,16 @@
 #pragma once
 #include "GameObject.h"
 #include "Animation.h"
-class Mob1 :
+class MobSlime :
 	public GameObject
 {
 public:
-	Mob1();
-	Mob1(Blueprint* blueprint, Vector3 pos, Vector3 scale, Vector3 rotation);
-	~Mob1();
+	MobSlime();
+	MobSlime(Blueprint* blueprint, Vector3 pos, Vector3 scale, Vector3 rotation);
+	~MobSlime();
 
 	void AddComponent(Component* comp);
-	void SetState(void(Mob1::*state)()) {
+	void SetState(void(MobSlime::*state)()) {
 		activeState = state;
 	}
 
@@ -24,7 +24,7 @@ public:
 	void CalculateVelocity();
 	float velX, velY;
 	int status = 0;
-	void(Mob1::*activeState)() = NULL;
+	void(MobSlime::*activeState)() = NULL;
 	int activeAnimation = -1;
 	vector<Animation*> animeList{};
 };

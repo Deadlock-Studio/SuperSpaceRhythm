@@ -44,6 +44,7 @@ public:
 		activeState = state;
 	}
 	void Loading(float deltaTime);
+	void SplashScreen(float deltaTime);
 	void Menu(float deltaTime);
 	void LoadDebugRoom(float deltaTime);
 	void RoomStart(float deltaTime);

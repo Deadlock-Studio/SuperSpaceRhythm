@@ -2,7 +2,7 @@
 
 #include"Player.h"
 #include"Boss.h"
-#include"Mob1.h"
+#include"MobSlime.h"
 #include"HealthPotion.h"
 #include"Bullet.h"
 #include"Explosion.h"

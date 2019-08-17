@@ -23,11 +23,12 @@ int Init(ESContext *esContext)
 
 	//Singleton Inits
 	PhysicManager::GetInstance()->Init();
-	SceneManager::GetInstance()->LoadScene("../Resources/Templates/Template1.txt");
-	SceneManager::GetInstance()->UseCamera(0);
-	TextManager::GetInstance()->LoadFont("../Resources/Templates/Fontlist.txt");
-	GameManager::GetInstance()->Init();
+	SceneManager::GetInstance()->Init();
+	ResourceManager::GetInstance()->Init();
+	InputManager::GetInstance()->Init();
 	
+	GameManager::GetInstance()->Init();
+	TextManager::GetInstance()->Init();
 
 	//Load sound
 	SoundManager::GetInstance()->Init();

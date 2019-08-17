@@ -12,14 +12,23 @@ using namespace std;
 
 SceneManager * SceneManager::ms_pInstance = NULL;
 
-void SceneManager::LoadScene(char * filename)
+void SceneManager::Init()
 {
-	shaders = new Shaders("../Resources/Shaders/CommonShaderVS.vs", 
+	shaders = new Shaders("../Resources/Shaders/CommonShaderVS.vs",
 		"../Resources/Shaders/CommonShaderFS.fs");
 
 	fontShaders = new Shaders("../Resources/Shaders/FontShaderVS.vs",
 		"../Resources/Shaders/FontShaderFS.fs");
 
+	SceneManager::GetInstance()->LoadScene("../Resources/Templates/Template1.txt");
+	SceneManager::GetInstance()->LoadScene("../Resources/Templates/GUI.txt");
+	SceneManager::GetInstance()->LoadScene("../Resources/Templates/Mob.txt");
+
+	SceneManager::GetInstance()->UseCamera(0);
+}
+
+void SceneManager::LoadScene(char * filename)
+{
 	sceneName = _strdup(HandyString::getFileName(string(filename)).c_str());
 
 	string line;
@@ -192,6 +201,7 @@ void SceneManager::Draw()
 void SceneManager::UnloadAll()
 {
 	UnloadObjects();
+
 	for (std::vector<Blueprint*>::iterator it = blueprintList.begin(); it != blueprintList.end(); ++it)
 		delete *it;
 	blueprintList.clear();
