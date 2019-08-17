@@ -254,7 +254,7 @@ void Player::checkCollision(GameObject * tempObj)
 			((Crate*)tempObj)->SetState(&Crate::Destroying);
 		}
 	}
-	if (strcmp(tempObj->name, "mob_shoot") == 0) {
+	if (strcmp(tempObj->name, "mob_shoot") == 0 || strcmp(tempObj->name, "mob_knight") == 0) {
 		b2Vec2 pos = GetComponent<Collision2D>()->body->GetLinearVelocity();
 		if (pos.x != 0 || pos.y != 0) {
 			b2Vec2 pos = GetComponent<Collision2D>()->body->GetLinearVelocity();
@@ -279,7 +279,9 @@ void Player::checkCollision(GameObject * tempObj)
 	if (strcmp(tempObj->name, "eBullet") == 0) {
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
 		SetState(&Player::GetHit);
-
+	}
+	if (strcmp(tempObj->name, "mob_knight") == 0) {
+		((MobKnight*)(tempObj))->SetState(&MobKnight::Stop);
 	}
 }
 

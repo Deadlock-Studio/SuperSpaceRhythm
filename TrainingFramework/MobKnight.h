@@ -19,18 +19,23 @@ public:
 	void Spawn();
 	void Death();
 	void Update(float deltaTime) override;
+	void Stop();
 	void checkCollision(GameObject * tempObj);
 	void Init();
 	void ShieldUp();
 
+	void ShieldDown();
+
 	void CalculateVelocity();
-	float velX, velY;
+	float velX = 0.0f, velY = 0.0f;
 	int status = 0;
 	void(MobKnight::*activeState)() = NULL;
 	int activeAnimation = -1;
 	vector<Animation*> animeList{};
-	int shieldCooldown = 0;
+	int shieldCooldown = 200;
 	int shieldDuration = 0;
+	int delay = 0;
+	GameObject* shield;
 	float distance;
 	bool isShieldUp = false;
 };

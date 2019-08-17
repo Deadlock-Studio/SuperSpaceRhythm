@@ -32,12 +32,12 @@ Shield::~Shield()
 
 void Shield::Init()
 {
-	shieldDuration = 1000;
+	shieldDuration = 200;
 	b2Filter filter = GetComponent<Collision2D>()->body->GetFixtureList()->GetFilterData();
 	//type of body
 	filter.categoryBits = SHIELD;
 	//collide with what
-	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | BOSS | EXPLOSION | TNT_BOX | BULLET_E | MOB_RED | MOB_BLUE | WALL;
+	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | BOSS | EXPLOSION | TNT_BOX | BULLET_E | MOB_RED | MOB_BLUE | WALL | EXPLOSION;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 
 }
@@ -92,10 +92,6 @@ void Shield::Spawn()
 void Shield::Idle()
 {
 	PlayAnimation(0);
-	shieldDuration--;
-	if (shieldDuration == 0) {
-		SetState(&Shield::Destroyed);
-	}
 }
 
 

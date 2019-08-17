@@ -5,7 +5,7 @@ MobKnight::MobKnight()
 	SetState(&MobKnight::Spawn);
 }
 
-MobKnight::MobKnight(Blueprint * blueprint, Vector3 pos, Vector3 scale, Vector3 rotation) : MobKnight()
+MobKnight::MobKnight(Blueprint* blueprint, Vector3 pos, Vector3 scale, Vector3 rotation) : MobKnight()
 {
 	name = _strdup(blueprint->name);
 
@@ -15,13 +15,11 @@ MobKnight::MobKnight(Blueprint * blueprint, Vector3 pos, Vector3 scale, Vector3 
 	UpdateScale(scale.x, scale.y, scale.z);
 
 	//Clone components
-	for (vector<Component *>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
+	for (vector<Component*>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
 		AddComponent((*it)->Clone());
 	}
 
 	Init();
-	shieldCooldown = 100;
-	shieldDuration = 100;
 }
 
 
@@ -36,42 +34,35 @@ void MobKnight::Init()
 {
 
 	b2Filter filter = GetComponent<Collision2D>()->body->GetFixtureList()->GetFilterData();
-		//type of body
-		filter.categoryBits = MOB;
-		//collide with what
-		filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE | WALL | EXPLOSION | BOSS | TNT_BOX | MOB | MOB_RED | MOB_BLUE | CRATE;
-		GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
+	//type of body
+	filter.categoryBits = MOB;
+	//collide with what
+	filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE | WALL | EXPLOSION | BOSS | TNT_BOX | MOB | MOB_RED | MOB_BLUE | CRATE;
+	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 
 }
 
 void MobKnight::ShieldUp()
 {
-	if (GameManager::GetInstance()->player->transform->position.x <= transform->position.x)
-		PlayAnimation(0);
-	else
-		PlayAnimation(1);
-
-	shieldDuration--;
-	AddToPosition(0.0f, 0.0f);
 	if (!isShieldUp) {
-		GameManager::GetInstance()->Spawn("shield",
+		shield = (GameManager::GetInstance()->Spawn("shield",
 			SceneManager::GetInstance()->GetBlueprintByName("shield"),
 			Vector3(transform->position.x, transform->position.y, MOB_LAYER),
 			Vector3(1, 1, 1),
-			Vector3());
+			Vector3()));
 		isShieldUp = true;
 	}
-	if (shieldDuration <= 0) {
-		SetState(&MobKnight::Idle);
-		shieldCooldown = 100;
-	}
-
 }
 
-void MobKnight::AddComponent(Component * comp)
+void MobKnight::ShieldDown() {
+	isShieldUp = FALSE;
+	((Shield*)(shield))->SetState(&Shield::Destroyed);
+}
+
+void MobKnight::AddComponent(Component* comp)
 {
 	GameObject::AddComponent(comp);
-	if (dynamic_cast<Animation *>(comp) != NULL) {
+	if (dynamic_cast<Animation*>(comp) != NULL) {
 		comp->isActive = false;
 		animeList.push_back((Animation*)comp);
 	}
@@ -98,19 +89,13 @@ void MobKnight::CalculateVelocity()
 	y = transform->position.y;
 	distance = sqrt(pow((mX - x), 2) + pow((mY - y), 2));
 	float speed;
-	speed = 0.5f *  MOVE_SPEED;
+	speed = 0.85f * MOVE_SPEED;
 	velX = ((mX - x) * speed / distance);
 	velY = ((mY - y) * speed / distance);
 }
 
 void MobKnight::Idle()
 {
-	if (GameManager::GetInstance()->player->transform->position.x <= transform->position.x)
-		PlayAnimation(0);
-	else
-		PlayAnimation(1);
-	isShieldUp = false;
-
 }
 
 void MobKnight::Spawn()
@@ -122,24 +107,64 @@ void MobKnight::Spawn()
 		Vector3());
 	SetState(&MobKnight::Idle);
 }
+
 void MobKnight::Death()
 {
+
 }
+
 void MobKnight::Update(float deltaTime)
 {
 	if (activeState != NULL)
 		(this->*activeState)();
 
 	b2Vec2 bodyPos = GetComponent<Collision2D>()->body->GetPosition();
-	transform->setPosition(bodyPos.x *PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, transform->position.z);
+	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, transform->position.z);
 
-	SetState(&MobKnight::ShieldUp);
+	CalculateVelocity();
 
+	if (GameManager::GetInstance()->player->transform->position.x <= transform->position.x)
+		PlayAnimation(0);
+	else
+		PlayAnimation(1);
 
+	if (delay > 0)
+	{
+		SetState(&MobKnight::Stop);
+	}
+	else
+	{
+		SetState(&MobKnight::Idle);
+		if (shieldCooldown <= 0 && shieldDuration <= 200) {
+			AddToPosition(0.0f, 0.0f);
+			SetState(&MobKnight::ShieldUp);
+			shieldDuration++;
+			if (shieldDuration == 200)
+				shieldCooldown = 200;
+		}
+		else if (shieldDuration >= 0) {
+			if (isShieldUp)
+			{
+				shieldDuration = 0;
+				SetState(&MobKnight::ShieldDown);
+			}
+			shieldCooldown--;
+			AddToPosition(velX, velY);
+		}
+	}
 	GameObject::Update(deltaTime);
 }
 
-void MobKnight::checkCollision(GameObject * tempObj)
+void MobKnight::Stop() {
+	if (delay <= 50)
+	{
+		AddToPosition(0.0f, 0.0f);
+		delay++;
+	}
+	else delay = 0;
+}
+
+void MobKnight::checkCollision(GameObject* tempObj)
 {
 	if (strcmp(tempObj->name, "tnt") == 0) {
 		((TNT*)tempObj)->SetState(&TNT::Destroying);
@@ -159,4 +184,5 @@ void MobKnight::checkCollision(GameObject * tempObj)
 	if (strcmp(tempObj->name, "explosion") == 0) {
 		SceneManager::GetInstance()->addToRemovalList(this);
 	}
+
 }
