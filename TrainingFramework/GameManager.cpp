@@ -194,11 +194,11 @@ void GameManager::LoadDebugRoom(float deltaTime)
 	//	Vector3(800, 300, TRAP_LAYER),
 	//	Vector3(1, 1, 1),
 	//	Vector3());
-	Spawn("mob",
-		SceneManager::GetInstance()->GetBlueprintByName("mob_white"),
-		Vector3(800, 200, MOB_LAYER),
-		Vector3(1, 1, 1),
-		Vector3());
+	//Spawn("mob",
+	//	SceneManager::GetInstance()->GetBlueprintByName("mob_white"),
+	//	Vector3(800, 200, MOB_LAYER),
+	//	Vector3(1, 1, 1),
+	//	Vector3());
 	//Spawn("mob",
 	//	SceneManager::GetInstance()->GetBlueprintByName("mob_red"),
 	//	Vector3(850, 200, MOB_LAYER),

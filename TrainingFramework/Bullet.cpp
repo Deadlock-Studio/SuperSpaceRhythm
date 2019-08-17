@@ -155,7 +155,7 @@ void Bullet::checkCollision(GameObject* tempObj)
 	}
 	if (strcmp(tempObj->name, "mob_explode") == 0 && (strcmp(name, "pBullet_red") == 0 || strcmp(name, "pBullet_blue") == 0)) {
 		SceneManager::GetInstance()->addToRemovalList(this);
-		((MobExplode*)tempObj)->SetState(&MobExplode::Explode);
+		((MobExplode*)tempObj)->SetState(&MobExplode::Death);
 	}
 	if (strcmp(tempObj->name, "player") == 0 && strcmp(name, "eBullet") == 0) {
 		SceneManager::GetInstance()->addToRemovalList(this);

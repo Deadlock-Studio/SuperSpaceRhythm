@@ -50,7 +50,7 @@ void MobExplode::CalculateVelocity()
 	y = transform->position.y;
 	distance = sqrt(pow((mX - x), 2) + pow((mY - y), 2));
 	float speed;
-	speed = 0.75f *  MOVE_SPEED;
+	speed = 0.5f *  MOVE_SPEED;
 	velX = ((mX - x) * speed / distance);
 	velY = ((mY - y) * speed / distance);
 }
@@ -96,19 +96,13 @@ void MobExplode::Idle()
 
 void MobExplode::Death()
 {
-	GameManager::GetInstance()->Spawn("explosion",
-		SceneManager::GetInstance()->GetBlueprintByName("explosion"),
-		Vector3(transform->position.x, transform->position.y, PLAYER_LAYER),
-		Vector3(1, 1, 1),
-		Vector3());
-	SceneManager::GetInstance()->addToRemovalList(this);
-}
-
-void MobExplode::Explode() {
+	isExploding = true;
+	AddToPosition(0.0f, 0.0f);
 	if (GameManager::GetInstance()->player->transform->position.x <= transform->position.x)
 		PlayAnimation(0);
 	else
 		PlayAnimation(2);
+
 	explodeDelay--;
 	if (explodeDelay <= 0) {
 		GameManager::GetInstance()->Spawn("explosion",
@@ -127,18 +121,16 @@ void MobExplode::Update(float deltaTime)
 
 	b2Vec2 bodyPos = GetComponent<Collision2D>()->body->GetPosition();
 	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, 1);
-	//CalculateVelocity();
-	//
-	////cout << distance << endl;
-	//if (distance <= 100.0f) {
-	//	AddToPosition(0.0f, 0.0f);
-	//	SetState(&MobExplode::Explode);
-	//	isExploding = true;
-	//}
-	//else {
-	//	if(!isExploding)
-	//		AddToPosition(velX, velY);
-	//}
+	CalculateVelocity();
+	
+	//cout << distance << endl;
+	if (distance <= 100.0f) {
+		AddToPosition(0.0f, 0.0f);
+		SetState(&MobExplode::Death);
+		isExploding = true;
+	}
+	if(!isExploding)
+		AddToPosition(velX, velY);
 	GameObject::Update(deltaTime);
 }
 

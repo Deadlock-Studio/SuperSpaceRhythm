@@ -18,7 +18,6 @@ public:
 	void Idle();
 	void Spawn();
 	void Death();
-	void Explode();
 	void Update(float deltaTime) override;
 	void checkCollision(GameObject * tempObj);
 	void CalculateVelocity();
