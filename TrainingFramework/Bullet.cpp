@@ -6,18 +6,18 @@ Bullet::Bullet()
 	//SetState(&Bullet::Idle);
 }
 
-Bullet::Bullet(float x, float y, float mX, float mY, char * type)
+Bullet::Bullet(float x, float y, float mX, float mY, char* type)
 {
 	name = _strdup(type);
-	Blueprint * blueprint = SceneManager::GetInstance()->GetBlueprintByName("bullet");
-	for (vector<Component *>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
+	Blueprint* blueprint = SceneManager::GetInstance()->GetBlueprintByName("bullet");
+	for (vector<Component*>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
 		AddComponent((*it)->Clone());
 	}
 	this->x = x;
 	this->y = y;
 	this->mX = mX;
 	this->mY = mY;
-	UpdatePosition(x, y,EFFECT_LAYER);
+	UpdatePosition(x, y, EFFECT_LAYER);
 	Init(name);
 }
 
@@ -29,13 +29,13 @@ Bullet::~Bullet()
 }
 
 //init bullet red attr
-void Bullet::Init(char * type)
+void Bullet::Init(char* type)
 {
 	CalculateVelocity();
 
 	if (strcmp(type, "pBullet_red") == 0) {
 		PlayAnimation(0);
-		UpdateScale(2.0f,2.0f,2.0f);
+		UpdateScale(2.0f, 2.0f, 2.0f);
 		//set collision filtering
 		b2Filter filter = GetComponent<Collision2D>()->body->GetFixtureList()->GetFilterData();
 		//type of body
@@ -83,10 +83,10 @@ void Bullet::Disable()
 
 
 
-void Bullet::AddComponent(Component * comp)
+void Bullet::AddComponent(Component* comp)
 {
 	GameObject::AddComponent(comp);
-	if (dynamic_cast<Animation *>(comp) != NULL) {
+	if (dynamic_cast<Animation*>(comp) != NULL) {
 		comp->isActive = false;
 		animeList.push_back((Animation*)comp);
 	}
@@ -125,7 +125,7 @@ void Bullet::Update(float deltaTime)
 {
 	if (activeState != NULL)
 		(this->*activeState)();
-	
+
 	//bullet fly
 	AddToPosition(velX, velY);
 
@@ -133,13 +133,13 @@ void Bullet::Update(float deltaTime)
 
 }
 
-void Bullet::checkCollision(GameObject * tempObj)
+void Bullet::checkCollision(GameObject* tempObj)
 {
-	if (strcmp(tempObj->name, "boss")  == 0 && (strcmp(name, "pBullet_red") == 0) || strcmp(name, "pBullet_blue") == 0) {
+	if (strcmp(tempObj->name, "boss") == 0 && (strcmp(name, "pBullet_red") == 0) || strcmp(name, "pBullet_blue") == 0) {
 		tempObj->GetComponent<HP>()->Damage(damage);
 		SceneManager::GetInstance()->addToRemovalList(this);
 	}
-	if (strcmp(tempObj->name, "crate") == 0 && (strcmp(name, "pBullet_red") == 0 || strcmp(name, "pBullet_blue") == 0 || strcmp(name, "eBullet") == 0)){
+	if (strcmp(tempObj->name, "crate") == 0 && (strcmp(name, "pBullet_red") == 0 || strcmp(name, "pBullet_blue") == 0 || strcmp(name, "eBullet") == 0)) {
 		SceneManager::GetInstance()->addToRemovalList(this);
 		((Crate*)tempObj)->SetState(&Crate::Destroying);
 	}
@@ -148,15 +148,12 @@ void Bullet::checkCollision(GameObject * tempObj)
 		((TNT*)tempObj)->SetState(&TNT::Destroying);
 	}
 	if ((strcmp(tempObj->name, "mob_red") == 0 || strcmp(tempObj->name, "mob_white") == 0 || strcmp(tempObj->name, "mob_shoot") == 0) && strcmp(name, "pBullet_red") == 0) {
-		SceneManager::GetInstance()->addToRemovalList(this);
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
 	}
 	if ((strcmp(tempObj->name, "mob_blue") == 0 || strcmp(tempObj->name, "mob_white") == 0 || strcmp(tempObj->name, "mob_shoot") == 0) && strcmp(name, "pBullet_blue") == 0) {
-		SceneManager::GetInstance()->addToRemovalList(this);
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
 	}
-
-	if (strcmp(tempObj->name, "mob_explode") == 0 && (strcmp(name, "pBullet_red") == 0 || strcmp(name, "pBullet_blue") == 0 || strcmp(name, "eBullet") == 0)) {
+	if (strcmp(tempObj->name, "mob_explode") == 0 && (strcmp(name, "pBullet_red") == 0 || strcmp(name, "pBullet_blue") == 0)) {
 		SceneManager::GetInstance()->addToRemovalList(this);
 		((MobExplode*)tempObj)->SetState(&MobExplode::Explode);
 	}

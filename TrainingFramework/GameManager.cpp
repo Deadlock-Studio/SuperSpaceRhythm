@@ -183,11 +183,11 @@ void GameManager::LoadDebugRoom(float deltaTime)
 		Vector3(1, 1, 1),
 		Vector3());
 
-	Spawn("boss",
+	/*Spawn("boss",
 		SceneManager::GetInstance()->GetBlueprintByName("boss"),
 		Vector3(700, 500, PLAYER_LAYER),
 		Vector3(1, 1, 1),
-		Vector3());
+		Vector3());*/
 
 	//Spawn("hp",
 	//	SceneManager::GetInstance()->GetBlueprintByName("health_potion"),
@@ -199,16 +199,16 @@ void GameManager::LoadDebugRoom(float deltaTime)
 		Vector3(800, 200, MOB_LAYER),
 		Vector3(1, 1, 1),
 		Vector3());
-	Spawn("mob",
-		SceneManager::GetInstance()->GetBlueprintByName("mob_red"),
-		Vector3(850, 200, MOB_LAYER),
-		Vector3(1, 1, 1),
-		Vector3());
-	Spawn("mob",
-		SceneManager::GetInstance()->GetBlueprintByName("mob_blue"),
-		Vector3(750, 200, MOB_LAYER),
-		Vector3(1, 1, 1),
-		Vector3());
+	//Spawn("mob",
+	//	SceneManager::GetInstance()->GetBlueprintByName("mob_red"),
+	//	Vector3(850, 200, MOB_LAYER),
+	//	Vector3(1, 1, 1),
+	//	Vector3());
+	//Spawn("mob",
+	//	SceneManager::GetInstance()->GetBlueprintByName("mob_blue"),
+	//	Vector3(750, 200, MOB_LAYER),
+	//	Vector3(1, 1, 1),
+	//	Vector3());
 
 	Spawn("mobExplode",
 		SceneManager::GetInstance()->GetBlueprintByName("mob_explode"),
@@ -225,11 +225,11 @@ void GameManager::LoadDebugRoom(float deltaTime)
 		Vector3(700, 200, MOB_LAYER),
 		Vector3(1, 1, 1),
 		Vector3());
-	Spawn("mobKnight",
-		SceneManager::GetInstance()->GetBlueprintByName("mob_knight"),
-		Vector3(400, 200, MOB_LAYER),
-		Vector3(1, 1, 1),
-		Vector3());
+	//Spawn("mobKnight",
+	//	SceneManager::GetInstance()->GetBlueprintByName("mob_knight"),
+	//	Vector3(400, 200, MOB_LAYER),
+	//	Vector3(1, 1, 1),
+	//	Vector3());
 	Spawn("mobWiz",
 		SceneManager::GetInstance()->GetBlueprintByName("mob_wiz"),
 		Vector3(300, 200, MOB_LAYER),

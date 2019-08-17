@@ -60,8 +60,6 @@ void MobSlime::Init()
 
 }
 
-
-
 void MobSlime::AddComponent(Component * comp)
 {
 	GameObject::AddComponent(comp);
@@ -113,16 +111,42 @@ void MobSlime::Idle()
 
 void MobSlime::Spawn()
 {
-		GameManager::GetInstance()->Spawn("spawn",
-			SceneManager::GetInstance()->GetBlueprintByName("spawn"),
-			Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
-			Vector3(1, 1, 1),
-			Vector3());
-		SetState(&MobSlime::Idle);
+	GameManager::GetInstance()->Spawn("spawn",
+		SceneManager::GetInstance()->GetBlueprintByName("spawn"),
+		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
+	SetState(&MobSlime::Idle);
 }
 
 void MobSlime::Death()
 {
+	if (strcmp(this->name, "mob_white") == 0)
+	{
+		int offset = -60;
+		srand(time(NULL));
+		int rdm = rand() % 2;
+		for (int i = 0; i < 2; i++)
+		{
+			offset = offset * -1;
+			if (rdm == 0)
+			{
+				GameManager::GetInstance()->Spawn("mob",
+					SceneManager::GetInstance()->GetBlueprintByName("mob_red"),
+					Vector3(transform->position.x + offset, transform->position.y + offset, MOB_LAYER),
+					Vector3(1, 1, 1),
+					Vector3());
+			}
+			if (rdm == 1)
+			{
+				GameManager::GetInstance()->Spawn("mob",
+					SceneManager::GetInstance()->GetBlueprintByName("mob_blue"),
+					Vector3(transform->position.x + offset, transform->position.y + offset, MOB_LAYER),
+					Vector3(1, 1, 1),
+					Vector3());
+			}
+		}
+	}
 	SceneManager::GetInstance()->addToRemovalList(this);
 }
 
@@ -133,8 +157,8 @@ void MobSlime::Update(float deltaTime)
 
 	b2Vec2 bodyPos = GetComponent<Collision2D>()->body->GetPosition();
 	transform->setPosition(bodyPos.x *PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, transform->position.z);
-	//CalculateVelocity();
-	//AddToPosition(velX, velY);
+	CalculateVelocity();
+	AddToPosition(velX, velY);
 
 	GameObject::Update(deltaTime);
 }
@@ -147,16 +171,17 @@ void MobSlime::checkCollision(GameObject * tempObj)
 	else if (strcmp(tempObj->name, "pBullet_red") == 0) {
 			if (strcmp(name, "mob_red") == 0 || strcmp(name, "mob_white") == 0) {
 				GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
+				SetState(&MobSlime::Death);
 				SceneManager::GetInstance()->addToRemovalList(tempObj);
 			}
 	}
 	else if (strcmp(tempObj->name, "pBullet_blue") == 0) {
 			if (strcmp(name, "mob_blue") == 0 || strcmp(name, "mob_white") == 0) {
 				GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
-				SceneManager::GetInstance()->addToRemovalList(tempObj);
+				SetState(&MobSlime::Death);
 			}
 	}
 	else if (strcmp(tempObj->name, "explosion") == 0) {
-			SceneManager::GetInstance()->addToRemovalList(this);
+		SetState(&MobSlime::Death);
 	}
 }
