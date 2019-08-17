@@ -41,7 +41,7 @@ void Bullet::Init(char * type)
 		//type of body
 		filter.categoryBits = BULLET_RED;
 		//collide with what
-		filter.maskBits = BOSS | WALL | MOB | MOB_RED | TNT_BOX | CRATE;
+		filter.maskBits = BOSS | WALL | MOB | MOB_RED | TNT_BOX | CRATE | SHIELD;
 		GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 		damage = 15;
 	}
@@ -54,7 +54,7 @@ void Bullet::Init(char * type)
 		//type of body
 		filter.categoryBits = BULLET_BLUE;
 		//collide with what
-		filter.maskBits = BOSS | WALL | MOB | MOB_BLUE | TNT_BOX | CRATE | BULLET_BLUE;
+		filter.maskBits = BOSS | WALL | MOB | MOB_BLUE | TNT_BOX | CRATE | SHIELD;
 		GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 		damage = 5;
 	}
@@ -163,5 +163,7 @@ void Bullet::checkCollision(GameObject * tempObj)
 	if (strcmp(tempObj->name, "player") == 0 && strcmp(name, "eBullet") == 0) {
 		SceneManager::GetInstance()->addToRemovalList(this);
 	}
-
+	if (strcmp(tempObj->name, "shield") == 0) {
+		SceneManager::GetInstance()->addToRemovalList(this);
+	}
 }
