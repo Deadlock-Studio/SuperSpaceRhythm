@@ -1,31 +1,29 @@
 #pragma once
 #include "GameObject.h"
 #include "Animation.h"
-class TNT :
+class Bomb :
 	public GameObject
 {
 public:
-	TNT();
-	TNT(Blueprint* blueprint, Vector3 pos, Vector3 scale, Vector3 rotation);
-	~TNT();
+	Bomb();
+	Bomb(Blueprint* blueprint, Vector3 pos, Vector3 scale, Vector3 rotation);
+	~Bomb();
 
 	void AddComponent(Component* comp);
-	void SetState(void(TNT::*state)()) {
+	void SetState(void(Bomb::* state)()) {
 		activeState = state;
 	}
 
 	void PlayAnimation(int key);
 	void Idle();
-	void Spawn();
-	void Exploding();
 	void Destroyed();
+	void Exploding();
 	void Update(float deltaTime) override;
-	void checkCollision(GameObject * tempObj);
+	void checkCollision(GameObject* tempObj);
 	void Init();
-	void InitDestroyed();
-	int status = 0;
-	void(TNT::*activeState)() = NULL;
+	void(Bomb::* activeState)() = NULL;
 	int activeAnimation = -1;
 	vector<Animation*> animeList{};
-	int TNTCoolDown = 0;
+	int bombCoolDown = 0;
+	int bombDelay = 0;
 };

@@ -34,11 +34,13 @@ Mine::~Mine()
 void Mine::Init()
 {
 
+	GetComponent<Collision2D>()->body->SetSleepingAllowed(false);
+
 	b2Filter filter = GetComponent<Collision2D>()->body->GetFixtureList()->GetFilterData();
 	//type of body
 	filter.categoryBits = MINE;
 	//collide with what
-	filter.maskBits = PLAYER | EXPLOSION | MOB | MINE | CRATE | WALL | TNT_BOX;
+	filter.maskBits = PLAYER | EXPLOSION | CRATE | WALL;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetSensor(true);
 
@@ -46,13 +48,19 @@ void Mine::Init()
 
 void Mine::InitDestroyed()
 {
+
+	GetComponent<Collision2D>()->body->SetSleepingAllowed(false);
+
 	b2Filter filter = GetComponent<Collision2D>()->body->GetFixtureList()->GetFilterData();
 	//type of body
 	filter.categoryBits = MINE;
 	//collide with what
 	filter.maskBits = 0;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
+	GetComponent<Collision2D>()->body->GetFixtureList()->SetSensor(true);
+
 }
+
 
 
 void Mine::AddComponent(Component* comp)
@@ -90,7 +98,7 @@ void Mine::Idle()
 	PlayAnimation(0);
 }
 
-void Mine::Destroying()
+void Mine::Exploding()
 {
 	PlayAnimation(1);
 	InitDestroyed();
@@ -103,13 +111,13 @@ void Mine::Destroying()
 			Vector3(1, 1, 1),
 			Vector3());
 		SetState(&Mine::Destroyed);
-
 	}
 }
 
 void Mine::Destroyed()
 {
-		SceneManager::GetInstance()->addToRemovalList(this);
+	//InitDestroyed();
+	SceneManager::GetInstance()->addToRemovalList(this);
 }
 
 
@@ -128,7 +136,7 @@ void Mine::Update(float deltaTime)
 void Mine::checkCollision(GameObject* tempObj)
 {
 	if (strcmp(tempObj->name, "explosion") == 0) {
-		SetState(&Mine::Destroying);
+		SetState(&Mine::Exploding);
 	}
 }
 

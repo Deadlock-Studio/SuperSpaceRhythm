@@ -37,7 +37,7 @@ void Shield::Init()
 	//type of body
 	filter.categoryBits = SHIELD;
 	//collide with what
-	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | BOSS | EXPLOSION | TNT_BOX | BULLET_E | MOB_RED | MOB_BLUE | WALL;
+	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | BOSS | EXPLOSION | CRATE | BULLET_E | MOB_RED | MOB_BLUE | WALL;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 
 }

@@ -37,7 +37,7 @@ void Mob1::Init()
 		//type of body
 		filter.categoryBits = MOB;
 		//collide with what
-		filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE | WALL | EXPLOSION | BOSS | TNT_BOX | MOB | MOB_RED | MOB_BLUE | CRATE;
+		filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE | WALL | EXPLOSION | BOSS | CRATE | MOB | MOB_RED | MOB_BLUE | CRATE;
 		GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 	}
 	if (strcmp(name, "mob_red") == 0) {
@@ -45,7 +45,7 @@ void Mob1::Init()
 		//type of body
 		filter.categoryBits = MOB_RED;
 		//collide with what
-		filter.maskBits = PLAYER | BULLET_RED | WALL | EXPLOSION | BOSS | TNT_BOX | MOB | MOB_RED | MOB_BLUE | CRATE;
+		filter.maskBits = PLAYER | BULLET_RED | WALL | EXPLOSION | BOSS | CRATE | MOB | MOB_RED | MOB_BLUE | CRATE;
 		GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 	}
 	if (strcmp(name, "mob_blue") == 0) {
@@ -53,7 +53,7 @@ void Mob1::Init()
 		//type of body
 		filter.categoryBits = MOB_BLUE;
 		//collide with what
-		filter.maskBits = PLAYER | BULLET_BLUE | WALL | EXPLOSION | BOSS | TNT_BOX | MOB | MOB_RED | MOB_BLUE | CRATE;
+		filter.maskBits = PLAYER | BULLET_BLUE | WALL | EXPLOSION | BOSS | CRATE | MOB | MOB_RED | MOB_BLUE | CRATE;
 		GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 	}
 
@@ -131,7 +131,7 @@ void Mob1::Spawn()
 void Mob1::checkCollision(GameObject * tempObj)
 {
 	if (strcmp(tempObj->name, "tnt") == 0) {
-		((TNT*)tempObj)->SetState(&TNT::Destroying);
+		((TNT*)tempObj)->SetState(&TNT::Exploding);
 	}
 	if (strcmp(tempObj->name, "pBullet_red") == 0) {
 		if (strcmp(name, "mob_red") == 0 || strcmp(name, "mob_white") == 0) {

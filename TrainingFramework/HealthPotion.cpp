@@ -36,7 +36,7 @@ void HealthPotion::Init()
 {
 	b2Filter filter = GetComponent<Collision2D>()->body->GetFixtureList()->GetFilterData();
 	//type of body
-	filter.categoryBits = HEALTHPOTION;
+	filter.categoryBits = ITEM;
 	//collide with what
 	filter.maskBits = PLAYER | EXPLOSION | WALL;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);

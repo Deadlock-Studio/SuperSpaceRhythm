@@ -37,7 +37,7 @@ void Crate::Init()
 	//type of body
 	filter.categoryBits = CRATE;
 	//collide with what
-	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | BOSS | EXPLOSION | CRATE | TNT_BOX | BULLET_E | MOB | MOB_RED | MOB_BLUE | WALL;
+	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | BOSS | EXPLOSION | CRATE | CRATE | BULLET_E | MOB | MOB_RED | MOB_BLUE | WALL;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 
 }
@@ -88,7 +88,7 @@ void Crate::Idle()
 	PlayAnimation(0);
 }
 
-void Crate::Destroying()
+void Crate::Exploding()
 {
 	PlayAnimation(1);
 	InitDestroyed();
@@ -132,11 +132,11 @@ void Crate::checkCollision(GameObject * tempObj)
 {
 	if (strcmp(tempObj->name, "pBullet_red") == 0 || strcmp(tempObj->name, "pBullet_blue") == 0 || strcmp(tempObj->name, "eBullet") == 0) {
 		SceneManager::GetInstance()->addToRemovalList(tempObj);
-		SetState(&Crate::Destroying);
+		SetState(&Crate::Exploding);
 
 	}
 	if (strcmp(tempObj->name, "explosion") == 0) {
-		SetState(&Crate::Destroying);
+		SetState(&Crate::Exploding);
 	}
 }
 

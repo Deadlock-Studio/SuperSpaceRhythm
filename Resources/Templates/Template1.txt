@@ -406,7 +406,24 @@ anim_spd: 5
 ../Resources/Textures/mine.tga
 COLLISION
 body: 57, 57, 1, 0
-body_type: STATIC
+body_type: DYNAMIC
+
+BLUEPRINT 0
+NAME: bomb
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 12
+anim: 0, 0, 32, 32, 4
+anim_spd: 5
+../Resources/Textures/bomb.tga
+ANIMATION
+pixelsPerUnit: 12
+anim: 0, 32, 32, 32, 4
+anim_spd: 5
+../Resources/Textures/bomb.tga
+COLLISION
+body: 40, 40, 10000, 0
+body_type: DYNAMIC
 
 BLUEPRINT 1
 NAME: demo_room
@@ -640,12 +657,12 @@ BLUEPRINT 0
 NAME: explosion
 COMPONENT:
 ANIMATION
-pixelsPerUnit: 8
+pixelsPerUnit: 6
 anim: 0, 0, 48, 48, 8
 anim_spd: 5
 ../Resources/Textures/explosion.tga
 COLLISION
-body: 240,240, 1, 0
+body: 320,320, 1, 0
 body_type: STATIC
 
 BLUEPRINT 0
