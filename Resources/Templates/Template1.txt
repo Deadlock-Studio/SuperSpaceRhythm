@@ -540,3 +540,12 @@ pixelsPerUnit: 6
 anim: 0, 0, 18, 18, 8
 anim_spd: 5
 ../Resources/Textures/smoke.tga
+
+BLUEPRINT 0
+NAME: bullet_despawn
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 40
+anim: 0, 0, 20, 20, 3
+anim_spd: 5
+../Resources/Textures/bullet_die.tga

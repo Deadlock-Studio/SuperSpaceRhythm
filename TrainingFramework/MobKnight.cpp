@@ -9,15 +9,15 @@ MobKnight::MobKnight(Blueprint* blueprint, Vector3 pos, Vector3 scale, Vector3 r
 {
 	name = _strdup(blueprint->name);
 
-	//Update transform
-	UpdatePosition(pos.x, pos.y, pos.z);
-	UpdateRotation(rotation.x, rotation.y, rotation.z);
-	UpdateScale(scale.x, scale.y, scale.z);
-
 	//Clone components
 	for (vector<Component*>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
 		AddComponent((*it)->Clone());
 	}
+
+	//Update transform
+	UpdatePosition(pos.x, pos.y, pos.z);
+	UpdateRotation(rotation.x, rotation.y, rotation.z);
+	UpdateScale(scale.x, scale.y, scale.z);
 
 	Init();
 }
@@ -115,6 +115,11 @@ void MobKnight::Spawn()
 
 void MobKnight::Death()
 {
+	GameManager::GetInstance()->Spawn("smoke",
+		SceneManager::GetInstance()->GetBlueprintByName("smoke"),
+		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
+		Vector3(1.0f, 1.0f, 1.0f),
+		Vector3());
 	SceneManager::GetInstance()->addToRemovalList(this);
 }
 
@@ -182,11 +187,11 @@ void MobKnight::checkCollision(GameObject* tempObj)
 	}
 	if (strcmp(tempObj->name, "pBullet_red") == 0) {
 		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
-		SceneManager::GetInstance()->addToRemovalList(tempObj);
+		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 	}
 	if (strcmp(tempObj->name, "pBullet_blue") == 0) {
 		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
-		SceneManager::GetInstance()->addToRemovalList(tempObj);
+		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 	}
 	if (strcmp(tempObj->name, "explosion") == 0) {
 		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);

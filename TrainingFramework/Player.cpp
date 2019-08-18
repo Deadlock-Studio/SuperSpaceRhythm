@@ -12,15 +12,14 @@ Player::Player(Blueprint * blueprint, Vector3 pos, Vector3 scale, Vector3 rotati
 {
 	name = _strdup(blueprint->name);
 
-	//Update transform
-	UpdatePosition(pos.x, pos.y, pos.z);
-	UpdateRotation(rotation.x, rotation.y, rotation.z);
-	UpdateScale(scale.x, scale.y, scale.z);
-
 	//Clone components
 	for (vector<Component *>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
 		AddComponent((*it)->Clone());
 	}
+	//Update transform
+	UpdatePosition(pos.x, pos.y, pos.z);
+	UpdateRotation(rotation.x, rotation.y, rotation.z);
+	UpdateScale(scale.x, scale.y, scale.z);
 
 	Init();
 	iTick = iTICK;
@@ -275,7 +274,7 @@ void Player::checkCollision(GameObject * tempObj)
 		SetState(&Player::GetHit);
 	}
 	if (strcmp(tempObj->name, "eBullet") == 0) {
-		SceneManager::GetInstance()->addToRemovalList(tempObj);
+		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 		SetState(&Player::GetHit);
 	}
 	if (strcmp(tempObj->name, "mob_knight") == 0) {

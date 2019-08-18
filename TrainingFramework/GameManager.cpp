@@ -35,6 +35,7 @@ void GameManager::LoadConstructorMap()
 	constructorMap["mobDino"] = &constructor<MobDino>;
 	constructorMap["shield"] = &constructor<Shield>;
 	constructorMap["spawn"] = &constructor<SpawnEffect>;
+	constructorMap["bulletDespawn"] = &constructor<BulletDespawn>;
 	constructorMap["smoke"] = &constructor<Smoke>;
 	constructorMap["room"] = &constructor<Room>;
 	constructorMap["shopKeeper"] = &constructor<ShopKeeper>;
@@ -193,22 +194,22 @@ void GameManager::LoadDebugRoom(float deltaTime)
 		Vector3(1, 1, 1),
 		Vector3());
 
-	/*Spawn("boss",
+	Spawn("boss",
 		SceneManager::GetInstance()->GetBlueprintByName("boss"),
 		Vector3(700, 500, PLAYER_LAYER),
 		Vector3(1, 1, 1),
-		Vector3());*/
+		Vector3());
 
 	//Spawn("hp",
 	//	SceneManager::GetInstance()->GetBlueprintByName("health_potion"),
 	//	Vector3(800, 300, TRAP_LAYER),
 	//	Vector3(1, 1, 1),
 	//	Vector3());
-	//Spawn("mob",
-	//	SceneManager::GetInstance()->GetBlueprintByName("mob_white"),
-	//	Vector3(800, 200, MOB_LAYER),
-	//	Vector3(1, 1, 1),
-	//	Vector3());
+	Spawn("mob",
+		SceneManager::GetInstance()->GetBlueprintByName("mob_white"),
+		Vector3(800, 200, MOB_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
 	//Spawn("mob",
 	//	SceneManager::GetInstance()->GetBlueprintByName("mob_red"),
 	//	Vector3(850, 200, MOB_LAYER),

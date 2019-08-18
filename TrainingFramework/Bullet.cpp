@@ -32,7 +32,6 @@ Bullet::~Bullet()
 void Bullet::Init(char* type)
 {
 	CalculateVelocity();
-
 	if (strcmp(type, "pBullet_red") == 0) {
 		PlayAnimation(0);
 		UpdateScale(2.0f, 2.0f, 2.0f);
@@ -72,15 +71,31 @@ void Bullet::Init(char* type)
 
 }
 
-void Bullet::Disable()
+void Bullet::Despawn()
 {
-	b2Filter filter = GetComponent<Collision2D>()->body->GetFixtureList()->GetFilterData();
-	//type of body
-	//collide with what
-	filter.maskBits = 0;
-	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
+	if (strcmp(name, "pBullet_red") == 0) {
+		GameManager::GetInstance()->Spawn("bulletDespawn",
+			SceneManager::GetInstance()->GetBlueprintByName("bullet_despawn"),
+			Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
+			Vector3(2, 2, 2),
+			Vector3());
+	}
+	else if (strcmp(name, "pBullet_blue") == 0) {
+		GameManager::GetInstance()->Spawn("bulletDespawn",
+			SceneManager::GetInstance()->GetBlueprintByName("bullet_despawn"),
+			Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
+			Vector3(1.5, 1.5, 1.5),
+			Vector3());
+	}
+	else if (strcmp(name, "eBullet") == 0) {
+		GameManager::GetInstance()->Spawn("bulletDespawn",
+			SceneManager::GetInstance()->GetBlueprintByName("bullet_despawn"),
+			Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
+			Vector3(2.5, 2.5, 2.5),
+			Vector3());
+	}
+	SceneManager::GetInstance()->addToRemovalList(this);
 }
-
 
 
 void Bullet::AddComponent(Component* comp)
@@ -137,34 +152,24 @@ void Bullet::checkCollision(GameObject* tempObj)
 {
 	if (strcmp(tempObj->name, "boss") == 0 && (strcmp(name, "pBullet_red") == 0) || strcmp(name, "pBullet_blue") == 0) {
 		tempObj->GetComponent<HP>()->Damage(damage);
-		SceneManager::GetInstance()->addToRemovalList(this);
+		SetState(&Bullet::Despawn);
 	}
 	if (strcmp(tempObj->name, "crate") == 0 && (strcmp(name, "pBullet_red") == 0 || strcmp(name, "pBullet_blue") == 0 || strcmp(name, "eBullet") == 0)) {
-		SceneManager::GetInstance()->addToRemovalList(this);
+		SetState(&Bullet::Despawn);
 		((Crate*)tempObj)->SetState(&Crate::Exploding);
 	}
 	if (strcmp(tempObj->name, "tnt") == 0 && (strcmp(name, "pBullet_red") == 0 || strcmp(name, "pBullet_blue") == 0 || strcmp(name, "eBullet") == 0)) {
-		SceneManager::GetInstance()->addToRemovalList(this);
+		SetState(&Bullet::Despawn);
 		((TNT*)tempObj)->SetState(&TNT::Exploding);
 	}
-	if ((strcmp(tempObj->name, "mob_red") == 0 || strcmp(tempObj->name, "mob_white") == 0 || strcmp(tempObj->name, "mob_shoot") == 0) && strcmp(name, "pBullet_red") == 0) {
-		SceneManager::GetInstance()->addToRemovalList(tempObj);
-	}
-	if ((strcmp(tempObj->name, "mob_blue") == 0 || strcmp(tempObj->name, "mob_white") == 0 || strcmp(tempObj->name, "mob_shoot") == 0) && strcmp(name, "pBullet_blue") == 0) {
-		SceneManager::GetInstance()->addToRemovalList(tempObj);
-	}
-	if (strcmp(tempObj->name, "mob_explode") == 0 && (strcmp(name, "pBullet_red") == 0 || strcmp(name, "pBullet_blue") == 0)) {
-		SceneManager::GetInstance()->addToRemovalList(this);
-		((MobExplode*)tempObj)->SetState(&MobExplode::Death);
-	}
 	if (strcmp(tempObj->name, "player") == 0 && strcmp(name, "eBullet") == 0) {
-		SceneManager::GetInstance()->addToRemovalList(this);
+		SetState(&Bullet::Despawn);
 	}
 	if (strcmp(tempObj->name, "bomb") == 0) {
-		SceneManager::GetInstance()->addToRemovalList(this);
+		SetState(&Bullet::Despawn);
 		((Bomb*)tempObj)->SetState(&Bomb::Exploding);
 	}
 	if (strcmp(tempObj->name, "shield") == 0) {
-		SceneManager::GetInstance()->addToRemovalList(this);
+		SetState(&Bullet::Despawn);
 	}
 }

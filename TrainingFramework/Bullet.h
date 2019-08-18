@@ -20,9 +20,8 @@ public:
 	void Update(float deltaTime) override;
 	void checkCollision(GameObject * tempObj);
 	void Init(char * type);
-	void Disable();
+	void Despawn();
 
-	void SetPosition(float x, float y, float mX, float mY);
 	void(Bullet::*activeState)() = NULL;
 	int activeAnimation = -1;
 	float x, y, mX, mY, velX, velY;

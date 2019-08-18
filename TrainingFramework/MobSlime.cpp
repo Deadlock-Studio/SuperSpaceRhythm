@@ -9,15 +9,15 @@ MobSlime::MobSlime(Blueprint * blueprint, Vector3 pos, Vector3 scale, Vector3 ro
 {
 	name = _strdup(blueprint->name);
 
-	//Update transform
-	UpdatePosition(pos.x, pos.y, pos.z);
-	UpdateRotation(rotation.x, rotation.y, rotation.z);
-	UpdateScale(scale.x, scale.y, scale.z);
-
 	//Clone components
 	for (vector<Component *>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
 		AddComponent((*it)->Clone());
 	}
+
+	//Update transform
+	UpdatePosition(pos.x, pos.y, pos.z);
+	UpdateRotation(rotation.x, rotation.y, rotation.z);
+	UpdateScale(scale.x, scale.y, scale.z);
 
 	Init();
 }
@@ -147,6 +147,11 @@ void MobSlime::Death()
 			}
 		}
 	}
+	GameManager::GetInstance()->Spawn("smoke",
+		SceneManager::GetInstance()->GetBlueprintByName("smoke"),
+		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
+		Vector3(1.0f, 1.0f, 1.0f),
+		Vector3());
 	SceneManager::GetInstance()->addToRemovalList(this);
 }
 
@@ -172,13 +177,14 @@ void MobSlime::checkCollision(GameObject * tempObj)
 			if (strcmp(name, "mob_red") == 0 || strcmp(name, "mob_white") == 0) {
 				GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 				SetState(&MobSlime::Death);
-				SceneManager::GetInstance()->addToRemovalList(tempObj);
+				((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 			}
 	}
 	else if (strcmp(tempObj->name, "pBullet_blue") == 0) {
 			if (strcmp(name, "mob_blue") == 0 || strcmp(name, "mob_white") == 0) {
 				GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 				SetState(&MobSlime::Death);
+				((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 			}
 	}
 	else if (strcmp(tempObj->name, "explosion") == 0) {

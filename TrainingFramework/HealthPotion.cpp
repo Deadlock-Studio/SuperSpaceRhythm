@@ -11,15 +11,15 @@ HealthPotion::HealthPotion(Blueprint * blueprint, Vector3 pos, Vector3 scale, Ve
 {
 	name = _strdup(blueprint->name);
 
-	//Update transform
-	UpdatePosition(pos.x, pos.y, pos.z);
-	UpdateRotation(rotation.x, rotation.y, rotation.z);
-	UpdateScale(scale.x, scale.y, scale.z);
-
 	//Clone components
 	for (vector<Component *>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
 		AddComponent((*it)->Clone());
 	}
+
+	//Update transform
+	UpdatePosition(pos.x, pos.y, pos.z);
+	UpdateRotation(rotation.x, rotation.y, rotation.z);
+	UpdateScale(scale.x, scale.y, scale.z);
 
 	Init();
 }

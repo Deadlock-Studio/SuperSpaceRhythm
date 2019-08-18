@@ -60,6 +60,6 @@ void Room::checkCollision(GameObject * tempObj)
 {
 	//collide with player bullet
 	if (strcmp(tempObj->name, "pBullet_red") == 0 || strcmp(tempObj->name, "pBullet_blue") == 0 || strcmp(tempObj->name, "eBullet") == 0) {
-		SceneManager::GetInstance()->addToRemovalList(tempObj);
+		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 	}
 }

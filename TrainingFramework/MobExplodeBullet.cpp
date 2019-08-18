@@ -9,15 +9,16 @@ MobExplodeBullet::MobExplodeBullet(Blueprint * blueprint, Vector3 pos, Vector3 s
 {
 	name = _strdup(blueprint->name);
 
+	//Clone components
+	for (vector<Component *>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
+		AddComponent((*it)->Clone());
+	}
+
 	//Update transform
 	UpdatePosition(pos.x, pos.y, pos.z);
 	UpdateRotation(rotation.x, rotation.y, rotation.z);
 	UpdateScale(scale.x, scale.y, scale.z);
 
-	//Clone components
-	for (vector<Component *>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
-		AddComponent((*it)->Clone());
-	}
 	Init();
 	explodeDelay = 50;
 
@@ -139,7 +140,7 @@ void MobExplodeBullet::Update(float deltaTime)
 void MobExplodeBullet::checkCollision(GameObject * tempObj)
 {
 	if (strcmp(tempObj->name, "pBullet_red") == 0 || strcmp(tempObj->name, "pBullet_blue") == 0) {
-		SceneManager::GetInstance()->addToRemovalList(tempObj);
+		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 		SetState(&MobExplodeBullet::Death);
 	}
 	if (strcmp(tempObj->name, "explosion") == 0) {

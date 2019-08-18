@@ -1,17 +1,18 @@
 #include "stdafx.h"
-#include "SpawnEffect.h"
+#include "BulletDespawn.h"
 
-SpawnEffect::SpawnEffect()
+BulletDespawn::BulletDespawn()
 {
-	SetState(&SpawnEffect::Idle);
+	SetState(&BulletDespawn::Idle);
 }
 
-SpawnEffect::SpawnEffect(Blueprint * blueprint, Vector3 pos, Vector3 scale, Vector3 rotation) : SpawnEffect()
+BulletDespawn::BulletDespawn(Blueprint* blueprint, Vector3 pos, Vector3 scale, Vector3 rotation) : BulletDespawn()
 {
 	name = _strdup(blueprint->name);
 
+
 	//Clone components
-	for (vector<Component *>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
+	for (vector<Component*>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
 		AddComponent((*it)->Clone());
 	}
 
@@ -20,33 +21,33 @@ SpawnEffect::SpawnEffect(Blueprint * blueprint, Vector3 pos, Vector3 scale, Vect
 	UpdateRotation(rotation.x, rotation.y, rotation.z);
 	UpdateScale(scale.x, scale.y, scale.z);
 
-	SpawnEffectTick = 15;
+	BulletDespawnTick = 10;
 	Init();
 }
 
 
-SpawnEffect::~SpawnEffect()
+BulletDespawn::~BulletDespawn()
 {
 }
 
 
-void SpawnEffect::Init()
+void BulletDespawn::Init()
 {
 
 }
 
 
 
-void SpawnEffect::AddComponent(Component * comp)
+void BulletDespawn::AddComponent(Component* comp)
 {
 	GameObject::AddComponent(comp);
-	if (dynamic_cast<Animation *>(comp) != NULL) {
+	if (dynamic_cast<Animation*>(comp) != NULL) {
 		comp->isActive = false;
 		animeList.push_back((Animation*)comp);
 	}
 }
 
-void SpawnEffect::PlayAnimation(int key)
+void BulletDespawn::PlayAnimation(int key)
 {
 	//Deactivate active animation and active this one if its not active
 	if (!animeList.at(key)->isActive) {
@@ -57,28 +58,28 @@ void SpawnEffect::PlayAnimation(int key)
 	}
 }
 
-void SpawnEffect::Idle()
+void BulletDespawn::Idle()
 {
 	PlayAnimation(0);
-	SpawnEffectTick--;
-	if (SpawnEffectTick == 0) {
-		SetState(&SpawnEffect::Destroyed);
+	BulletDespawnTick--;
+	if (BulletDespawnTick == 0) {
+		SetState(&BulletDespawn::Destroyed);
 	}
 }
 
-void SpawnEffect::Destroyed()
+void BulletDespawn::Destroyed()
 {
 	SceneManager::GetInstance()->addToRemovalList(this);
 }
 
-void SpawnEffect::Update(float deltaTime)
+void BulletDespawn::Update(float deltaTime)
 {
 	if (activeState != NULL)
 		(this->*activeState)();
 	GameObject::Update(deltaTime);
 }
 
-void SpawnEffect::checkCollision(GameObject * tempObj)
+void BulletDespawn::checkCollision(GameObject* tempObj)
 {
 
 }

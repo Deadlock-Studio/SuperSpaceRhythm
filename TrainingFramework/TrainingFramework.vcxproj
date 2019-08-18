@@ -99,6 +99,7 @@
     <ClCompile Include="Blueprint.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="BulletDespawn.cpp" />
     <ClCompile Include="BulletManager.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Blueprint.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="BulletDespawn.h" />
     <ClInclude Include="BulletManager.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />

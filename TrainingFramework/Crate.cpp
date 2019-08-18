@@ -10,15 +10,17 @@ Crate::Crate(Blueprint * blueprint, Vector3 pos, Vector3 scale, Vector3 rotation
 {
 	name = _strdup(blueprint->name);
 
-	//Update transform
-	UpdatePosition(pos.x, pos.y, pos.z);
-	UpdateRotation(rotation.x, rotation.y, rotation.z);
-	UpdateScale(scale.x, scale.y, scale.z);
 
 	//Clone components
 	for (vector<Component *>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
 		AddComponent((*it)->Clone());
 	}
+
+	//Update transform
+	UpdatePosition(pos.x, pos.y, pos.z);
+	UpdateRotation(rotation.x, rotation.y, rotation.z);
+	UpdateScale(scale.x, scale.y, scale.z);
+
 	Init();
 	crateCoolDown = 20;
 }
@@ -131,7 +133,7 @@ void Crate::Update(float deltaTime)
 void Crate::checkCollision(GameObject * tempObj)
 {
 	if (strcmp(tempObj->name, "pBullet_red") == 0 || strcmp(tempObj->name, "pBullet_blue") == 0 || strcmp(tempObj->name, "eBullet") == 0) {
-		SceneManager::GetInstance()->addToRemovalList(tempObj);
+		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 		SetState(&Crate::Exploding);
 
 	}

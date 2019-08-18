@@ -19,15 +19,15 @@ Boss::Boss(Blueprint * blueprint, Vector3 pos, Vector3 scale, Vector3 rotation) 
 {
 	name = _strdup(blueprint->name);
 
-	//Update transform
-	UpdatePosition(pos.x, pos.y, pos.z);
-	UpdateRotation(rotation.x, rotation.y, rotation.z);
-	UpdateScale(scale.x, scale.y, scale.z);
-
 	//Clone components
 	for (vector<Component *>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
 		AddComponent((*it)->Clone());
 	}
+
+	//Update transform
+	UpdatePosition(pos.x, pos.y, pos.z);
+	UpdateRotation(rotation.x, rotation.y, rotation.z);
+	UpdateScale(scale.x, scale.y, scale.z);
 
 	Init();
 }
@@ -142,10 +142,10 @@ void Boss::checkCollision(GameObject * tempObj)
 	}
 	//collide with player bullet
 	if (strcmp(tempObj->name, "pBullet_red") == 0) {
-		SceneManager::GetInstance()->addToRemovalList(tempObj);
+		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 	}
 	if (strcmp(tempObj->name, "pBullet_blue") == 0) {
-		SceneManager::GetInstance()->addToRemovalList(tempObj);
+		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 	}
 	if (strcmp(tempObj->name, "crate") == 0) {
 		((Crate*)tempObj)->SetState(&Crate::Exploding);

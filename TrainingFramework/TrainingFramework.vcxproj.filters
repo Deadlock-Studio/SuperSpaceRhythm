@@ -262,7 +262,10 @@
       <Filter>Source Files\GameObjects\Interactables</Filter>
     </ClCompile>
     <ClCompile Include="Smoke.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameObjects\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletDespawn.cpp">
+      <Filter>Source Files\GameObjects\Effects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -435,7 +438,10 @@
       <Filter>Header Files\GameObjects\Mob</Filter>
     </ClInclude>
     <ClInclude Include="Smoke.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameObjects\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletDespawn.h">
+      <Filter>Header Files\GameObjects\Effects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
