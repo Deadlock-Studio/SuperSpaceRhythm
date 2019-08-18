@@ -1,8 +1,8 @@
 #pragma once
 #define UPPER_GUI_LAYER 5
 #define GUI_LAYER 4
-#define PLAYER_LAYER 3
-#define EFFECT_LAYER 2
+#define EFFECT_LAYER 3
+#define PLAYER_LAYER 2
 #define MOB_LAYER 1
 #define TRAP_LAYER -1
 #define ROOM_LAYER -2

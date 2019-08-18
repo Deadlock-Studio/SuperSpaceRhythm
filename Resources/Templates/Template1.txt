@@ -9,328 +9,328 @@ BLUEPRINT 0
 NAME: player
 COMPONENT:
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 736, 32, 32, 1
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 96, 704, 32, 32, 1
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 32, 672, 32, 32, 1
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 64, 640, 32, 32, 1
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 608, 32, 32, 1
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 96, 576, 32, 32, 1
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 544, 32, 32, 1
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 96, 512, 32, 32, 1
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 736, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 704, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 672, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 640, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 608, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 576, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 544, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 512, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 480, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 448, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 416, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 384, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 352, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 320, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 288, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 256, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 224, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 192, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 160, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 128, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 96, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 64, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 32, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 0, 0, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 736, 32, 32, 1
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 224, 704, 32, 32, 1
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 160, 672, 32, 32, 1
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 192, 640, 32, 32, 1
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 608, 32, 32, 1
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 224, 576, 32, 32, 1
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 544, 32, 32, 1
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 224, 512, 32, 32, 1
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 736, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 704, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 672, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 640, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 608, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 576, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 544, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 512, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 480, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 448, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 416, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 384, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 352, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 320, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 288, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 256, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 224, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 192, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 160, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 128, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 96, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 64, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 32, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 ANIMATION
-pixelsPerUnit: 16
+pixelsPerUnit: 10
 anim: 128, 0, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/player.tga
 CONTROL
 COLLISION
-body: 32, 60, 50, 0
+body: 50, 100, 50, 0
 body_type: DYNAMIC
 
 BLUEPRINT 0
@@ -356,6 +356,19 @@ body: 142, 210, 1000, 0
 body_type: DYNAMIC
 HP
 health: 1000
+
+BLUEPRINT 0
+NAME: shop_keeper
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 10
+anim: 0, 0, 32, 32, 4
+anim_spd: 10
+../Resources/Textures/shop_keeper.tga
+COLLISION
+body: 60, 100, 50, 0
+body_type: DYNAMIC
+
 
 BLUEPRINT 0
 NAME: health_potion
@@ -422,7 +435,7 @@ anim: 0, 32, 32, 32, 4
 anim_spd: 5
 ../Resources/Textures/bomb.tga
 COLLISION
-body: 40, 40, 10000, 0
+body: 45, 45, 10000, 0
 body_type: DYNAMIC
 
 BLUEPRINT 1
@@ -518,3 +531,12 @@ pixelsPerUnit: 40
 anim: 0, 0, 88, 110, 4
 anim_spd: 5
 ../Resources/Textures/SpawnEffect.tga
+
+BLUEPRINT 0
+NAME: smoke
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 6
+anim: 0, 0, 18, 18, 8
+anim_spd: 5
+../Resources/Textures/smoke.tga

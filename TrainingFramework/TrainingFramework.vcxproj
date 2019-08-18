@@ -14,7 +14,7 @@
     <ProjectGuid>{FC024EC8-32F4-4657-A2CB-14D2B3A931F8}</ProjectGuid>
     <RootNamespace>TrainingFramework</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -25,7 +25,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -131,6 +131,8 @@
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shield.cpp" />
+    <ClCompile Include="ShopKeeper.cpp" />
+    <ClCompile Include="Smoke.cpp" />
     <ClCompile Include="SpawnEffect.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
@@ -191,6 +193,8 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="Shield.h" />
+    <ClInclude Include="ShopKeeper.h" />
+    <ClInclude Include="Smoke.h" />
     <ClInclude Include="SpawnEffect.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpriteRenderer.h" />

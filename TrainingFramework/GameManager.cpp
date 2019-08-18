@@ -35,7 +35,10 @@ void GameManager::LoadConstructorMap()
 	constructorMap["mobDino"] = &constructor<MobDino>;
 	constructorMap["shield"] = &constructor<Shield>;
 	constructorMap["spawn"] = &constructor<SpawnEffect>;
+	constructorMap["smoke"] = &constructor<Smoke>;
 	constructorMap["room"] = &constructor<Room>;
+	constructorMap["shopKeeper"] = &constructor<ShopKeeper>;
+
 }
 
 void GameManager::Update(float deltaTime)
@@ -184,6 +187,12 @@ void GameManager::LoadDebugRoom(float deltaTime)
 		Vector3(1, 1, 1),
 		Vector3());
 
+	Spawn("shopKeeper",
+		SceneManager::GetInstance()->GetBlueprintByName("shop_keeper"),
+		Vector3(540, 360, PLAYER_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
+
 	/*Spawn("boss",
 		SceneManager::GetInstance()->GetBlueprintByName("boss"),
 		Vector3(700, 500, PLAYER_LAYER),
@@ -221,31 +230,31 @@ void GameManager::LoadDebugRoom(float deltaTime)
 		Vector3(500, 200, MOB_LAYER),
 		Vector3(1, 1, 1),
 		Vector3());*/
-	Spawn("mobShoot",
-		SceneManager::GetInstance()->GetBlueprintByName("mob_mask"),
-		Vector3(700, 200, MOB_LAYER),
-		Vector3(1, 1, 1),
-		Vector3());
+	//Spawn("mobShoot",
+	//	SceneManager::GetInstance()->GetBlueprintByName("mob_mask"),
+	//	Vector3(700, 200, MOB_LAYER),
+	//	Vector3(1, 1, 1),
+	//	Vector3());
 	//Spawn("mobKnight",
 	//	SceneManager::GetInstance()->GetBlueprintByName("mob_knight"),
 	//	Vector3(400, 200, MOB_LAYER),
 	//	Vector3(1, 1, 1),
 	//	Vector3());
-	Spawn("mobWiz",
-		SceneManager::GetInstance()->GetBlueprintByName("mob_wiz"),
-		Vector3(300, 200, MOB_LAYER),
-		Vector3(1, 1, 1),
-		Vector3());
-	Spawn("mobNecro",
-		SceneManager::GetInstance()->GetBlueprintByName("mob_necro"),
-		Vector3(200, 200, MOB_LAYER),
-		Vector3(1, 1, 1),
-		Vector3());
-	Spawn("mobDino",
-		SceneManager::GetInstance()->GetBlueprintByName("mob_dino"),
-		Vector3(100, 200, MOB_LAYER),
-		Vector3(1, 1, 1),
-		Vector3());
+	//Spawn("mobWiz",
+	//	SceneManager::GetInstance()->GetBlueprintByName("mob_wiz"),
+	//	Vector3(300, 200, MOB_LAYER),
+	//	Vector3(1, 1, 1),
+	//	Vector3());
+	//Spawn("mobNecro",
+	//	SceneManager::GetInstance()->GetBlueprintByName("mob_necro"),
+	//	Vector3(200, 200, MOB_LAYER),
+	//	Vector3(1, 1, 1),
+	//	Vector3());
+	//Spawn("mobDino",
+	//	SceneManager::GetInstance()->GetBlueprintByName("mob_dino"),
+	//	Vector3(100, 200, MOB_LAYER),
+	//	Vector3(1, 1, 1),
+	//	Vector3());
 	Spawn("trap",
 		SceneManager::GetInstance()->GetBlueprintByName("trap"),
 		Vector3(800, 500, TRAP_LAYER),
@@ -266,11 +275,11 @@ void GameManager::LoadDebugRoom(float deltaTime)
 	//	Vector3(550, 500, TRAP_LAYER),
 	//	Vector3(1, 1, 1),
 	//	Vector3());
-	//Spawn("crate",
-	//	SceneManager::GetInstance()->GetBlueprintByName("crate"),
-	//	Vector3(600, 500, TRAP_LAYER),
-	//	Vector3(1, 1, 1),
-	//	Vector3());
+	Spawn("crate",
+		SceneManager::GetInstance()->GetBlueprintByName("crate"),
+		Vector3(600, 500, TRAP_LAYER),
+		Vector3(1, 1, 1),
+		Vector3());
 	Spawn("tnt",
 		SceneManager::GetInstance()->GetBlueprintByName("tnt"),
 		Vector3(750, 700, TRAP_LAYER),

@@ -36,14 +36,12 @@ Player::~Player()
 
 void Player::Init()
 {
-	UpdateScale(1.5f, 1.5f, 1.0f);
-
 	//filter MUST ALWAYS be the LAST THING to do in init
 	b2Filter filter = GetComponent<Collision2D>()->body->GetFixtureList()->GetFilterData();
 	//type of body
 	filter.categoryBits = PLAYER;
 	//collide with what
-	filter.maskBits = BOSS | ITEM| MOB | MOB_RED | MOB_BLUE | EXPLOSION | CRATE | CRATE | WALL | TRAP | BULLET_E | SHIELD | MINE | BOMB;
+	filter.maskBits = BOSS | ITEM| MOB | MOB_RED | MOB_BLUE | EXPLOSION | CRATE | CRATE | WALL | TRAP | BULLET_E | SHIELD | MINE | BOMB | PLAYER;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 }
 

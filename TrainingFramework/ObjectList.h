@@ -21,3 +21,5 @@
 #include"Shield.h"
 #include"Mine.h"
 #include"Bomb.h"
+#include"ShopKeeper.h"
+#include"Smoke.h"

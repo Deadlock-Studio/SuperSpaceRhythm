@@ -252,11 +252,17 @@
     <ClCompile Include="MobSlime.cpp">
       <Filter>Source Files\GameObjects\Mob\Melee</Filter>
     </ClCompile>
-    <ClCompile Include="Mine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Bomb.cpp">
       <Filter>Source Files\GameObjects\Interactables</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopKeeper.cpp">
+      <Filter>Source Files\GameObjects\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="Mine.cpp">
+      <Filter>Source Files\GameObjects\Interactables</Filter>
+    </ClCompile>
+    <ClCompile Include="Smoke.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -419,11 +425,17 @@
     <ClInclude Include="MobSlime.h">
       <Filter>Header Files\GameObjects\Mob\Melee</Filter>
     </ClInclude>
-    <ClInclude Include="Mine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Bomb.h">
       <Filter>Header Files\GameObjects\Interactables</Filter>
+    </ClInclude>
+    <ClInclude Include="Mine.h">
+      <Filter>Header Files\GameObjects\Interactables</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopKeeper.h">
+      <Filter>Header Files\GameObjects\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="Smoke.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
