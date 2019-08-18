@@ -84,7 +84,7 @@ void Shield::Spawn()
 {
 	GameManager::GetInstance()->Spawn("spawn",
 		SceneManager::GetInstance()->GetBlueprintByName("spawn"),
-		Vector3(transform->position.x, transform->position.y, 2),
+		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
 		Vector3(1.5, 1.5, 1.5),
 		Vector3());
 	SetState(&Shield::Idle);

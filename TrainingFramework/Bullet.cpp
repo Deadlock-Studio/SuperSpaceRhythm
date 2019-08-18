@@ -17,7 +17,7 @@ Bullet::Bullet(float x, float y, float mX, float mY, char* type)
 	this->y = y;
 	this->mX = mX;
 	this->mY = mY;
-	UpdatePosition(x, y, EFFECT_LAYER);
+	UpdatePosition(x, y, BULLET_LAYER);
 	Init(name);
 }
 

@@ -67,7 +67,7 @@ void Boss::Spawn()
 {
 	GameManager::GetInstance()->Spawn("spawn",
 		SceneManager::GetInstance()->GetBlueprintByName("spawn"),
-		Vector3(transform->position.x, transform->position.y, 2),
+		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
 		Vector3(3, 3, 3),
 		Vector3());
 	SetState(&Boss::Idle);

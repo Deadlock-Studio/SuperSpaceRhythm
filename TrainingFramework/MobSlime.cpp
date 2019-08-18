@@ -176,15 +176,15 @@ void MobSlime::checkCollision(GameObject * tempObj)
 	else if (strcmp(tempObj->name, "pBullet_red") == 0) {
 			if (strcmp(name, "mob_red") == 0 || strcmp(name, "mob_white") == 0) {
 				GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
-				SetState(&MobSlime::Death);
 				((Bullet*)tempObj)->SetState(&Bullet::Despawn);
+				SetState(&MobSlime::Death);
 			}
 	}
 	else if (strcmp(tempObj->name, "pBullet_blue") == 0) {
 			if (strcmp(name, "mob_blue") == 0 || strcmp(name, "mob_white") == 0) {
 				GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
-				SetState(&MobSlime::Death);
 				((Bullet*)tempObj)->SetState(&Bullet::Despawn);
+				SetState(&MobSlime::Death);
 			}
 	}
 	else if (strcmp(tempObj->name, "explosion") == 0) {

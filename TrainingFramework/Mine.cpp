@@ -88,7 +88,7 @@ void Mine::Spawn()
 {
 	GameManager::GetInstance()->Spawn("spawn",
 		SceneManager::GetInstance()->GetBlueprintByName("spawn"),
-		Vector3(transform->position.x, transform->position.y, 2),
+		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
 		Vector3(1.5, 1.5, 1.5),
 		Vector3());
 	SetState(&Mine::Idle);
@@ -108,7 +108,7 @@ void Mine::Exploding()
 		//spawn hp if Mine destroyed
 		GameManager::GetInstance()->Spawn("explosion",
 			SceneManager::GetInstance()->GetBlueprintByName("explosion"),
-			Vector3(transform->position.x, transform->position.y, PLAYER_LAYER),
+			Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
 			Vector3(1, 1, 1),
 			Vector3());
 		SetState(&Mine::Destroyed);

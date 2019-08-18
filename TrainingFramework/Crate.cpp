@@ -79,7 +79,7 @@ void Crate::Spawn()
 {
 	GameManager::GetInstance()->Spawn("spawn",
 		SceneManager::GetInstance()->GetBlueprintByName("spawn"),
-		Vector3(transform->position.x, transform->position.y, 2),
+		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
 		Vector3(1.5, 1.5, 1.5),
 		Vector3());
 	SetState(&Crate::Idle);
@@ -100,7 +100,7 @@ void Crate::Exploding()
 		//spawn hp if crate destroyed
 		GameManager::GetInstance()->Spawn("hp",
 			SceneManager::GetInstance()->GetBlueprintByName("health_potion"),
-			Vector3(transform->position.x, transform->position.y, PLAYER_LAYER),
+			Vector3(transform->position.x, transform->position.y, ITEM_LAYER),
 			Vector3(1, 1, 1),
 			Vector3());
 		crateCoolDown = 100;

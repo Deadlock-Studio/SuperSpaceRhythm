@@ -81,7 +81,7 @@ void Bomb::Destroyed()
 {
 	GameManager::GetInstance()->Spawn("explosion",
 		SceneManager::GetInstance()->GetBlueprintByName("explosion"),
-		Vector3(transform->position.x, transform->position.y, PLAYER_LAYER),
+		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
 		Vector3(1, 1, 1),
 		Vector3());
 	SceneManager::GetInstance()->addToRemovalList(this);
