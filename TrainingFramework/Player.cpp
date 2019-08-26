@@ -495,9 +495,12 @@ void Player::checkCollision(GameObject * tempObj)
 		GameManager::GetInstance()->shopped = true;
 		GameManager::GetInstance()->addToRemovalList(tempObj);
 	}
+
 	if (strcmp(tempObj->name, "ladder") == 0) {
-		cout << "yeet" << endl;
+		GameManager::GetInstance()->counter = 0;
+		SetState(&Player::ClimbLadder);
 	}
+
 	if (strcmp(tempObj->name, "mine") == 0) {
 		((Mine*)tempObj)->SetState(&Mine::Destroying);
 	}

@@ -33,6 +33,9 @@ Perk::~Perk()
 void Perk::checkCollision(GameObject * tempObj)
 {
 	if (strcmp(tempObj->name, "player") == 0) {
+		GetComponent<PowerUp>()->ActivatePower();
+		GameManager::GetInstance()->spawnedBuffList.remove(this);
+		GameManager::GetInstance()->shopped = true;
 		GameManager::GetInstance()->addToRemovalList(this);
 	}
 }
