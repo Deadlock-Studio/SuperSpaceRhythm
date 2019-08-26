@@ -154,6 +154,13 @@ pixelsPerUnit: 32
 ../Resources/Image/minus.tga
 BUTTON
 
+BLUEPRINT 1
+NAME: victory_screen
+COMPONENT:
+SPRITE
+pixelsPerUnit: 40
+../Resources/Image/victory_screen.tga
+
 ///////////////////////////////////////////Health, shield, void_shell_GUI
 
 BLUEPRINT 1
