@@ -280,7 +280,7 @@ void GameManager::Loading(float deltaTime)
 	calComplete->isActive = false;
 
 	victoryScreen = Spawn("object",
-		SceneManager::GetInstance()->GetBlueprintByName("splash_screen"),
+		SceneManager::GetInstance()->GetBlueprintByName("victory_screen"),
 		Vector3(640, 360, GUI_LAYER),
 		Vector3(1, 1, 1),
 		Vector3());
