@@ -128,6 +128,10 @@ void Mine::checkCollision(GameObject* tempObj)
 	if (strcmp(tempObj->name, "explosion") == 0) {
 		SetState(&Mine::Destroying);
 	}
+
+	if (strcmp(tempObj->name, "player") == 0) {
+		SetState(&Mine::Destroying);
+	}
 }
 
 

@@ -280,6 +280,7 @@ int SoundManager::RhythmConductor(Track* track, float FrameTime) {
 			track->prevBeatTime = track->beatmap[0];
 			getTrack("level_half")->music.setLoop(false);
 			getTrack("level_half")->music.play();
+			
 			if (strcmp(track->songname, "boss") != 0)
 			{
 				if (GameManager::GetInstance()->player != NULL)
@@ -287,11 +288,15 @@ int SoundManager::RhythmConductor(Track* track, float FrameTime) {
 					if (GameManager::GetInstance()->player->GetComponent<Control>()->isReforming)
 					{
 						getTrack("level_half")->music.setVolume(musicVolume);
-
+						track->music.setVolume(0);
 					}
 					else getTrack("level_half")->music.setVolume(0);
 				}
 				else getTrack("level_half")->music.setVolume(0);
+			}
+			if (strcmp(track->songname, "boss") == 0)
+			{
+				getTrack("level_half")->music.stop();
 			}
 			track->music.play();
 			float tm = track->music.getPlayingOffset().asSeconds();

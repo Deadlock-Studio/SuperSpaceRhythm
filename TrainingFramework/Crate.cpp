@@ -100,7 +100,7 @@ void Crate::Exploding()
 		int a = std::rand() % 100;
 		//spawn hp if crate destroyed
 		if (a <= 25) {
-			GameManager::GetInstance()->Spawn("hp",
+			GameManager::GetInstance()->SpawnToRoom("hp",
 				SceneManager::GetInstance()->GetBlueprintByName("health_potion"),
 				Vector3(transform->position.x, transform->position.y, ITEM_LAYER),
 				Vector3(1, 1, 1),
