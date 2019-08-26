@@ -95,6 +95,11 @@ void Boss::WalkRight()
 
 void Boss::Death()
 {
+	GameManager::GetInstance()->Spawn("smoke",
+		SceneManager::GetInstance()->GetBlueprintByName("smoke"),
+		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
+		Vector3(3.0f, 3.0f, 3.0f),
+		Vector3());
 	GameManager::GetInstance()->addToRemovalList(this);
 	GameManager::GetInstance()->mobCount++;
 }

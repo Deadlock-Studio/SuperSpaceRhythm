@@ -306,7 +306,7 @@ void Player::Death()
 		GameManager::GetInstance()->Spawn("smoke",
 			SceneManager::GetInstance()->GetBlueprintByName("smoke"),
 			Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
-			Vector3(1.0f, 1.0f, 1.0f),
+			Vector3(2.0f, 2.0f, 2.0f),
 			Vector3());
 	}
 	death = true;
