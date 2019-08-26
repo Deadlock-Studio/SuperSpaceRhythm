@@ -379,7 +379,7 @@ anim: 0, 0, 16, 16, 1
 anim_spd: 10
 ../Resources/Textures/trap.tga
 COLLISION
-body: 80, 80, 10, 0
+body: 80, 80, 1, 0
 body_type: STATIC
 
 BLUEPRINT 0

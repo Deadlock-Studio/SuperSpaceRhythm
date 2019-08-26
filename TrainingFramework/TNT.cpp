@@ -50,7 +50,7 @@ void TNT::InitDestroyed()
 	//type of body
 	filter.categoryBits = CRATE;
 	//collide with what
-	filter.maskBits = 0;
+	filter.maskBits = WALL;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 }
 
