@@ -970,7 +970,7 @@ void GameManager::Victory(float deltaTime)
 			if (rand() % 2 == 0) xOffset = -xOffset;
 			if (rand() % 2 == 0) yOffset = -yOffset;
 
-			shopKeeper->UpdatePosition(clamp_X(player->transform->position.x + xOffset),  clamp_Y(player->transform->position.y + yOffset), shopKeeper->transform->position.z);
+			shopKeeper->UpdatePosition(Globals::clamp_x(player->transform->position.x + xOffset), Globals::clamp_y(player->transform->position.y + yOffset), shopKeeper->transform->position.z);
 
 			SpawnBuff();
 
@@ -1076,6 +1076,7 @@ void GameManager::LoadRoom(float deltaTime)
 		ResetRoomAndBuff();
 		HideHealthBar();
 		counter = 0;
+		roomNum = 0;
 		SetState(&GameManager::VictoryScreen);
 		return;
 	}
@@ -1085,7 +1086,7 @@ void GameManager::LoadRoom(float deltaTime)
 		SoundManager::GetInstance()->currentlyPlaying = SoundManager::GetInstance()->getTrack("boss");
 		SoundManager::GetInstance()->startConductor = TRUE;
 
-		room = room = SpawnToRoom("room",
+		room = SpawnToRoom("room",
 			SceneManager::GetInstance()->GetBlueprintByName(bossRoom),
 			Vector3(640, 360, ROOM_LAYER),
 			Vector3(1, 1, 1),
