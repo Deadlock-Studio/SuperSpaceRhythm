@@ -20,7 +20,7 @@ COLLISION
 body: 142, 210, 1000, 0
 body_type: DYNAMIC
 HP
-health: 10
+health: 1000
 
 BLUEPRINT 0
 NAME: mob_white
