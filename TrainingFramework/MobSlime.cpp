@@ -124,7 +124,7 @@ void MobSlime::Death()
 			offset = offset * -1;
 			if (rdm == 0)
 			{
-				GameManager::GetInstance()->Spawn("mob",
+				GameManager::GetInstance()->SpawnToRoom("mob",
 					SceneManager::GetInstance()->GetBlueprintByName("mob_red"),
 					Vector3(Globals::clamp_x(transform->position.x + offset), Globals::clamp_y(transform->position.y + offset), MOB_LAYER),
 					Vector3(1, 1, 1),
@@ -132,7 +132,7 @@ void MobSlime::Death()
 			}
 			if (rdm == 1)
 			{
-				GameManager::GetInstance()->Spawn("mob",
+				GameManager::GetInstance()->SpawnToRoom("mob",
 					SceneManager::GetInstance()->GetBlueprintByName("mob_blue"),
 					Vector3(Globals::clamp_x(transform->position.x + offset), Globals::clamp_y(transform->position.y + offset), MOB_LAYER),
 					Vector3(1, 1, 1),
