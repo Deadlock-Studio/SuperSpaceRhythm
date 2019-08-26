@@ -4,7 +4,7 @@
 class Beat
 {
 public:
-	Beat(float X_offset, float beatpos, bool type);
+	Beat(float X_offset, int beatIndex, float beatpos, bool type);
 	~Beat();
 	Beat(float X_offset, bool type);
 	void Move(float songtime);
@@ -22,6 +22,7 @@ public:
 	float leftSpawnPos;
 	float rightSpawnPos;
 	float beatPos;
+	int beatIndex;
 	float distance;
 };
 

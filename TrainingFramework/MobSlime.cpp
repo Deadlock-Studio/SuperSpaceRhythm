@@ -37,7 +37,7 @@ void MobSlime::Init()
 		//type of body
 		filter.categoryBits = MOB;
 		//collide with what
-		filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE | WALL | EXPLOSION | BOSS | CRATE | MOB | MOB_RED | MOB_BLUE | CRATE;
+		filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE | WALL | EXPLOSION | BOSS | CRATE | MOB | MOB_RED | MOB_BLUE | CRATE | SHIELD;
 		GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 	}
 	if (strcmp(name, "mob_red") == 0) {
@@ -45,7 +45,7 @@ void MobSlime::Init()
 		//type of body
 		filter.categoryBits = MOB_RED;
 		//collide with what
-		filter.maskBits = PLAYER | BULLET_RED | WALL | EXPLOSION | BOSS | CRATE | MOB | MOB_RED | MOB_BLUE | CRATE;
+		filter.maskBits = PLAYER | BULLET_RED | WALL | EXPLOSION | BOSS | CRATE | MOB | MOB_RED | MOB_BLUE | CRATE | SHIELD;
 		GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 	}
 	if (strcmp(name, "mob_blue") == 0) {
@@ -53,12 +53,12 @@ void MobSlime::Init()
 		//type of body
 		filter.categoryBits = MOB_BLUE;
 		//collide with what
-		filter.maskBits = PLAYER | BULLET_BLUE | WALL | EXPLOSION | BOSS | CRATE | MOB | MOB_RED | MOB_BLUE | CRATE;
+		filter.maskBits = PLAYER | BULLET_BLUE | WALL | EXPLOSION | BOSS | CRATE | MOB | MOB_RED | MOB_BLUE | CRATE | SHIELD;
 		GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 	}
-
-
 }
+
+
 
 void MobSlime::AddComponent(Component * comp)
 {
@@ -97,12 +97,6 @@ void MobSlime::CalculateVelocity()
 
 void MobSlime::Idle()
 {
-	//Transition
-	if (GetComponent<HP>()->dead) {
-		SetState(&MobSlime::Death);
-		return;
-	}
-	
 	if (GameManager::GetInstance()->player->transform->position.x <= transform->position.x)
 		PlayAnimation(0);
 	else
@@ -124,7 +118,6 @@ void MobSlime::Death()
 	if (strcmp(this->name, "mob_white") == 0)
 	{
 		int offset = -60;
-		srand(time(NULL));
 		int rdm = rand() % 2;
 		for (int i = 0; i < 2; i++)
 		{
@@ -133,7 +126,7 @@ void MobSlime::Death()
 			{
 				GameManager::GetInstance()->Spawn("mob",
 					SceneManager::GetInstance()->GetBlueprintByName("mob_red"),
-					Vector3(transform->position.x + offset, transform->position.y + offset, MOB_LAYER),
+					Vector3(Globals::clamp_x(transform->position.x + offset), Globals::clamp_y(transform->position.y + offset), MOB_LAYER),
 					Vector3(1, 1, 1),
 					Vector3());
 			}
@@ -141,27 +134,40 @@ void MobSlime::Death()
 			{
 				GameManager::GetInstance()->Spawn("mob",
 					SceneManager::GetInstance()->GetBlueprintByName("mob_blue"),
-					Vector3(transform->position.x + offset, transform->position.y + offset, MOB_LAYER),
+					Vector3(Globals::clamp_x(transform->position.x + offset), Globals::clamp_y(transform->position.y + offset), MOB_LAYER),
 					Vector3(1, 1, 1),
 					Vector3());
 			}
 		}
+
+		GameManager::GetInstance()->mobCount -= 2;
 	}
+
 	GameManager::GetInstance()->Spawn("smoke",
 		SceneManager::GetInstance()->GetBlueprintByName("smoke"),
 		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
 		Vector3(1.0f, 1.0f, 1.0f),
 		Vector3());
-	SceneManager::GetInstance()->addToRemovalList(this);
+	GameManager::GetInstance()->addToRemovalList(this);
+	GameManager::GetInstance()->mobCount++;
 }
 
 void MobSlime::Update(float deltaTime)
 {
+	//Transition
+	if (GetComponent<HP>()->dead) {
+		SetState(&MobSlime::Death);
+		if (((Player*)(GameManager::GetInstance()->player))->SpeedBoost)
+		{
+			((Player*)(GameManager::GetInstance()->player))->speedIncrease = TRUE;
+		}
+	}
+
 	if (activeState != NULL)
 		(this->*activeState)();
 
 	b2Vec2 bodyPos = GetComponent<Collision2D>()->body->GetPosition();
-	transform->setPosition(bodyPos.x *PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, transform->position.z);
+	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, transform->position.z);
 	CalculateVelocity();
 	AddToPosition(velX, velY);
 
@@ -170,24 +176,18 @@ void MobSlime::Update(float deltaTime)
 
 void MobSlime::checkCollision(GameObject * tempObj)
 {
-	if (strcmp(tempObj->name, "tnt") == 0) {
-		((TNT*)tempObj)->SetState(&TNT::Exploding);
+
+	if (strcmp(tempObj->name, "pBullet_red") == 0) {
+		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
+		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 	}
-	else if (strcmp(tempObj->name, "pBullet_red") == 0) {
-			if (strcmp(name, "mob_red") == 0 || strcmp(name, "mob_white") == 0) {
-				GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
-				((Bullet*)tempObj)->SetState(&Bullet::Despawn);
-				SetState(&MobSlime::Death);
-			}
+	if (strcmp(tempObj->name, "pBullet_blue") == 0
+		|| strcmp(tempObj->name, "pBullet_blue_crit") == 0
+		|| strcmp(tempObj->name, "pBullet_red_crit") == 0) {
+		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
+		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 	}
-	else if (strcmp(tempObj->name, "pBullet_blue") == 0) {
-			if (strcmp(name, "mob_blue") == 0 || strcmp(name, "mob_white") == 0) {
-				GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
-				((Bullet*)tempObj)->SetState(&Bullet::Despawn);
-				SetState(&MobSlime::Death);
-			}
-	}
-	else if (strcmp(tempObj->name, "explosion") == 0) {
-		SetState(&MobSlime::Death);
+	if (strcmp(tempObj->name, "explosion") == 0) {
+		GetComponent<HP>()->Damage(((Explosion*)tempObj)->damage);
 	}
 }

@@ -70,7 +70,7 @@ void Smoke::Idle()
 
 void Smoke::Destroyed()
 {
-	SceneManager::GetInstance()->addToRemovalList(this);
+	GameManager::GetInstance()->addToRemovalList(this);
 }
 
 void Smoke::Update(float deltaTime)

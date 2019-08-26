@@ -14,6 +14,9 @@ public:
 	void SetState(void(ShopKeeper::* state)()) {
 		activeState = state;
 	}
+
+	void SetCollidable(bool state);
+
 	void Update(float deltaTime);
 	void PlayAnimation(int key);
 	void Idle();
@@ -24,5 +27,4 @@ public:
 	void(ShopKeeper::* activeState)() = NULL;
 	int activeAnimation = -1;
 	vector<Animation*> animeList{};
-	int shopTick = 0;
 };

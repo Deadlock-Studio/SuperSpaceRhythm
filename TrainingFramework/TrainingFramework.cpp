@@ -11,27 +11,27 @@ int signal = 0;
 int Init(ESContext *esContext)
 {
 	glClearColor(0.1451f, 0.075f, 0.102f, 1.0f);
+	srand(time(NULL));
 
 	//Singleton Creates
+	TextManager::CreateInstance();
 	PhysicManager::CreateInstance();
 	SceneManager::CreateInstance();
 	ResourceManager::CreateInstance();
 	InputManager::CreateInstance();
 	SoundManager::CreateInstance();
 	GameManager::CreateInstance();
-	TextManager::CreateInstance();
 
 	//Singleton Inits
+	TextManager::GetInstance()->Init();
 	PhysicManager::GetInstance()->Init();
 	SceneManager::GetInstance()->Init();
+	GameManager::GetInstance()->Init();
 	ResourceManager::GetInstance()->Init();
 	InputManager::GetInstance()->Init();
-	
-	GameManager::GetInstance()->Init();
-	TextManager::GetInstance()->Init();
-
-	//Load sound
 	SoundManager::GetInstance()->Init();
+	SoundManager::GetInstance()->currentlyPlaying = SoundManager::GetInstance()->getTrack("level");
+
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
@@ -48,28 +48,29 @@ void Draw(ESContext *esContext)
 	TextManager::GetInstance()->Draw();
 
 	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
-	
 }
 
 void Update(ESContext *esContext, float deltaTime)
 {
 	//Frametime counter
 	//cout << "frametime " << deltaTime << endl;
-	GameManager::GetInstance()->Update(deltaTime);
-	//if (SoundManager::GetInstance()->AudioOffset == 0)
-	//{
-	//	SoundManager::GetInstance()->CalibrateAudio();
-	//}
-	//else if (SoundManager::GetInstance()->VisualOffset == 0)
-	//{
-	//	SoundManager::GetInstance()->CalibrateVisual();
-	//}
-	//else
-	SoundManager::GetInstance()->signalPass = SoundManager::GetInstance()->RhythmConductor(SoundManager::GetInstance()->getTrack("120bpm"), deltaTime);
+	SoundManager::GetInstance()->signalPass = SoundManager::GetInstance()->RhythmConductor(SoundManager::GetInstance()->currentlyPlaying, deltaTime);
 	SceneManager::GetInstance()->Update(deltaTime);
+	GameManager::GetInstance()->Update(deltaTime);
 	PhysicManager::GetInstance()->Update(deltaTime);
 	TextManager::GetInstance()->Update(deltaTime);
 
+	if (GameManager::GetInstance()->calibrate)
+	{
+		if (!SoundManager::GetInstance()->audioCalibrated)
+		{
+			SoundManager::GetInstance()->CalibrateAudio();
+		}
+		else if (!SoundManager::GetInstance()->visualCalibrated)
+		{
+			SoundManager::GetInstance()->CalibrateVisual();
+		}
+	}
 
 	//Always bottom
 	SceneManager::GetInstance()->LateUpdate(deltaTime);
@@ -83,20 +84,27 @@ void Key(ESContext *esContext, unsigned char key, bool bIsPressed)
 
 void TouchActionMove(ESContext *esContext, int x, int y)
 {
-	//cout << "mouse move "<< "x:" << x+SceneManager::GetInstance()->usedCamera->position.x << " " << "y:" << y+ SceneManager::GetInstance()->usedCamera->position.y << endl;
 	InputManager::GetInstance()->MousePosition((float)x, (float)y);
 }
 
 void TouchActionUp(ESContext *esContext, int x, int y)
 {
-	//cout << "mouse up "<< "x:" << x << " " << "y:" << y << endl;
 	InputManager::GetInstance()->MouseUp((float)x, (float)y);
 }
 
 void TouchActionDown(ESContext *esContext, int x, int y)
 {
-	//cout << "mouse down " << "x:" << x << " " << "y:" << y << endl;
 	InputManager::GetInstance()->MouseDown((float)x, (float)y);
+
+}
+void RightMouseUp(ESContext *esContext, int x, int y)
+{
+	InputManager::GetInstance()->RightMouseUp((float)x, (float)y);
+}
+
+void RightMouseDown(ESContext *esContext, int x, int y)
+{
+	InputManager::GetInstance()->RightMouseDown((float)x, (float)y);
 
 }
 
@@ -104,11 +112,11 @@ void CleanUp()
 {
 	//Singleton Destroys
 	InputManager::DestroyInstance();
+	GameManager::DestroyInstance();
 	SceneManager::DestroyInstance();
 	ResourceManager::DestroyInstance();
 	SoundManager::DestroyInstance();
 	PhysicManager::DestroyInstance();
-	GameManager::DestroyInstance();
 	TextManager::DestroyInstance();
 }
 
@@ -128,6 +136,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	esRegisterKeyFunc(&esContext, Key);
 	esRegisterMouseDownFunc(&esContext, TouchActionDown);
 	esRegisterMouseUpFunc(&esContext, TouchActionUp);
+	esRegisterRightMouseDownFunc(&esContext, RightMouseDown);
+	esRegisterRightMouseUpFunc(&esContext, RightMouseUp);
 	esRegisterMouseMoveFunc(&esContext, TouchActionMove);
 
 	esMainLoop(&esContext);

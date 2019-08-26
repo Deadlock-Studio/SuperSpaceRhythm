@@ -38,16 +38,20 @@ void Text::LateUpdate(float deltaTime)
 	if (fadeOut) {
 		if (color.w > 0) {
 			color.w -= fadeOut * deltaTime;
-			if (color.w < 0)
+			if (color.w < 0) {
 				color.w = 0;
+				FadeOff();
+			}
 		}	
 	}
 
 	if (fadeIn) {
 		if (color.w < 1) {
 			color.w += fadeIn * deltaTime;
-			if (color.w > 1)
+			if (color.w > 1) {
 				color.w = 1;
+				FadeOff();
+			}
 		}
 	}
 
@@ -75,4 +79,9 @@ void Text::FadeOff()
 {
 	fadeIn = 0;
 	fadeOut = 0;
+}
+
+void Text::UpdatePosition(float x, float y)
+{
+	posX = x; posY = y;
 }

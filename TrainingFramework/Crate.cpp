@@ -77,7 +77,7 @@ void Crate::PlayAnimation(int key)
 
 void Crate::Spawn()
 {
-	GameManager::GetInstance()->Spawn("spawn",
+	GameManager::GetInstance()->SpawnToRoom("spawn",
 		SceneManager::GetInstance()->GetBlueprintByName("spawn"),
 		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
 		Vector3(1.5, 1.5, 1.5),
@@ -97,12 +97,15 @@ void Crate::Exploding()
 	crateCoolDown--;
 	if (crateCoolDown == 0) {
 		SetState(&Crate::Destroyed);
+		int a = std::rand() % 100;
 		//spawn hp if crate destroyed
-		GameManager::GetInstance()->Spawn("hp",
-			SceneManager::GetInstance()->GetBlueprintByName("health_potion"),
-			Vector3(transform->position.x, transform->position.y, ITEM_LAYER),
-			Vector3(1, 1, 1),
-			Vector3());
+		if (a <= 25) {
+			GameManager::GetInstance()->Spawn("hp",
+				SceneManager::GetInstance()->GetBlueprintByName("health_potion"),
+				Vector3(transform->position.x, transform->position.y, ITEM_LAYER),
+				Vector3(1, 1, 1),
+				Vector3());
+		}
 		crateCoolDown = 100;
 	}
 }
@@ -112,7 +115,7 @@ void Crate::Destroyed()
 	PlayAnimation(2);
 	crateCoolDown--;
 	if (crateCoolDown == 0) {
-		SceneManager::GetInstance()->addToRemovalList(this);
+		GameManager::GetInstance()->addToRemovalList(this);
 	}
 }
 
@@ -121,9 +124,6 @@ void Crate::Update(float deltaTime)
 {
 	if (activeState != NULL)
 		(this->*activeState)();
-
-	b2Vec2 bodyPos = GetComponent<Collision2D>()->body->GetPosition();
-	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, 1);
 	AddToPosition(0.0f, 0.0f);
 
 
@@ -132,10 +132,9 @@ void Crate::Update(float deltaTime)
 
 void Crate::checkCollision(GameObject * tempObj)
 {
-	if (strcmp(tempObj->name, "pBullet_red") == 0 || strcmp(tempObj->name, "pBullet_blue") == 0 || strcmp(tempObj->name, "eBullet") == 0) {
+	if (strcmp(tempObj->name, "pBullet_red") == 0 || strcmp(tempObj->name, "pBullet_blue") == 0 || strcmp(tempObj->name, "eBullet") == 0 || strcmp(tempObj->name, "eBullet_mob") == 0) {
 		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 		SetState(&Crate::Exploding);
-
 	}
 	if (strcmp(tempObj->name, "explosion") == 0) {
 		SetState(&Crate::Exploding);

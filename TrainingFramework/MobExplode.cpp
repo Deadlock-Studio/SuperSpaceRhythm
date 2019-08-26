@@ -38,7 +38,7 @@ void MobExplode::Init()
 	//type of body
 	filter.categoryBits = MOB;
 	//collide with what
-	filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE | WALL | EXPLOSION | CRATE | BOSS | MOB | MOB_RED | MOB_BLUE | CRATE;
+	filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE | WALL | EXPLOSION | CRATE | BOSS | MOB | MOB_RED | MOB_BLUE | CRATE | SHIELD;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 
 }
@@ -111,17 +111,26 @@ void MobExplode::Death()
 			Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
 			Vector3(1, 1, 1),
 			Vector3());
-		SceneManager::GetInstance()->addToRemovalList(this);
+		GameManager::GetInstance()->addToRemovalList(this);
+		GameManager::GetInstance()->mobCount++;
 	}
 }
 
 void MobExplode::Update(float deltaTime)
 {
+	if (GetComponent<HP>()->dead) {
+		if (((Player*)(GameManager::GetInstance()->player))->SpeedBoost)
+		{
+			((Player*)(GameManager::GetInstance()->player))->speedIncrease = TRUE;
+		}
+		SetState(&MobExplode::Death);
+	}
+
 	if (activeState != NULL)
 		(this->*activeState)();
 
 	b2Vec2 bodyPos = GetComponent<Collision2D>()->body->GetPosition();
-	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, 1);
+	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, transform->position.z);
 	CalculateVelocity();
 	
 	//cout << distance << endl;
@@ -130,6 +139,7 @@ void MobExplode::Update(float deltaTime)
 		SetState(&MobExplode::Death);
 		isExploding = true;
 	}
+
 	if(!isExploding)
 		AddToPosition(velX, velY);
 	GameObject::Update(deltaTime);
@@ -137,12 +147,14 @@ void MobExplode::Update(float deltaTime)
 
 void MobExplode::checkCollision(GameObject * tempObj)
 {
-	if (strcmp(tempObj->name, "pBullet_red") == 0 || strcmp(tempObj->name, "pBullet_blue") == 0) {
+	if (strcmp(tempObj->name, "pBullet_red") == 0 
+		|| strcmp(tempObj->name, "pBullet_blue") == 0
+		|| strcmp(tempObj->name, "pBullet_blue_crit") == 0
+		|| strcmp(tempObj->name, "pBullet_red_crit") == 0) {
 		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
-		SetState(&MobExplode::Death);
+		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 	}
-	else if (strcmp(tempObj->name, "explosion") == 0) {
-		SetState(&MobExplode::Death);
+	if (strcmp(tempObj->name, "explosion") == 0) {
+		GetComponent<HP>()->Damage(((Explosion*)tempObj)->damage);
 	}
 }
-

@@ -75,9 +75,11 @@ protected:
 	static SoundManager * ms_pInstance;
 
 public:
+	Track* currentlyPlaying;
+	bool startConductor = TRUE;
 	float offset;
-	float AudioOffset = 0;
-	float VisualOffset = 0;
+	float AudioOffset = 0.0f;
+	float VisualOffset = 0.0f;
 	bool halftime = FALSE;
 	int halftimeCounter = 0;
 	int cal = 0;
@@ -86,17 +88,21 @@ public:
 	int enemySignal = 0;
 	int beatonscreen;
 	float InitPosX;
-	GUI * yeet;
-	GUI* bruh;
-	GUI* meh;
+	GUI * perfect;
+	GUI* miss;
+	GUI* good;
+	GUI* goodPower;
 	std::deque<Beat*> BeatList;
 	std::vector<Track*> MusicList;
 	std::vector<Sfx*> SfxList;
 	bool hit = FALSE;
 	bool destroyed = FALSE;
+	bool audioCalibrated = FALSE;
+	bool visualCalibrated = FALSE;
 	int counter = 0;
 	float timing[20], total = 0;
 	DWORD play, press, begin, time;
+	int musicVolume;
 	Beat* calibration;
 };
 

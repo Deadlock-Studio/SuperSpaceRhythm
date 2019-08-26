@@ -53,3 +53,11 @@ void Camera::UpdatePosition(float x, float y, float deltaTime)
 
 	m_view = m_translation * m_direction;
 }
+
+void Camera::SnapPosition(float x, float y)
+{
+	position.x = x;
+	position.y = y;
+
+	LookAt();
+}

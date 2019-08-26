@@ -68,7 +68,7 @@ void SpawnEffect::Idle()
 
 void SpawnEffect::Destroyed()
 {
-	SceneManager::GetInstance()->addToRemovalList(this);
+	GameManager::GetInstance()->addToRemovalList(this);
 }
 
 void SpawnEffect::Update(float deltaTime)

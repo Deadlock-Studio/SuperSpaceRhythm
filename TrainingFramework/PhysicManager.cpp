@@ -56,6 +56,6 @@ b2Body * PhysicManager::createBody(float x, float y, float width, float height,f
 
 void PhysicManager::Update(float deltaTime)
 {
-	world->Step(0.5f/FPS, Globals::velIter, Globals::posIter);
+	world->Step(1.0f / FPS, Globals::velIter, Globals::posIter);
 	SceneManager::GetInstance()->deleteRemovalList();
 }

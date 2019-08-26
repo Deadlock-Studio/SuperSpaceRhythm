@@ -43,7 +43,7 @@ void Trap::InitIdle()
 	//type of body
 	filter.categoryBits = TRAP;
 	//collide with what
-	filter.maskBits = 0;
+	filter.maskBits = CRATE;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 }
 
@@ -136,9 +136,6 @@ void Trap::Update(float deltaTime)
 
 void Trap::checkCollision(GameObject * tempObj)
 {
-	if (strcmp(tempObj->name, "player") == 0) {
-		//SceneManager::GetInstance()->addToRemovalList(this);
-	}
 }
 
 

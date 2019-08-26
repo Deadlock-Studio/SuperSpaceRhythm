@@ -47,6 +47,7 @@ void GameObject::UpdatePosition(float x, float y, float z)
 	if (transform) {
 		transform->UpdatePosition(Vector3(x,y,z));
 	}
+
 	if (GetComponent<Collision2D>()) {
 		GetComponent<Collision2D>()->UpdateBodyPostition(x, y);
 	}
@@ -94,13 +95,7 @@ void GameObject::AddToPosition(float x, float y)
 	posOffset.y = y / PIXEL_RATIO;
 	tempBody->SetLinearVelocity(posOffset);
 	b2Vec2 bodyPos = tempBody->GetPosition();
-	if (strcmp(name, "eBullet") == 0 || strcmp(name, "pBullet_red") == 0 || strcmp(name, "pBullet_blue") == 0) {
-		transform->UpdatePosition(Vector3(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, BULLET_LAYER));
-	}
-	else if (strcmp(name, "player") == 0 || strcmp(name, "boss") == 0) {
-		transform->UpdatePosition(Vector3(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, PLAYER_LAYER));
-	}
-	else transform->UpdatePosition(Vector3(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, MOB_LAYER));
+	transform->UpdatePosition(Vector3(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, transform->position.z));
 }
 
 void GameObject::checkCollision(GameObject * tempObj)

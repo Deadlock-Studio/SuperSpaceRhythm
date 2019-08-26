@@ -12,6 +12,7 @@ public:
 	void Update(float deltaTime);
 
 	bool isClicked = false;
+	bool isHovered = false;
 	Texture* sprite = NULL;
 };
 

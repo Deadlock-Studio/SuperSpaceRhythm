@@ -22,6 +22,7 @@ Explosion::Explosion(Blueprint * blueprint, Vector3 pos, Vector3 scale, Vector3 
 	UpdateScale(scale.x, scale.y, scale.z);
 
 	explosionTick = 35;
+	damage = 5;
 	Init();
 }
 
@@ -39,21 +40,9 @@ void Explosion::Init()
 	//type of body
 	filter.categoryBits = EXPLOSION;
 	//collide with what
-	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | CRATE | BOSS | MOB | MOB_RED | MOB_BLUE | ITEM | BOMB | MINE;
-	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
-
-}
-
-void Explosion::InitDestroyed()
-{
-	b2Filter filter = GetComponent<Collision2D>()->body->GetFixtureList()->GetFilterData();
-	//type of body
-	filter.categoryBits = EXPLOSION;
-	//collide with what
-	filter.maskBits = 0;
+	filter.maskBits = PLAYER | BULLET_BLUE | BULLET_RED | CRATE | BOSS | MOB | MOB_RED | MOB_BLUE | ITEM | BOMB | MINE | SHIELD;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 }
-
 
 
 void Explosion::AddComponent(Component * comp)
@@ -80,14 +69,20 @@ void Explosion::Idle()
 {
 	PlayAnimation(0);
 	explosionTick--;
+
+	if (exploded)
+		GetComponent<Collision2D>()->body->GetFixtureList()->SetSensor(true);
+
 	if (explosionTick == 0) {
 		SetState(&Explosion::Destroyed);
 	}
+
+	exploded = true;
 }
 
 void Explosion::Destroyed()
 {
-	SceneManager::GetInstance()->addToRemovalList(this);
+	GameManager::GetInstance()->addToRemovalList(this);
 }
 
 void Explosion::Update(float deltaTime)
@@ -95,35 +90,34 @@ void Explosion::Update(float deltaTime)
 	if (activeState != NULL)
 		(this->*activeState)();
 
-	b2Vec2 bodyPos = GetComponent<Collision2D>()->body->GetPosition();
-	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, 1);
-
-
 	GameObject::Update(deltaTime);
 }
 
 void Explosion::checkCollision(GameObject * tempObj)
 {
-	if (strcmp(tempObj->name, "crate") == 0) {
+	if (strcmp(tempObj->name, "crate") == 0)
 		((Crate*)tempObj)->SetState(&Crate::Exploding);
-	}
-	if (strcmp(tempObj->name, "tnt") == 0) {
+	if (strcmp(tempObj->name, "tnt") == 0)
 		((TNT*)tempObj)->SetState(&TNT::Exploding);
-	}
-	if (strcmp(tempObj->name, "health_potion") == 0) {
-		SceneManager::GetInstance()->addToRemovalList(tempObj);
-	}
-	if (strcmp(tempObj->name, "mob_blue") == 0
-		|| strcmp(tempObj->name, "mob_red") == 0
-		|| strcmp(tempObj->name, "mob_white") == 0
-		|| strcmp(tempObj->name, "mob_shoot") == 0
-		|| strcmp(tempObj->name, "mob_explode") == 0){
-		SceneManager::GetInstance()->addToRemovalList(tempObj);
-	}
-	if (strcmp(tempObj->name, "mine") == 0) {
-		((Mine*)tempObj)->SetState(&Mine::Exploding);
-	}
-	if (strcmp(tempObj->name, "bomb") == 0) {
+	if (strcmp(tempObj->name, "health_potion") == 0)
+		GameManager::GetInstance()->addToRemovalList(tempObj);
+	if (strcmp(tempObj->name, "mine") == 0)
+		((Mine*)tempObj)->SetState(&Mine::Destroying);
+	if (strcmp(tempObj->name, "bomb") == 0)
 		((Bomb*)tempObj)->SetState(&Bomb::Exploding);
-	}
+
+	if ((strcmp(tempObj->name, "mob_red") == 0
+		|| strcmp(tempObj->name, "mob_blue") == 0
+		|| strcmp(tempObj->name, "mob_white") == 0
+		|| strcmp(tempObj->name, "mob_explode") == 0
+		|| strcmp(tempObj->name, "mob_explode_bullet") == 0
+		|| strcmp(tempObj->name, "mob_dino") == 0
+		|| strcmp(tempObj->name, "mob_wiz") == 0
+		|| strcmp(tempObj->name, "mob_knight") == 0
+		|| strcmp(tempObj->name, "mob_necro") == 0
+		|| strcmp(tempObj->name, "mob_mask") == 0
+		|| strcmp(tempObj->name, "boss") == 0))
+		{
+			tempObj->GetComponent<HP>()->Damage(damage);
+		}
 }

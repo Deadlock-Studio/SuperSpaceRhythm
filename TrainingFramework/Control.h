@@ -1,5 +1,6 @@
 #pragma once
 #include "InputManager.h"
+#define SPD_BOOST_TIME 120
 
 class Control :
 	public Component
@@ -21,6 +22,7 @@ public:
 	Vector2 dashVec;
 	b2Vec2 colVec;
 	bool disableControl = FALSE;
+	int spdBoostCounter = 0;
 
 	bool isDashing = FALSE;
 	bool isColliding = FALSE;

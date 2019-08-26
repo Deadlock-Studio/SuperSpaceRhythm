@@ -73,8 +73,7 @@ void HealthPotion::Update(float deltaTime)
 	if (activeState != NULL)
 		(this->*activeState)();
 	
-	b2Vec2 bodyPos = GetComponent<Collision2D>()->body->GetPosition();
-	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, 1);
+
 	AddToPosition(0.0f, 0.0f);
 
 	GameObject::Update(deltaTime);
@@ -83,10 +82,10 @@ void HealthPotion::Update(float deltaTime)
 void HealthPotion::checkCollision(GameObject * tempObj)
 {
 	if (strcmp(tempObj->name, "player") == 0) {
-		SceneManager::GetInstance()->addToRemovalList(this);
+		GameManager::GetInstance()->addToRemovalList(this);
 	}
 	if (strcmp(tempObj->name, "explosion") == 0) {
-		SceneManager::GetInstance()->addToRemovalList(this);
+		GameManager::GetInstance()->addToRemovalList(this);
 	}
 }
 

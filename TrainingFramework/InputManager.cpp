@@ -14,7 +14,7 @@ void InputManager::LoadDefault()
 	keyBind.insert({ 'A', MoveLeft });
 	keyBind.insert({ 'D', MoveRight });
 	keyBind.insert({ 'E', BeatIt });
-	keyBind.insert({ 'F', Reform });
+	keyBind.insert({ 'F', VoidShell });
 	keyBind.insert({ ' ', Dash });
 	keyBind.insert({ 'B', DebugMode });
 }
@@ -42,6 +42,17 @@ void InputManager::MouseDown(float x, float y)
 void InputManager::MouseUp(float x, float y)
 {
 	isMouseDown = false;
+}
+
+void InputManager::RightMouseDown(float x, float y)
+{
+	isRightMouseDown = TRUE;
+}
+
+void InputManager::RightMouseUp(float x, float y)
+{
+	isRightMouseDown = FALSE;
+
 }
 
 void InputManager::MousePosition(float x, float y)

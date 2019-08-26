@@ -14,7 +14,7 @@
     <ProjectGuid>{FC024EC8-32F4-4657-A2CB-14D2B3A931F8}</ProjectGuid>
     <RootNamespace>TrainingFramework</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -114,6 +114,7 @@
     <ClCompile Include="HealthPotion.cpp" />
     <ClCompile Include="HP.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Ladder.cpp" />
     <ClCompile Include="Mine.cpp" />
     <ClCompile Include="MobSlime.cpp" />
     <ClCompile Include="MobDino.cpp" />
@@ -125,12 +126,16 @@
     <ClCompile Include="MobWiz.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Perk.cpp" />
+    <ClCompile Include="PerkDetails.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PhysicManager.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Script.cpp" />
     <ClCompile Include="Shield.cpp" />
     <ClCompile Include="ShopKeeper.cpp" />
     <ClCompile Include="Smoke.cpp" />
@@ -175,6 +180,7 @@
     <ClInclude Include="HealthPotion.h" />
     <ClInclude Include="HP.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Ladder.h" />
     <ClInclude Include="Mine.h" />
     <ClInclude Include="MobSlime.h" />
     <ClInclude Include="MobDino.h" />
@@ -187,12 +193,16 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ObjectList.h" />
+    <ClInclude Include="Perk.h" />
+    <ClInclude Include="PerkDetails.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PhysicManager.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="PowerUp.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Script.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="Shield.h" />
     <ClInclude Include="ShopKeeper.h" />

@@ -1,0 +1,139 @@
+BLUEPRINT 1
+NAME: health_buff
+COMPONENT:
+SPRITE
+pixelsPerUnit: 24
+../Resources/Textures/buff_health.tga
+COLLISION
+body: 35, 35, 1, 0
+body_type: DYNAMIC
+POWER
+Health
+Fat heal
+BUTTON
+
+BLUEPRINT 3
+NAME: void_shell_buff
+COMPONENT:
+SPRITE
+pixelsPerUnit: 24
+../Resources/Textures/buff_void_shell.tga
+COLLISION
+body: 35, 35, 1, 0
+body_type: DYNAMIC
+POWER
+Void Shell
+Press F to destroy all bullets, use once
+BUTTON
+
+BLUEPRINT 2
+NAME: shield_buff
+COMPONENT:
+SPRITE
+pixelsPerUnit: 24
+../Resources/Textures/buff_shield.tga
+COLLISION
+body: 35, 35, 1, 0
+body_type: DYNAMIC
+POWER
+Shield
+Gives player 3 shields
+BUTTON
+
+BLUEPRINT 4
+NAME: magic_beat_buff
+COMPONENT:
+SPRITE
+pixelsPerUnit: 24
+../Resources/Textures/buff_magic_beat.tga
+COLLISION
+body: 35, 35, 1, 0
+body_type: DYNAMIC
+POWER
+Magic Beat
+10% chance MISS to PERFECT
+BUTTON
+
+BLUEPRINT 5
+NAME: side_gun_buff
+COMPONENT:
+SPRITE
+pixelsPerUnit: 24
+../Resources/Textures/buff_side_gun.tga
+COLLISION
+body: 35, 35, 1, 0
+body_type: DYNAMIC
+POWER
+Side Gun
+10% chance to dash shoot                                                                                                                                        
+BUTTON
+
+BLUEPRINT 6
+NAME: enhanced_muzzle_buff
+COMPONENT:
+SPRITE
+pixelsPerUnit: 24
+../Resources/Textures/buff_enhanced_muzzle.tga
+COLLISION
+body: 35, 35, 1, 0
+body_type: DYNAMIC
+POWER
+Enhanced Muzzle
+5% chance to shoot a high speed bullet    
+BUTTON
+
+BLUEPRINT 7
+NAME: blade_mail_buff
+COMPONENT:
+SPRITE
+pixelsPerUnit: 24
+../Resources/Textures/buff_blade_mail.tga
+COLLISION
+body: 35, 35, 1, 0
+body_type: DYNAMIC
+POWER
+Blade Mail
+40% chance to shoot a bullet ring when getting hit
+BUTTON
+
+BLUEPRINT 8
+NAME: invincible_cloak_buff
+COMPONENT:
+SPRITE
+pixelsPerUnit: 24
+../Resources/Textures/buff_evasion_cloak.tga
+COLLISION
+body: 35, 35, 1, 0
+body_type: DYNAMIC
+POWER
+Invincible Cloak
+50% dodge chance
+BUTTON
+
+BLUEPRINT 9
+NAME: swift_slipper_buff
+COMPONENT:
+SPRITE
+pixelsPerUnit: 24
+../Resources/Textures/buff_swift_slipper.tga
+COLLISION
+body: 35, 35, 1, 0
+body_type: DYNAMIC
+POWER
+Swift Slipper
+Speed boost when killing an enemy
+BUTTON
+
+BLUEPRINT 10
+NAME: enhanced_shell_buff
+COMPONENT:
+SPRITE
+pixelsPerUnit: 24
+../Resources/Textures/buff_enhanced_shell.tga
+COLLISION
+body: 35, 35, 1, 0
+body_type: DYNAMIC
+POWER
+Enhanced Shell
+5% critical chance
+BUTTON

@@ -56,6 +56,27 @@ LRESULT WINAPI ESWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			esContext->mouseDownFunc(esContext, (int)point.x, (int)point.y);
 	}
 	break;
+	case WM_RBUTTONDOWN:
+	{
+		POINTS      point;
+		ESContext *esContext = (ESContext*)(LONG_PTR)GetWindowLongPtr(hWnd, GWL_USERDATA);
+
+		point = MAKEPOINTS(lParam);
+		if (esContext && esContext->RightMouseDownFunc)
+			esContext->RightMouseDownFunc(esContext, (int)point.x, (int)point.y);
+	}
+	break;
+	case WM_RBUTTONUP:
+	{
+		POINTS     point;
+		ESContext *esContext = (ESContext*)(LONG_PTR)GetWindowLongPtr(hWnd, GWL_USERDATA);
+
+		point = MAKEPOINTS(lParam);
+
+		if (esContext && esContext->RightMouseUpFunc)
+			esContext->RightMouseUpFunc(esContext, (int)point.x, (int)point.y);
+	}
+	break;
 	case WM_MOUSEMOVE:
 		{
 			POINTS      point;
@@ -190,7 +211,6 @@ void WinLoop(ESContext *esContext)
 
 		//FPS Counter
 		if (timer > 1000.f){
-			printf("fps: %d\n", frame);
 			timer = 0;
 			frame = 0;
 		}

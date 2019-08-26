@@ -10,7 +10,6 @@
 #include <algorithm>
 
 SoundManager * SoundManager::ms_pInstance = NULL;
-//ofstream fout("SongPos.txt");
 int sp = 0;
 bool del = FALSE;
 
@@ -49,6 +48,7 @@ void SoundManager::DeleteAll() {
 void SoundManager::Init() {
 	int tracknum, sfxnum, beatnum;
 	float time;
+	musicVolume = 20;
 	FILE* f = fopen("../Resources/Sound/Sound.txt", "r");
 	if (f == nullptr)
 	{
@@ -136,12 +136,14 @@ void SoundManager::safePop(std::deque<Beat*>* queue) {
 void SoundManager::SpawnBeatGUI()
 {
 	//render rhythm grid
-	yeet = SceneManager::GetInstance()->SpawnGUI(SceneManager::GetInstance()->GetBlueprintByName("yeet"), Vector3(Globals::screenWidth / 2, Globals::screenHeight / 6, GUI_LAYER), Vector3(1, 1, 1), Vector3());
-	bruh = SceneManager::GetInstance()->SpawnGUI(SceneManager::GetInstance()->GetBlueprintByName("bruh"), Vector3(Globals::screenWidth / 2, Globals::screenHeight / 6, GUI_LAYER), Vector3(1, 1, 1), Vector3());
-	meh = SceneManager::GetInstance()->SpawnGUI(SceneManager::GetInstance()->GetBlueprintByName("meh"), Vector3(Globals::screenWidth / 2, Globals::screenHeight / 6, GUI_LAYER), Vector3(1, 1, 1), Vector3());
-	yeet->GetComponent<SpriteRenderer>()->isActive = FALSE;
-	bruh->GetComponent<SpriteRenderer>()->isActive = FALSE;
-	meh->GetComponent<SpriteRenderer>()->isActive = FALSE;
+	perfect = SceneManager::GetInstance()->SpawnGUI(SceneManager::GetInstance()->GetBlueprintByName("perfect"), Vector3(Globals::screenWidth / 2, Globals::screenHeight / 6, GUI_LAYER), Vector3(1, 1, 1), Vector3());
+	miss = SceneManager::GetInstance()->SpawnGUI(SceneManager::GetInstance()->GetBlueprintByName("miss"), Vector3(Globals::screenWidth / 2, Globals::screenHeight / 6, GUI_LAYER), Vector3(1, 1, 1), Vector3());
+	good = SceneManager::GetInstance()->SpawnGUI(SceneManager::GetInstance()->GetBlueprintByName("good"), Vector3(Globals::screenWidth / 2, Globals::screenHeight / 6, GUI_LAYER), Vector3(1, 1, 1), Vector3());
+	goodPower = SceneManager::GetInstance()->SpawnGUI(SceneManager::GetInstance()->GetBlueprintByName("good_power"), Vector3(Globals::screenWidth / 2, Globals::screenHeight / 6, GUI_LAYER), Vector3(1, 1, 1), Vector3());
+	goodPower->GetComponent<SpriteRenderer>()->isActive = FALSE;
+	perfect->GetComponent<SpriteRenderer>()->isActive = FALSE;
+	miss->GetComponent<SpriteRenderer>()->isActive = FALSE;
+	good->GetComponent<SpriteRenderer>()->isActive = FALSE;
 	SceneManager::GetInstance()->SpawnGUI(SceneManager::GetInstance()->GetBlueprintByName("grid"), Vector3(Globals::screenWidth / 2, Globals::screenHeight / 15, GUI_LAYER), Vector3(10, 1, 1), Vector3());
 	SceneManager::GetInstance()->SpawnGUI(SceneManager::GetInstance()->GetBlueprintByName("ring"), Vector3(Globals::screenWidth / 2, Globals::screenHeight / 15, GUI_LAYER), Vector3(1, 1, 1), Vector3());
 };
@@ -174,9 +176,10 @@ bool SoundManager::CalibrateAudio() {
 		{
 			total += timing[i];
 		}
-		AudioOffset = (total / 20.0f) / 1000.0f;
+		AudioOffset = (total / 20.0f);
 		counter = 0;
 		cal = 0;
+		audioCalibrated = TRUE;
 		return TRUE;
 	}
 };
@@ -187,7 +190,7 @@ bool SoundManager::CalibrateVisual() {
 		counter++;
 		if (counter == 30)
 		{
-			calibration = new Beat(10, FALSE);
+			calibration = new Beat(12, FALSE);
 			play = GetTickCount();
 			counter = 0;
 			sp++;
@@ -224,247 +227,336 @@ bool SoundManager::CalibrateVisual() {
 			calibration->Delete();
 			delete calibration;
 		}
-		VisualOffset = (total / 20.0f) / 1000.0f;
+		VisualOffset = (total / 20.0f);
 		counter = 0;
 		cal = 0;
+		visualCalibrated = TRUE;
 		return TRUE;
 	}
 }
 
 int SoundManager::RhythmConductor(Track* track, float FrameTime) {
-	sf::Time temp;
-	signal = 0;
-	enemySignal = 0;
-	//initialization
-	if (track->music.getStatus() == sf::Sound::Stopped)
+
+	if (GameManager::GetInstance()->musicPlusPressed || GameManager::GetInstance()->musicMinusPressed)
 	{
-		for (int i = 0; i < track->beatnum; i++)
-		{
-			track->beatmap[i] = track->beatmap[i] + AudioOffset;
-		}
-		for (std::deque<Beat*>::iterator it = BeatList.begin(); it != BeatList.end(); ++it)
-		{
-			delete (*it);
-		}
-		yeet->GetComponent<SpriteRenderer>()->isActive = FALSE;
-		bruh->GetComponent<SpriteRenderer>()->isActive = FALSE;
-		meh->GetComponent<SpriteRenderer>()->isActive = FALSE;
-		BeatList.clear();
-		track->index = 0;
-		track->music.setVolume(20);
-		track->lastPos = 0;
-		track->songTime = 0;
-		track->beattime = track->beatmap[1] - track->beatmap[0];
-		track->distance = SPEED * track->beattime * 60;
-		beatonscreen = (int)std::ceil(Globals::X_percent(50) / track->distance);
-		InitPosX = beatonscreen * track->distance;
-		track->music.setLoop(false);
-		track->prevBeatTime = track->beatmap[0];
-		track->music.play();
-		float tm = track->music.getPlayingOffset().asSeconds();
-
-		while (!PositionComparision(tm, VisualOffset))
-		{
-			tm = track->music.getPlayingOffset().asSeconds();
-		}
-
-		for (int i = 1; i <= beatonscreen; i++)
-		{
-			Beat *temp;
-			if (i % 4 == 0)
-			{
-				temp = new Beat(InitPosX, track->beatmap[track->index], TRUE);
-			}
-			else
-				temp = new Beat(InitPosX, track->beatmap[track->index], FALSE);
-			BeatList.push_back(temp);
-			track->index++;
-		}
+		if (musicVolume <= 0) musicVolume = 0;
+		if (musicVolume >= 100) musicVolume = 100;
+		track->music.setVolume(musicVolume);
 	}
-
-	else {
-		float tm = track->music.getPlayingOffset().asSeconds();
-		time = GetTickCount();
-		track->songTime += 1.0f/FPS;
-
-		if (yeet->GetComponent<SpriteRenderer>()->isActive == TRUE || bruh->GetComponent<SpriteRenderer>()->isActive == TRUE ||
-			meh->GetComponent<SpriteRenderer>()->isActive == TRUE)
+	
+	if (startConductor)
+	{
+		sf::Time temp;
+		signal = 0;
+		enemySignal = 0;
+		//initialization
+		if (track->music.getStatus() == sf::Sound::Stopped)
 		{
-			counter++;
-			if (counter == 5) {
-				yeet->GetComponent<SpriteRenderer>()->isActive = FALSE;
-				bruh->GetComponent<SpriteRenderer>()->isActive = FALSE;
-				meh->GetComponent<SpriteRenderer>()->isActive = FALSE;
-				counter = 0;
+			for (int i = 0; i < track->beatnum; i++)
+			{
+				if (track->beatmap[i] != (track->beatmap[i] + (AudioOffset / 1000.0f)))
+				{
+					track->beatmap[i] = track->beatmap[i] + (AudioOffset / 1000.0f);
+				}
+			}
+			for (std::deque<Beat*>::iterator it = BeatList.begin(); it != BeatList.end(); ++it)
+			{
+				delete (*it);
+			}
+			perfect->GetComponent<SpriteRenderer>()->isActive = FALSE;
+			miss->GetComponent<SpriteRenderer>()->isActive = FALSE;
+			good->GetComponent<SpriteRenderer>()->isActive = FALSE;
+			goodPower->GetComponent<SpriteRenderer>()->isActive = FALSE;
+			BeatList.clear();
+			track->index = 0;
+			track->lastPos = 0;
+			track->songTime = 0;
+			track->beattime = track->beatmap[1] - track->beatmap[0];
+			track->distance = SPEED * track->beattime * 60;
+			beatonscreen = (int)std::ceil(Globals::X_percent(50) / track->distance);
+			InitPosX = beatonscreen * track->distance;
+			track->music.setLoop(false);
+			track->music.setVolume(musicVolume);
+			track->prevBeatTime = track->beatmap[0];
+			getTrack("level_half")->music.setLoop(false);
+			getTrack("level_half")->music.play();
+			if (GameManager::GetInstance()->player != NULL)
+			{
+				if (GameManager::GetInstance()->player->GetComponent<Control>()->isReforming)
+				{
+					getTrack("level_half")->music.setVolume(musicVolume);
+
+				}
+				else getTrack("level_half")->music.setVolume(0);
+			}
+			else getTrack("level_half")->music.setVolume(0);
+			track->music.play();
+			float tm = track->music.getPlayingOffset().asSeconds();
+
+			while (!PositionComparision(tm, (VisualOffset / 1000.0f)))
+			{
+				tm = track->music.getPlayingOffset().asSeconds();
+			}
+
+			for (int i = 1; i <= beatonscreen; i++)
+			{
+				Beat *temp;
+				if (i % 4 == 0)
+				{
+					temp = new Beat(InitPosX, track->index, track->beatmap[track->index], TRUE);
+				}
+				else
+					temp = new Beat(InitPosX, track->index, track->beatmap[track->index], FALSE);
+				BeatList.push_back(temp);
+				track->index++;
 			}
 		}
 
-		//check input
-		if (InputManager::GetInstance()->isMouseDown || InputManager::GetInstance()->ActionCheck(Dash) || InputManager::GetInstance()->ActionCheck(Reform))
-		{
-			float greatGateEarly, greatGateLate, okGateEarly, okGateLate, delGate;
-			if (!hit)
-			{
-				if (BeatList.size() > 0)
-				{
-					greatGateLate = track->prevBeatTime + GREAT_GATE * track->beattime;
-					okGateLate = track->prevBeatTime + OK_GATE * track->beattime;
+		else {
+			float tm = track->music.getPlayingOffset().asSeconds();
+			time = GetTickCount();
+			track->songTime += 1.0f / FPS;
 
-					if (BeatList.front()->checkActive())
+			if (perfect->GetComponent<SpriteRenderer>()->isActive == TRUE
+				|| miss->GetComponent<SpriteRenderer>()->isActive == TRUE
+				|| good->GetComponent<SpriteRenderer>()->isActive == TRUE
+				|| goodPower->GetComponent<SpriteRenderer>()->isActive == TRUE)
+			{
+				counter++;
+				if (counter == 5) {
+					perfect->GetComponent<SpriteRenderer>()->isActive = FALSE;
+					miss->GetComponent<SpriteRenderer>()->isActive = FALSE;
+					good->GetComponent<SpriteRenderer>()->isActive = FALSE;
+					goodPower->GetComponent<SpriteRenderer>()->isActive = FALSE;
+					counter = 0;
+				}
+			}
+
+			//check input
+			if (InputManager::GetInstance()->isMouseDown
+				|| InputManager::GetInstance()->ActionCheck(Dash)
+				|| InputManager::GetInstance()->isRightMouseDown
+				|| InputManager::GetInstance()->ActionCheck(VoidShell))
+			{
+				float greatGateEarly, greatGateLate, okGateEarly, okGateLate, delGate;
+				if (!hit)
+				{
+					if (BeatList.size() > 0)
 					{
-						greatGateEarly = BeatList.front()->beatPos - GREAT_GATE * track->beattime;
-						okGateEarly = BeatList.front()->beatPos - OK_GATE * track->beattime;
-						delGate = BeatList.front()->beatPos - DEL_GATE * track->beattime;
+						greatGateLate = track->prevBeatTime + GREAT_GATE * track->beattime;
+						okGateLate = track->prevBeatTime + OK_GATE * track->beattime;
+
+						if (BeatList.front()->checkActive())
+						{
+							greatGateEarly = BeatList.front()->beatPos - GREAT_GATE * track->beattime;
+							okGateEarly = BeatList.front()->beatPos - OK_GATE * track->beattime;
+							delGate = BeatList.front()->beatPos - DEL_GATE * track->beattime;
+						}
+						else {
+							greatGateEarly = BeatList.at(1)->beatPos - GREAT_GATE * track->beattime;
+							okGateEarly = BeatList.at(1)->beatPos - OK_GATE * track->beattime;
+							delGate = BeatList.at(1)->beatPos - DEL_GATE * track->beattime;
+						}
+
+						if (track->songTime >= okGateEarly && track->songTime <= greatGateEarly)
+						{
+							if (BeatList.front()->hidden == FALSE)
+							{
+								good->GetComponent<SpriteRenderer>()->isActive = TRUE;
+								if (BeatList.front()->halftime == TRUE && InputManager::GetInstance()->isRightMouseDown)
+								{
+									signal = 4;
+									halftime = !halftime;
+									if (halftime)
+									{
+										for (std::deque<Beat*>::iterator it = BeatList.begin(); it != BeatList.end(); ++it) {
+											if (((*it)->beatIndex - 7) % 4 != 0) (*it)->Hide();
+										}
+									}
+								}
+								else
+								{
+									signal = 2;
+								}
+							}
+						}
+						else if (track->songTime >= greatGateLate && track->songTime <= okGateLate)
+						{
+							if (track->prevBeatStat == FALSE)
+							{
+								good->GetComponent<SpriteRenderer>()->isActive = TRUE;
+								if (InputManager::GetInstance()->isRightMouseDown && track->prevStat == TRUE)
+								{
+									signal = 4;
+									halftime = !halftime;
+									if (halftime)
+									{
+										for (std::deque<Beat*>::iterator it = BeatList.begin(); it != BeatList.end(); ++it) {
+											if (((*it)->beatIndex - 7) % 4 != 0) (*it)->Hide();
+										}
+									}
+								}
+								else
+								{
+									signal = 2;
+								}
+							}
+						}
+						else if (track->songTime > greatGateEarly)
+						{
+							if (BeatList.front()->hidden == FALSE)
+							{
+								perfect->GetComponent<SpriteRenderer>()->isActive = TRUE;
+								if (BeatList.front()->halftime == TRUE && InputManager::GetInstance()->isRightMouseDown)
+								{
+									signal = 4;
+									halftime = !halftime;
+									if (halftime)
+									{
+										for (std::deque<Beat*>::iterator it = BeatList.begin(); it != BeatList.end(); ++it) {
+											if (((*it)->beatIndex - 7) % 4 != 0) (*it)->Hide();
+										}
+									}
+								}
+								else
+								{
+									signal = 3;
+								}
+							}
+						}
+						else if (track->songTime < greatGateLate)
+						{
+							if (track->prevBeatStat == FALSE)
+							{
+								perfect->GetComponent<SpriteRenderer>()->isActive = TRUE;
+								if (InputManager::GetInstance()->isRightMouseDown && track->prevStat == TRUE)
+								{
+									signal = 4;
+									halftime = !halftime;
+									if (halftime)
+									{
+										for (std::deque<Beat*>::iterator it = BeatList.begin(); it != BeatList.end(); ++it) {
+											if (((*it)->beatIndex - 7) % 4 != 0) (*it)->Hide();
+										}
+									}
+								}
+								else
+								{
+									signal = 3;
+								}
+							}
+						}
+						else
+						{
+							if (track->prevBeatStat == FALSE || BeatList.front()->hidden == FALSE)
+							{
+								if (GameManager::GetInstance()->player != nullptr
+									&& Globals::chance(((Player*)(GameManager::GetInstance()->player))->MagicBeatChance))
+								{
+									goodPower->GetComponent<SpriteRenderer>()->isActive = TRUE;
+									signal = 2;
+								}
+								else
+								{
+									miss->GetComponent<SpriteRenderer>()->isActive = TRUE;
+									signal = 1;
+								}
+							}
+						}
+
+						if (track->songTime >= delGate)
+						{
+							BeatList.front()->Hide();
+						}
+						hit = TRUE;
+					}
+				}
+			}
+			else hit = FALSE;
+
+			//beat check
+			if (BeatList.size() != 0)
+			{
+				if (PositionComparision(track->songTime, BeatList.front()->beatPos))
+				{
+					enemySignal = 1;
+					if (halftime)
+					{
+						if ((track->index - 7) % 4 == 0)
+						{
+							enemySignal = 2;
+						}
 					}
 					else {
-						greatGateEarly = BeatList.at(1)->beatPos - GREAT_GATE * track->beattime;
-						okGateEarly = BeatList.at(1)->beatPos - OK_GATE * track->beattime;
-						delGate = BeatList.at(1)->beatPos - DEL_GATE * track->beattime;
+						if (BeatList.front()->halftime == TRUE)
+						{
+							enemySignal = 2;
+						}
 					}
+					track->prevBeatTime = BeatList.front()->beatPos;
+					track->prevStat = BeatList.front()->halftime;
+					track->prevBeatStat = BeatList.front()->hidden;
+					safePop(&BeatList);
+					if (track->index <= track->beatnum)
+					{
+						Beat *tmp;
 
-					if (track->songTime >= okGateEarly && track->songTime <= greatGateEarly)
-					{
-						if (BeatList.front()->hidden == FALSE)
+						if (halftime == FALSE)
 						{
-							if (BeatList.front()->halftime == TRUE && InputManager::GetInstance()->ActionCheck(Reform))
+							if ((track->index - 7) % 4 == 0)
 							{
-								signal = 4;
-								halftime = !halftime;
+								tmp = new Beat(InitPosX, track->index, track->beatmap[track->index], TRUE);
 							}
 							else
-							{
-								meh->GetComponent<SpriteRenderer>()->isActive = TRUE;
-								signal = 2;
-							}
-						}
-					}
-					else if (track->songTime >= greatGateLate && track->songTime <= okGateLate)
-					{
-						if (track->prevBeatStat == FALSE)
-						{
-							if (InputManager::GetInstance()->ActionCheck(Reform) && track->prevStat == TRUE)
-							{
-								signal = 4;
-								halftime = !halftime;
-							}
-							else
-							{
-								meh->GetComponent<SpriteRenderer>()->isActive = TRUE;
-								signal = 2;
-							}
-						}
-					}
-					else if (track->songTime > greatGateEarly)
-					{
-						if (BeatList.front()->hidden == FALSE)
-						{
-							if (BeatList.front()->halftime == TRUE && InputManager::GetInstance()->ActionCheck(Reform))
-							{
-								signal = 4;
-								halftime = !halftime;
-							}
-							else
-							{
-								yeet->GetComponent<SpriteRenderer>()->isActive = TRUE;
-								signal = 3;
-							}
-						}
-					}
-					else if (track->songTime < greatGateLate)
-					{
-						if (track->prevBeatStat == FALSE)
-						{
-							if (InputManager::GetInstance()->ActionCheck(Reform) && track->prevStat == TRUE)
-							{
-								signal = 4;
-								halftime = !halftime;
-							}
-							else
-							{
-								yeet->GetComponent<SpriteRenderer>()->isActive = TRUE;
-								signal = 3;
-							}
-						}
-					}
-					else
-					{
-						if (track->prevBeatStat == FALSE || BeatList.front()->hidden == FALSE)
-						{
-							bruh->GetComponent<SpriteRenderer>()->isActive = TRUE;
-							signal = 1;
-						}
-					}
-
-					if (track->songTime >= delGate)
-					{
-						BeatList.front()->Hide();
-					}
-					hit = TRUE;
-				}
-			}
-		}
-		else hit = FALSE;
-
-		//beat check
-		if (BeatList.size() != 0)
-		{
-			if (PositionComparision(track->songTime, BeatList.front()->beatPos))
-			{
-				enemySignal = 1;
-				if (BeatList.front()->halftime == TRUE)
-				{
-					enemySignal = 2;
-				}
-				track->prevBeatTime = BeatList.front()->beatPos;
-				track->prevStat = BeatList.front()->halftime;
-				track->prevBeatStat = BeatList.front()->hidden;
-				safePop(&BeatList);
-				if (track->index <= track->beatnum)
-				{
-					Beat *tmp;
-
-					if (halftime == FALSE)
-					{
-						if ((track->index - 7) % 4 == 0)
-						{
-							tmp = new Beat(InitPosX, track->beatmap[track->index], TRUE);
-						}
-						else
-							tmp = new Beat(InitPosX, track->beatmap[track->index], FALSE);
-					}
-					else
-					{
-						if ((track->index - 7) % 4 == 0)
-						{
-							if (halftimeCounter == 3)
-							{
-								tmp = new Beat(InitPosX, track->beatmap[track->index], TRUE);
-								halftimeCounter = 0;
-							}
-							else
-							{
-								tmp = new Beat(InitPosX, track->beatmap[track->index], FALSE);
-								halftimeCounter++;
-							}
+								tmp = new Beat(InitPosX, track->index, track->beatmap[track->index], FALSE);
 						}
 						else
 						{
-							tmp = new Beat(InitPosX, track->beatmap[track->index], FALSE);
-							tmp->Hide();
+							if ((track->index - 7) % 4 == 0)
+							{
+								if (halftimeCounter == 3)
+								{
+									tmp = new Beat(InitPosX, track->index, track->beatmap[track->index], TRUE);
+									halftimeCounter = 0;
+								}
+								else
+								{
+									tmp = new Beat(InitPosX, track->index, track->beatmap[track->index], FALSE);
+									halftimeCounter++;
+								}
+							}
+							else
+							{
+								tmp = new Beat(InitPosX, track->index, track->beatmap[track->index], FALSE);
+								tmp->Hide();
+							}
 						}
-					}
 
-					BeatList.push_back(tmp);
-					track->index++;
+						BeatList.push_back(tmp);
+						track->index++;
+					}
+				}
+
+				//move
+				for (size_t i = 0; i < BeatList.size(); i++)
+				{
+					BeatList[i]->Move(track->songTime);
 				}
 			}
-
-			//move
-			for (size_t i = 0; i < BeatList.size(); i++)
-			{
-				BeatList[i]->Move(track->songTime);
-			}
 		}
+		return signal;
 	}
-	return signal;
+	else {
+		track->music.stop();
+		getTrack("level_half")->music.stop();
+		goodPower->GetComponent<SpriteRenderer>()->isActive = FALSE;
+		perfect->GetComponent<SpriteRenderer>()->isActive = FALSE;
+		miss->GetComponent<SpriteRenderer>()->isActive = FALSE;
+		good->GetComponent<SpriteRenderer>()->isActive = FALSE;
+		while (BeatList.size() !=  0)
+		{
+			safePop(&BeatList);
+		}
+		return 0;
+	}
 }

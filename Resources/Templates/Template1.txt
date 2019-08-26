@@ -8,6 +8,8 @@ ROTSPEED: 3.14
 BLUEPRINT 0
 NAME: player
 COMPONENT:
+HP
+health: 10
 ANIMATION
 pixelsPerUnit: 10
 anim: 0, 736, 32, 32, 1
@@ -334,30 +336,6 @@ body: 50, 100, 50, 0
 body_type: DYNAMIC
 
 BLUEPRINT 0
-NAME: boss
-COMPONENT:
-ANIMATION
-pixelsPerUnit: 18
-anim: 0, 196, 66, 98, 3
-anim_spd: 20
-../Resources/Textures/boss_ghost.tga
-ANIMATION
-pixelsPerUnit: 18
-anim: 0, 98, 66, 98, 3
-anim_spd: 20
-../Resources/Textures/boss_ghost.tga
-ANIMATION
-pixelsPerUnit: 18
-anim: 0, 0, 66, 98, 3
-anim_spd: 20
-../Resources/Textures/boss_ghost.tga
-COLLISION
-body: 142, 210, 1000, 0
-body_type: DYNAMIC
-HP
-health: 1000
-
-BLUEPRINT 0
 NAME: shop_keeper
 COMPONENT:
 ANIMATION
@@ -366,8 +344,8 @@ anim: 0, 0, 32, 32, 4
 anim_spd: 10
 ../Resources/Textures/shop_keeper.tga
 COLLISION
-body: 60, 100, 50, 0
-body_type: DYNAMIC
+body: 60, 100, 0, 0
+body_type: STATIC
 
 
 BLUEPRINT 0
@@ -401,7 +379,7 @@ anim: 0, 0, 16, 16, 1
 anim_spd: 10
 ../Resources/Textures/trap.tga
 COLLISION
-body: 80, 80, 1, 0
+body: 80, 80, 10, 0
 body_type: STATIC
 
 BLUEPRINT 0
@@ -438,12 +416,6 @@ COLLISION
 body: 45, 45, 10000, 0
 body_type: DYNAMIC
 
-BLUEPRINT 1
-NAME: demo_room
-COMPONENT:
-SPRITE
-pixelsPerUnit: 24
-../Resources/Textures/demo_room.tga
 
 BLUEPRINT 0
 NAME: bullet
@@ -463,6 +435,16 @@ pixelsPerUnit: 44
 anim: 0, 0, 22, 22, 1
 anim_spd: 10
 ../Resources/Textures/eBullet.tga
+ANIMATION
+pixelsPerUnit: 24
+anim: 0, 0, 12, 12, 1
+anim_spd: 10
+../Resources/Textures/pBulletRed_crit.tga
+ANIMATION
+pixelsPerUnit: 24
+anim: 0, 0, 12, 12, 1
+anim_spd: 10
+../Resources/Textures/pBulletBlue_crit.tga
 COLLISION
 body: 20, 20, 0, 0
 body_type: DYNAMIC
@@ -498,7 +480,7 @@ anim: 256, 0, 64, 64, 1
 anim_spd: 10
 ../Resources/Textures/crate.tga
 COLLISION
-body: 68, 78, 100, 0
+body: 68, 78, 1000, 0
 body_type: DYNAMIC
 
 BLUEPRINT 0
@@ -511,16 +493,11 @@ anim_spd: 10
 ../Resources/Textures/tnt.tga
 ANIMATION
 pixelsPerUnit: 50
-anim: 320, 0, 320, 320, 3
-anim_spd: 10
-../Resources/Textures/tnt.tga
-ANIMATION
-pixelsPerUnit: 50
-anim: 256, 0, 320, 320, 1
-anim_spd: 10
+anim: 0, 0, 320, 320, 2
+anim_spd: 5
 ../Resources/Textures/tnt.tga
 COLLISION
-body: 68, 78, 100, 0
+body: 68, 78, 1000, 0
 body_type: DYNAMIC
 
 BLUEPRINT 0
@@ -549,3 +526,25 @@ pixelsPerUnit: 40
 anim: 0, 0, 20, 20, 3
 anim_spd: 5
 ../Resources/Textures/bullet_die.tga
+
+BLUEPRINT 0
+NAME: ladder
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 8
+anim: 0, 0, 16, 16, 1
+anim_spd: 5
+../Resources/Textures/ladder.tga
+COLLISION
+body: 80, 80, 100, 0
+body_type: STATIC
+
+BLUEPRINT 0
+NAME: bg
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 9
+anim: 0, 0, 480, 279, 8
+anim_spd: 10
+../Resources/Textures/background.tga
+

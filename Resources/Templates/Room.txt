@@ -1,0 +1,285 @@
+SCRIPT 0
+NAME: all_spawn
+0 tnt tnt -1
+0 trap trap -1
+0 crate crate -1
+0 mob mob_white 4
+0 mob mob_red 4
+0 mob mob_blue 4
+0 mobExplode mob_explode 4
+0 mobExplodeBullet mob_explode_bullet 4
+0 mobKnight mob_knight 4
+0 mobNecro mob_necro 4
+0 mobShoot mob_shoot 4
+0 mobWiz mob_wiz 4
+0 mobDino mob_dino 4
+0 boss boss 4
+
+BLUEPRINT 1
+NAME: room_1
+COMPONENT:
+SPRITE
+pixelsPerUnit: 15
+../Resources/Textures/room1.tga
+
+SCRIPT 1
+NAME: room_1
+0 tnt tnt -1
+0 tnt tnt -1
+0 crate crate -1
+0 crate crate -1
+0 crate crate -1
+0 crate crate -1
+0 crate crate -1
+3 mob mob_white 4
+6 mob mob_white 4
+6 mob mob_white 4
+7 mobExplode mob_explode 4
+9 mob mob_white 4
+9 mob mob_white 4
+9 mobExplodeBullet mob_explode_bullet 4
+11 mobKnight mob_knight 4
+
+BLUEPRINT 1
+NAME: room_2
+COMPONENT:
+SPRITE
+pixelsPerUnit: 15
+../Resources/Textures/room2.tga
+
+SCRIPT 1
+NAME: room_2
+0 tnt tnt -1
+0 crate crate -1
+0 crate crate -1
+0 crate crate -1
+0 crate crate -1
+0 crate crate -1
+3 mobExplode mob_explode 4
+3 mobExplodeBullet mob_explode_bullet 4
+3 mobExplode mob_explode 4
+4 mobShoot mob_shoot 4
+4 mobShoot mob_shoot 4
+4 mobShoot mob_shoot 4
+6 mobWiz mob_wiz 4
+6 mobWiz mob_wiz 4
+6 mobDino mob_dino 4
+
+BLUEPRINT 1
+NAME: room_3
+COMPONENT:
+SPRITE
+pixelsPerUnit: 15
+../Resources/Textures/room3.tga
+
+SCRIPT 1
+NAME: room_3
+0 tnt tnt -1
+0 tnt tnt -1
+0 tnt tnt -1
+0 tnt tnt -1
+0 tnt tnt -1
+0 tnt tnt -1
+0 tnt tnt -1
+3 mobDino mob_dino 4
+3 mobDino mob_dino 4
+3 mobDino mob_dino 4
+6 mobDino mob_dino 4
+6 mobDino mob_dino 4
+8 mobDino mob_dino 4
+
+BLUEPRINT 1
+NAME: room_4
+COMPONENT:
+SPRITE
+pixelsPerUnit: 15
+../Resources/Textures/room4.tga
+
+SCRIPT 1
+NAME: room_4
+0 crate crate -1
+0 tnt tnt -1
+0 crate crate -1
+0 tnt tnt -1
+0 crate crate -1
+0 tnt tnt -1
+0 crate crate -1
+0 tnt tnt -1
+3 mobExplodeBullet mob_explode_bullet 4
+4 mobExplodeBullet mob_explode_bullet 4
+5 mobExplodeBullet mob_explode_bullet 4
+9 crate crate -1
+9 tnt tnt -1
+9 crate crate -1
+9 tnt tnt -1
+9 crate crate -1
+9 tnt tnt -1
+9 crate crate -1
+9 tnt tnt -1
+12 mobExplodeBullet mob_explode_bullet 4
+13 mobExplodeBullet mob_explode_bullet 4
+14 mobExplodeBullet mob_explode_bullet 4
+
+BLUEPRINT 1
+NAME: room_5
+COMPONENT:
+SPRITE
+pixelsPerUnit: 15
+../Resources/Textures/room5.tga
+
+SCRIPT 1
+NAME: room_5
+0 trap trap -1
+0 crate crate -1
+0 trap trap -1
+0 crate crate -1
+0 trap trap -1
+0 crate crate -1
+0 trap trap -1
+0 crate crate -1
+3 mobWiz mob_wiz 4
+4 mobWiz mob_wiz 4
+5 mobWiz mob_wiz 4
+8 mobWiz mob_wiz 4
+8 mobWiz mob_wiz 4
+9 mobKnight mob_knight 4
+
+BLUEPRINT 1
+NAME: room_6
+COMPONENT:
+SPRITE
+pixelsPerUnit: 15
+../Resources/Textures/room6.tga
+
+SCRIPT 1
+NAME: room_6
+0 crate crate -1
+1 crate crate -1
+2 crate crate -1
+3 crate crate -1
+3 mobShoot mob_shoot 4
+3 mobShoot mob_shoot 4
+4 crate crate -1
+5 crate crate -1
+6 crate crate -1
+7 crate crate -1
+8 crate crate -1
+9 crate crate -1
+9 mobWiz mob_wiz 4
+9 mobWiz mob_wiz 4
+10 crate crate -1
+11 crate crate -1
+12 crate crate -1
+13 crate crate -1
+14 crate crate -1
+15 crate crate -1
+16 crate crate -1
+17 crate crate -1
+17 mobNecro mob_necro 4
+17 mobNecro mob_necro 4
+18 crate crate -1
+19 crate crate -1
+20 crate crate -1
+
+BLUEPRINT 1
+NAME: room_7
+COMPONENT:
+SPRITE
+pixelsPerUnit: 15
+../Resources/Textures/room7.tga
+
+SCRIPT 1
+NAME: room_7
+0 trap trap -1
+0 crate crate -1
+0 trap trap -1
+0 crate crate -1
+0 trap trap -1
+0 crate crate -1
+0 trap trap -1
+0 crate crate -1
+0 trap trap -1
+0 crate crate -1
+3 mob mob_white 4
+3 mob mob_white 4
+3 mob mob_white 4
+3 mobKnight mob_knight 4
+7 tnt tnt -1
+7 tnt tnt -1
+7 tnt tnt -1
+7 tnt tnt -1
+8 mobKnight mob_knight 4
+8 mobKnight mob_knight 4
+8 mobKnight mob_knight 4
+11 tnt tnt -1
+11 tnt tnt -1
+11 tnt tnt -1
+11 tnt tnt -1
+
+BLUEPRINT 1
+NAME: room_8
+COMPONENT:
+SPRITE
+pixelsPerUnit: 15
+../Resources/Textures/room9.tga
+
+SCRIPT 1
+NAME: room_8
+0 crate crate -1
+0 crate crate -1
+0 crate crate -1
+0 crate crate -1
+0 crate crate -1
+0 crate crate -1
+3 mobNecro mob_necro 4
+4 mobKnight mob_knight 4
+7 mobKnight mob_knight 4
+10 mobKnight mob_knight 4
+13 mobKnight mob_knight 4
+16 mobKnight mob_knight 4
+
+BLUEPRINT 1
+NAME: room_9
+COMPONENT:
+SPRITE
+pixelsPerUnit: 15
+../Resources/Textures/room10.tga
+
+SCRIPT 1
+NAME: room_9
+0 tnt tnt -1
+0 trap trap -1
+0 crate crate -1
+0 tnt tnt -1
+0 trap trap -1
+0 crate crate -1
+3 mob mob_white 4
+5 mobExplode mob_explode 4
+7 mobExplodeBullet mob_explode_bullet 4
+9 mobKnight mob_knight 4
+11 mobNecro mob_necro 4
+13 mobShoot mob_shoot 4
+15 mobWiz mob_wiz 4
+17 mobDino mob_dino 4
+
+BLUEPRINT 1
+NAME: boss_room
+COMPONENT:
+SPRITE
+pixelsPerUnit: 15
+../Resources/Textures/room8.tga
+
+SCRIPT 1
+NAME: boss_room
+0 trap trap -1
+0 trap trap -1
+0 crate crate -1
+0 crate crate -1
+0 crate crate -1
+0 crate crate -1
+0 crate crate -1
+0 crate crate -1
+0 crate crate -1
+0 crate crate -1
+5 boss boss 4
+

@@ -3,12 +3,14 @@
 #include "Camera.h"
 #include "Collision2D.h"
 #include "Blueprint.h"
+#include "PowerUp.h"
 #include "GameObject.h"
 #include "SpriteRenderer.h"
 #include "Animation.h"
 #include "GUI.h"
 #include "Font.h"
 #include "HP.h"
+#include "Script.h"
 #include <list>
 using namespace std;
 
@@ -53,6 +55,7 @@ public:
 	SpriteRenderer * GetSprite(ifstream & file);
 	Animation * GetAnim(ifstream & file);
 	Collision2D * GetCollision(ifstream & file);
+	PowerUp * GetPowerUp(ifstream & file);
 	HP * GetHP(ifstream & file);
 
 	/*
@@ -75,9 +78,10 @@ public:
 	GameObject* SpawnObject(Blueprint* blueprint, Vector3 pos, Vector3 scale, Vector3 rotation);
 	GUI* SpawnGUI(Blueprint* blueprint, Vector3 pos, Vector3 scale, Vector3 rotation);
 	GameObject* SpawnBullet(float x, float y, float mX, float mY, char * type);
+	GameObject * SpawnBomb(float x, float y, float mX, float mY);
 	Blueprint* GetBlueprintByName(char* name);
 	GameObject* GetObjectByName(char* name);
-	
+	Script* GetScriptByName(char* name);
 
 protected:
 	static SceneManager * ms_pInstance;
@@ -85,10 +89,11 @@ protected:
 public:
 	Shaders * shaders;
 	Shaders * fontShaders;
-	vector<Blueprint *> blueprintList;
+	list<Blueprint *> blueprintList;
 	list<GameObject*> objectList;
-	list<GameObject*> removalList;
 	vector<Camera *> cameraList;
+	vector<Script*> scriptList;
+	list<GameObject*> removalList;
 	Camera * usedCamera = NULL;
 	char * sceneName;
 };

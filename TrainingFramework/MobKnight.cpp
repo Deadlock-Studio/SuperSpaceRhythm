@@ -37,7 +37,7 @@ void MobKnight::Init()
 	//type of body
 	filter.categoryBits = MOB;
 	//collide with what
-	filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE | WALL | EXPLOSION | BOSS | MOB | MOB_RED | MOB_BLUE | CRATE;
+	filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE | WALL | EXPLOSION | BOSS | MOB | MOB_RED | MOB_BLUE | CRATE | SHIELD;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 
 }
@@ -45,19 +45,20 @@ void MobKnight::Init()
 void MobKnight::ShieldUp()
 {
 	if (!isShieldUp) {
-		shield = (GameManager::GetInstance()->Spawn("shield",
+		shield = (GameManager::GetInstance()->SpawnToRoom("shield",
 			SceneManager::GetInstance()->GetBlueprintByName("shield"),
 			Vector3(transform->position.x, transform->position.y, MOB_LAYER),
 			Vector3(1, 1, 1),
 			Vector3()));
+		GetComponent<Collision2D>()->body->GetFixtureList()->SetSensor(TRUE);
 		isShieldUp = true;
 	}
 }
 
 void MobKnight::ShieldDown() {
-
 	isShieldUp = FALSE;
-	((Shield*)(shield))->SetState(&Shield::Destroyed);
+	GetComponent<Collision2D>()->body->GetFixtureList()->SetSensor(FALSE);
+	((Shield*)shield)->SetState(&Shield::Destroyed);
 }
 
 void MobKnight::AddComponent(Component* comp)
@@ -90,7 +91,7 @@ void MobKnight::CalculateVelocity()
 	y = transform->position.y;
 	distance = sqrt(pow((mX - x), 2) + pow((mY - y), 2));
 	float speed;
-	speed = 0.85f * MOVE_SPEED;
+	speed = 0.6f * MOVE_SPEED;
 	velX = ((mX - x) * speed / distance);
 	velY = ((mY - y) * speed / distance);
 }
@@ -101,6 +102,16 @@ void MobKnight::Idle()
 		PlayAnimation(0);
 	else
 		PlayAnimation(1);
+}
+
+void MobKnight::Delay()
+{
+	if (delay <= 50)
+	{
+		AddToPosition(0.0f, 0.0f);
+		delay++;
+	}
+	else delay = 0;
 }
 
 void MobKnight::Spawn()
@@ -115,23 +126,33 @@ void MobKnight::Spawn()
 
 void MobKnight::Death()
 {
+	if (isShieldUp)
+		((Shield*)shield)->SetState(&Shield::Destroyed);
+
 	GameManager::GetInstance()->Spawn("smoke",
 		SceneManager::GetInstance()->GetBlueprintByName("smoke"),
 		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
 		Vector3(1.0f, 1.0f, 1.0f),
 		Vector3());
-	SceneManager::GetInstance()->addToRemovalList(this);
+	GameManager::GetInstance()->addToRemovalList(this);
+	GameManager::GetInstance()->mobCount++;
 }
 
 void MobKnight::Update(float deltaTime)
 {
+	if (activeState != NULL)
+		(this->*activeState)();
 	//Transition
 	if (GetComponent<HP>()->dead) {
+		if (((Player*)(GameManager::GetInstance()->player))->SpeedBoost)
+		{
+			((Player*)(GameManager::GetInstance()->player))->speedIncrease = TRUE;
+		}
 		SetState(&MobKnight::Death);
 	}
 	else if (delay > 0)
 	{
-		SetState(&MobKnight::Stop);
+		SetState(&MobKnight::Delay);
 	}
 	else
 	{
@@ -154,48 +175,31 @@ void MobKnight::Update(float deltaTime)
 		}
 	}
 
-	if (activeState != NULL)
-		(this->*activeState)();
-
 	b2Vec2 bodyPos = GetComponent<Collision2D>()->body->GetPosition();
 	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, transform->position.z);
 
 	CalculateVelocity();
 
-	
 	GameObject::Update(deltaTime);
 }
 
-void MobKnight::Stop() {
-	//Transition
-	if (GetComponent<HP>()->dead) {
-		SetState(&MobKnight::Death);
-		return;
-	}
-	if (delay <= 50)
-	{
-		AddToPosition(0.0f, 0.0f);
-		delay++;
-	}
-	else delay = 0;
-}
 
 void MobKnight::checkCollision(GameObject* tempObj)
 {
-	if (strcmp(tempObj->name, "tnt") == 0) {
-		((TNT*)tempObj)->SetState(&TNT::Exploding);
-	}
 	if (strcmp(tempObj->name, "pBullet_red") == 0) {
 		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 	}
-	if (strcmp(tempObj->name, "pBullet_blue") == 0) {
+	if (strcmp(tempObj->name, "pBullet_blue") == 0
+		|| strcmp(tempObj->name, "pBullet_blue_crit") == 0
+		|| strcmp(tempObj->name, "pBullet_red_crit") == 0) {
 		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 	}
 	if (strcmp(tempObj->name, "explosion") == 0) {
-		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
-		//explosion dmg
+		GetComponent<HP>()->Damage(((Explosion*)tempObj)->damage);
 	}
-
+	if (strcmp(tempObj->name, "player") == 0) {
+		SetState(&MobKnight::Delay);
+	}
 }

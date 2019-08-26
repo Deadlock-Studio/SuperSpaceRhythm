@@ -27,25 +27,32 @@ pixelsPerUnit: 30
 ../Resources/Textures/beat_grid_right.tga
 
 BLUEPRINT 7
-NAME: yeet
+NAME: perfect
 COMPONENT:
 SPRITE
 pixelsPerUnit: 400
-../Resources/Textures/yeet.tga
+../Resources/Textures/perfect.tga
+
+BLUEPRINT 7
+NAME: good_power
+COMPONENT:
+SPRITE
+pixelsPerUnit: 400
+../Resources/Textures/good_power.tga
 
 BLUEPRINT 8
-NAME: meh
+NAME: good
 COMPONENT:
 SPRITE
 pixelsPerUnit: 400
-../Resources/Textures/meh.tga
+../Resources/Textures/good.tga
 
 BLUEPRINT 9
-NAME: bruh
+NAME: miss
 COMPONENT:
 SPRITE
 pixelsPerUnit: 400
-../Resources/Textures/bruh.tga
+../Resources/Textures/miss.tga
 
 BLUEPRINT 10
 NAME: beat-left-ht
@@ -82,6 +89,15 @@ COMPONENT:
 SPRITE
 pixelsPerUnit: 40
 ../Resources/Image/options.tga
+BUTTON
+
+BLUEPRINT 1
+NAME: help_button
+COMPONENT:
+SPRITE
+pixelsPerUnit: 40
+../Resources/Image/help_button.tga
+BUTTON
 
 BLUEPRINT 1
 NAME: menu_BG
@@ -89,3 +105,96 @@ COMPONENT:
 SPRITE
 pixelsPerUnit: 40
 ../Resources/Image/menu_BG.tga
+
+BLUEPRINT 0
+NAME: mascot
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 9
+anim: 0, 196, 66, 98, 3
+anim_spd: 20
+../Resources/Textures/boss_ghost.tga
+
+BLUEPRINT 1
+NAME: tutorial
+COMPONENT:
+SPRITE
+pixelsPerUnit: 40
+../Resources/Image/tutorial.tga
+
+BLUEPRINT 1
+NAME: back_button
+COMPONENT:
+SPRITE
+pixelsPerUnit: 30
+../Resources/Image/back.tga
+BUTTON
+
+BLUEPRINT 1
+NAME: calibrate_button
+COMPONENT:
+SPRITE
+pixelsPerUnit: 35
+../Resources/Image/calibrate.tga
+BUTTON
+
+BLUEPRINT 1
+NAME: plus_button
+COMPONENT:
+SPRITE
+pixelsPerUnit: 32
+../Resources/Image/plus.tga
+BUTTON
+
+BLUEPRINT 1
+NAME: minus_button
+COMPONENT:
+SPRITE
+pixelsPerUnit: 32
+../Resources/Image/minus.tga
+BUTTON
+
+///////////////////////////////////////////Health, shield, void_shell_GUI
+
+BLUEPRINT 1
+NAME: void_shell_GUI
+COMPONENT:
+SPRITE
+pixelsPerUnit: 24
+../Resources/Textures/ui_void_shell.tga
+
+BLUEPRINT 1
+NAME: full_health_GUI
+COMPONENT:
+SPRITE
+pixelsPerUnit: 24
+../Resources/Textures/ui_heart_full.tga
+
+BLUEPRINT 1
+NAME: half_health_GUI
+COMPONENT:
+SPRITE
+pixelsPerUnit: 24
+../Resources/Textures/ui_heart_half.tga
+
+BLUEPRINT 1
+NAME: empty_health_GUI
+COMPONENT:
+SPRITE
+pixelsPerUnit: 24
+../Resources/Textures/ui_heart_empty.tga
+
+BLUEPRINT 1
+NAME: shield_GUI
+COMPONENT:
+SPRITE
+pixelsPerUnit: 24
+../Resources/Textures/ui_shield.tga
+
+BLUEPRINT 1
+NAME: preOrder_button
+COMPONENT:
+SPRITE
+pixelsPerUnit: 40
+../Resources/Image/preOrder.tga
+BUTTON

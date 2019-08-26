@@ -35,12 +35,10 @@ ShopKeeper::~ShopKeeper()
 
 void ShopKeeper::Init()
 {
-	shopTick = 500;
-
 	//filter MUST ALWAYS be the LAST THING to do in init
 	b2Filter filter = GetComponent<Collision2D>()->body->GetFixtureList()->GetFilterData();
 	//type of body
-	filter.categoryBits = PLAYER;
+	filter.categoryBits = MOB;
 	//collide with what
 	filter.maskBits = PLAYER | WALL;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
@@ -79,10 +77,6 @@ void ShopKeeper::Spawn()
 void ShopKeeper::Idle()
 {
 	PlayAnimation(0);
-	shopTick--;
-	if (shopTick <= 0) {
-		SetState(&ShopKeeper::Death);
-	}
 }
 
 
@@ -93,15 +87,23 @@ void ShopKeeper::Death()
 		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
 		Vector3(1.0f, 1.0f, 1.0f),
 		Vector3());
-	SceneManager::GetInstance()->addToRemovalList(this);
+	GameManager::GetInstance()->addToRemovalList(this);
 }
-
-
 
 void ShopKeeper::checkCollision(GameObject* tempObj)
 {
 }
 
+
+void ShopKeeper::SetCollidable(bool state)
+{
+	b2Filter filter = GetComponent<Collision2D>()->body->GetFixtureList()->GetFilterData();
+	filter.categoryBits = MOB;
+	if (state)
+		filter.maskBits = PLAYER | WALL;
+	else filter.maskBits = 0;
+	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
+}
 
 void ShopKeeper::Update(float deltaTime)
 {

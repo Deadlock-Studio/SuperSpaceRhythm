@@ -37,13 +37,8 @@ void MobShoot::Init()
 	//type of body
 	filter.categoryBits = MOB;
 	//collide with what
-	filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE| WALL | EXPLOSION | BOSS | CRATE | MOB | MOB_RED | MOB_BLUE;
+	filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE| WALL | EXPLOSION | BOSS | CRATE | MOB | MOB_RED | MOB_BLUE | SHIELD;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
-	srand(time(NULL));
-	mX = -69 + (std::rand() % (1347 - (-69) + 1));
-	mY = -101 + (std::rand() % (811 - (-101) + 1));
-	CalculateVelocity(mX, mY);
-
 }
 
 void MobShoot::CalculateVelocity(float mX, float mY)
@@ -90,12 +85,6 @@ void MobShoot::Spawn()
 
 void MobShoot::Idle()
 {
-	//Transition
-	if (GetComponent<HP>()->dead) {
-		SetState(&MobShoot::Death);
-		return;
-	}
-
 	if (GameManager::GetInstance()->player->transform->position.x <= transform->position.x)
 		PlayAnimation(0);
 	else
@@ -109,22 +98,36 @@ void MobShoot::Death()
 		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
 		Vector3(1.0f, 1.0f, 1.0f),
 		Vector3());
-	SceneManager::GetInstance()->addToRemovalList(this);
+	GameManager::GetInstance()->addToRemovalList(this);
+	GameManager::GetInstance()->mobCount++;
 }
 
 void MobShoot::Update(float deltaTime)
 {
+	//Transition
+	if (GetComponent<HP>()->dead) {
+		if (((Player*)(GameManager::GetInstance()->player))->SpeedBoost)
+		{
+			((Player*)(GameManager::GetInstance()->player))->speedIncrease = TRUE;
+		}
+		SetState(&MobShoot::Death);
+	}
+
 	if (activeState != NULL)
 		(this->*activeState)();
 
+	if (SoundManager::GetInstance()->enemySignal == 2)
+	{
+		BulletManager::GetInstance()->Trace(transform->position, "eBullet_mob");
+	}
+	
+
 	b2Vec2 bodyPos = GetComponent<Collision2D>()->body->GetPosition();
 	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, transform->position.z);
-	if (abs(transform->position.x - mX) <= 10 && abs(transform->position.y - mY) <= 10)
-	{
-		srand(time(NULL));
-		mX = -69 + (std::rand() % (1347 - (-69) + 1));
-		mY = -101 + (std::rand() % (811 - (-101) + 1));
-		CalculateVelocity(mX, mY);
+	CalculateVelocity(GameManager::GetInstance()->player->transform->position.x,
+		GameManager::GetInstance()->player->transform->position.y);
+	if (distance <= 200.0f) {
+		AddToPosition(0.0f, 0.0f);
 	}
 	else
 		AddToPosition(velX, velY);
@@ -133,16 +136,18 @@ void MobShoot::Update(float deltaTime)
 
 void MobShoot::checkCollision(GameObject * tempObj)
 {
-	if (strcmp(tempObj->name, "tnt") == 0) {
-		((TNT*)tempObj)->SetState(&TNT::Exploding);
-	}
-	if (strcmp(tempObj->name, "pBullet_red") == 0) {
+	if (strcmp(tempObj->name, "pBullet_red") == 0
+		|| strcmp(tempObj->name, "pBullet_blue_crit") == 0
+		|| strcmp(tempObj->name, "pBullet_red_crit") == 0) {
 		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 	}
 	if (strcmp(tempObj->name, "pBullet_blue") == 0) {
 		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
+	}
+	if (strcmp(tempObj->name, "explosion") == 0) {
+		GetComponent<HP>()->Damage(((Explosion*)tempObj)->damage);
 	}
 }
 

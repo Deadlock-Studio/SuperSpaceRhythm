@@ -7,7 +7,7 @@ enum Actions {
 	MoveLeft,
 	MoveRight,
 	BeatIt,
-	Reform,
+	VoidShell,
 	Shoot,
 	Dash,
 	DebugMode,
@@ -47,8 +47,11 @@ public:
 	bool ActionCheck(Actions action);
 	void MouseDown(float x, float y);
 	void MouseUp(float x, float y);
+	void RightMouseDown(float x, float y);
+	void RightMouseUp(float x, float y);
 	void MousePosition(float x, float y);
 	bool isMouseDown = false;
+	bool isRightMouseDown = FALSE;
 	float mX, mY;
 	float mouseX, mouseY;
 

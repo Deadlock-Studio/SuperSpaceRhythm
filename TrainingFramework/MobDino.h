@@ -24,6 +24,7 @@ public:
 	void checkCollision(GameObject* tempObj);
 	void Init();
 	int status = 0;
+	int mineCoolDown = 200;
 	void(MobDino::* activeState)() = NULL;
 	int activeAnimation = -1;
 	vector<Animation*> animeList{};

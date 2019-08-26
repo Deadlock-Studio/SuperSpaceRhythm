@@ -1,32 +1,29 @@
 #include "stdafx.h"
 #include "Bomb.h"
-#define BOMB_COOLDOWN 500
+#define BOMB_COOLDOWN 250
 #define BOMB_DELAY 50
 
 Bomb::Bomb()
 {
-	SetState(&Bomb::Idle);
+	
 }
 
-Bomb::Bomb(Blueprint* blueprint, Vector3 pos, Vector3 scale, Vector3 rotation) : Bomb()
+
+
+Bomb::Bomb(float x, float y, float mX, float mY)
 {
-	name = _strdup(blueprint->name);
-
-
-	//Clone components
+	name = _strdup("bomb");
+	Blueprint* blueprint = SceneManager::GetInstance()->GetBlueprintByName("bomb");
 	for (vector<Component*>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
 		AddComponent((*it)->Clone());
 	}
-
-	//Update transform
-	UpdatePosition(pos.x, pos.y, pos.z);
-	UpdateRotation(rotation.x, rotation.y, rotation.z);
-	UpdateScale(scale.x, scale.y, scale.z);
-
-
+	this->x = x;
+	this->y = y;
+	this->mX = mX;
+	this->mY = mY;
+	UpdatePosition(x, y, BULLET_LAYER);
 	Init();
 }
-
 
 Bomb::~Bomb()
 {
@@ -34,9 +31,19 @@ Bomb::~Bomb()
 	tempBody->GetWorld()->DestroyBody(tempBody);
 }
 
+void Bomb::CalculateVelocity()
+{
+	float distance = sqrt(pow((mX - x), 2) + pow((mY - y), 2));
+	float speed;
+	speed = 0.5f * MOVE_SPEED;
+	velX = ((mX - x) * speed / distance);
+	velY = ((mY - y) * speed / distance);
+}
 
 void Bomb::Init()
 {
+	CalculateVelocity();
+	SetState(&Bomb::Idle);
 	bombCoolDown = BOMB_COOLDOWN;
 	bombDelay = BOMB_DELAY;
 
@@ -44,7 +51,7 @@ void Bomb::Init()
 	//type of body
 	filter.categoryBits = BOMB;
 	//collide with what
-	filter.maskBits = PLAYER | EXPLOSION | WALL | BULLET_RED | BULLET_BLUE| CRATE;
+	filter.maskBits = EXPLOSION | WALL | BULLET_RED | BULLET_BLUE;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 }
 
@@ -84,7 +91,7 @@ void Bomb::Destroyed()
 		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
 		Vector3(1, 1, 1),
 		Vector3());
-	SceneManager::GetInstance()->addToRemovalList(this);
+	GameManager::GetInstance()->addToRemovalList(this);
 }
 
 void Bomb::Exploding()
@@ -101,9 +108,8 @@ void Bomb::Update(float deltaTime)
 	if (activeState != NULL)
 		(this->*activeState)();
 
-	b2Vec2 bodyPos = GetComponent<Collision2D>()->body->GetPosition();
-	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, 1);
-	//AddToPosition(50.0f, 50.0f);
+	//bomb fly
+	AddToPosition(velX, velY);
 
 	GameObject::Update(deltaTime);
 }

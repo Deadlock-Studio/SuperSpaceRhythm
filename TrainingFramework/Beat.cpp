@@ -7,7 +7,7 @@ float lerp(float a, float b, float f)
 	return a + f * (b - a);
 }
 
-Beat::Beat(float X_offset, float beatpos, bool type)
+Beat::Beat(float X_offset, int beatIndex, float beatpos, bool type)
 {
 	halftime = type;
 	if (!halftime)
@@ -23,7 +23,8 @@ Beat::Beat(float X_offset, float beatpos, bool type)
 	leftSpawnPos = Globals::X_percent(50) - X_offset;
 	rightSpawnPos = Globals::X_percent(50) + X_offset;
 	distance = X_offset;
-	beatPos = beatpos;
+	this->beatPos = beatpos;
+	this->beatIndex = beatIndex;
 }
 
 Beat::Beat(float X_offset, bool type) {

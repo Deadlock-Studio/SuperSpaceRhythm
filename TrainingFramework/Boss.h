@@ -14,6 +14,7 @@ public:
 	void SetState(void(Boss::*state)()) {
 		activeState = state;
 	}
+	float x, y, velX, velY, distance;
 
 	void PlayAnimation(int key);
 	void Idle();
@@ -22,6 +23,8 @@ public:
 	void WalkLeft();
 	void WalkRight();
 	void Death();
+	void CalculateVelocity(float mX, float mY);
+	void DoStuff();
 	void Update(float deltaTime) override;
 	void checkCollision(GameObject * tempObj);
 	void Init();

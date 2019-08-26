@@ -91,7 +91,7 @@ void Animation::Draw()
 
 	//MvP matrix
 	glUniformMatrix4fv(shaders->mvpLoc, 1, GL_FALSE, (GLfloat*)&mvp.m[0][0]);
-	glUniform1f(shaders->alphaLoc, alpha);
+	glUniform1f(shaders->alphaLoc, alpha * alphaMod);
 
 	//Texture
 	glBindTexture(GL_TEXTURE_2D, text->texId);
@@ -104,6 +104,29 @@ void Animation::Draw()
 void Animation::Update(float deltaTime)
 {
 	RunAnimation(deltaTime);
+}
+
+void Animation::LateUpdate(float deltaTime)
+{
+	if (fadeOut) {
+		if (alpha > 0) {
+			alpha -= fadeOut * deltaTime;
+			if (alpha < 0) {
+				alpha = 0;
+				FadeOff();
+			}	
+		}
+	}
+
+	if (fadeIn) {
+		if (alpha < 1) {
+			alpha += fadeIn * deltaTime;
+			if (alpha > 1) {
+				alpha = 1;
+				FadeOff();
+			}
+		}
+	}
 }
 
 Component * Animation::Clone()
@@ -124,4 +147,22 @@ void Animation::RunAnimation(float deltaTime)
 		if (activeSprite == nSprite)
 			activeSprite = 0;
 	}
+}
+
+void Animation::FadeOff()
+{
+	fadeOut = 0;
+	fadeIn = 0;
+}
+
+void Animation::FadeIn(float fadeSpeed)
+{
+	fadeOut = 0;
+	fadeIn = fadeSpeed;
+}
+
+void Animation::FadeOut(float fadeSpeed)
+{
+	fadeIn = 0;
+	fadeOut = fadeSpeed;
 }

@@ -31,20 +31,22 @@ public:
 	}
 
 	//Functions
-	void Circle(Vector3 pos);
-	void Plus(Vector3 pos);
-	void Cross(Vector3 pos);
-	void Flower(Vector3 pos);
-	void DoubleSpiral(Vector3 pos);
-	void ClockwiseSpriral(Vector3 pos);
-	void CounterClockwiseSpiral(Vector3 pos);
-	void Twist(Vector3 pos);
-	void Triangle(Vector3 pos);
-	void X(Vector3 pos);
-	void Square(Vector3 pos);
-	void Arc(Vector3 pos);
-	void Arrow(Vector3 pos);
-	void Trace(Vector3 pos);
+	void Circle(Vector3 pos, char* type);
+	void Plus(Vector3 pos, char* type);
+	void Cross(Vector3 pos, char* type);
+	void Flower(Vector3 pos, char* type);
+	void DoubleSpiral(Vector3 pos, char* type);
+	void ClockwiseSpriral(Vector3 pos, char* type);
+	void Spiral(Vector3 pos, char * type);
+	void CounterClockwiseSpiral(Vector3 pos, char* type);
+	void Twist(Vector3 pos, char* type);
+	void Triangle(Vector3 pos, char* type);
+	void X(Vector3 pos, char* type);
+	void Square(Vector3 pos, char* type);
+	void Arc(Vector3 pos, char* type);
+	void SuperTrace(Vector3 pos, char * type);
+	void ShotGun(Vector3 pos, char * type);
+	void Trace(Vector3 pos, char* type);
 	void DeleteAll();
 
 

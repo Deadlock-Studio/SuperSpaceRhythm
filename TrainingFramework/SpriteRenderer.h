@@ -23,5 +23,6 @@ public:
 	int textureId = -1;
 	int pixelsPerUnit;
 	float alpha = 1;
+	float alphaMod = 1;
 };
 

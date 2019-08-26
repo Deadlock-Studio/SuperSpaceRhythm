@@ -21,7 +21,7 @@ TNT::TNT(Blueprint * blueprint, Vector3 pos, Vector3 scale, Vector3 rotation) : 
 	UpdateScale(scale.x, scale.y, scale.z);
 
 	Init();
-	TNTCoolDown = 20;
+	TNTCoolDown = 50;
 }
 
 
@@ -93,37 +93,33 @@ void TNT::Idle()
 void TNT::Exploding()
 {
 	PlayAnimation(1);
-	InitDestroyed();
 	TNTCoolDown--;
 	if (TNTCoolDown == 0) {
 		SetState(&TNT::Destroyed);
 		//spawn hp if TNT destroyed
-		GameManager::GetInstance()->Spawn("explosion",
-			SceneManager::GetInstance()->GetBlueprintByName("explosion"),
-			Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
-			Vector3(1, 1, 1),
-			Vector3());
 		TNTCoolDown = 10;
 	}
 }
 
 void TNT::Destroyed()
 {
-	PlayAnimation(2);
 	TNTCoolDown--;
 	if (TNTCoolDown == 0) {
-		SceneManager::GetInstance()->addToRemovalList(this);
+		GameManager::GetInstance()->Spawn("explosion",
+			SceneManager::GetInstance()->GetBlueprintByName("explosion"),
+			Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
+			Vector3(1, 1, 1),
+			Vector3());
+		GameManager::GetInstance()->addToRemovalList(this);
 	}
 }
-
 
 void TNT::Update(float deltaTime)
 {
 	if (activeState != NULL)
 		(this->*activeState)();
 
-	b2Vec2 bodyPos = GetComponent<Collision2D>()->body->GetPosition();
-	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, 1);
+
 	AddToPosition(0.0f, 0.0f);
 
 	GameObject::Update(deltaTime);
@@ -131,7 +127,12 @@ void TNT::Update(float deltaTime)
 
 void TNT::checkCollision(GameObject * tempObj)
 {
-	if (strcmp(tempObj->name, "pBullet_red") == 0 || strcmp(tempObj->name, "pBullet_blue") == 0 || strcmp(tempObj->name, "eBullet") == 0) {
+	if (strcmp(tempObj->name, "pBullet_red") == 0 
+		|| strcmp(tempObj->name, "pBullet_blue") == 0 
+		|| strcmp(tempObj->name, "eBullet") == 0 
+		|| strcmp(tempObj->name, "eBullet_mob") == 0
+		|| strcmp(tempObj->name, "pBullet_blue_crit") == 0
+		|| strcmp(tempObj->name, "pBullet_red_crit") == 0) {
 		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 		SetState(&TNT::Exploding);
 	}

@@ -17,5 +17,4 @@ enum collisionFiltering {
 	BULLET_E = 0x2000,
 	SHIELD = 0x4000,
 	BOMB = 0x8000,
-
 };

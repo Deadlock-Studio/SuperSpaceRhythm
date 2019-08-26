@@ -21,7 +21,6 @@ MobExplodeBullet::MobExplodeBullet(Blueprint * blueprint, Vector3 pos, Vector3 s
 
 	Init();
 	explodeDelay = 50;
-
 }
 
 
@@ -38,14 +37,13 @@ void MobExplodeBullet::Init()
 	//type of body
 	filter.categoryBits = MOB;
 	//collide with what
-	filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE | WALL | EXPLOSION | CRATE | BOSS | MOB | MOB_RED | MOB_BLUE | CRATE;
+	filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE | WALL | EXPLOSION | CRATE | BOSS | MOB | MOB_RED | MOB_BLUE | CRATE | SHIELD;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 
 }
 
 void MobExplodeBullet::CalculateVelocity()
 {
-
 	mX = GameManager::GetInstance()->player->transform->position.x;
 	mY = GameManager::GetInstance()->player->transform->position.y;
 	x = transform->position.x;
@@ -82,7 +80,7 @@ void MobExplodeBullet::Spawn()
 {
 	GameManager::GetInstance()->Spawn("spawn",
 		SceneManager::GetInstance()->GetBlueprintByName("spawn"),
-		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
+		Vector3(transform->position.x, transform->position.y, 2),
 		Vector3(1, 1, 1),
 		Vector3());
 	SetState(&MobExplodeBullet::Idle);
@@ -111,40 +109,50 @@ void MobExplodeBullet::Death()
 			Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
 			Vector3(1, 1, 1),
 			Vector3());
-		BulletManager::GetInstance()->Circle(this->transform->position);
-		SceneManager::GetInstance()->addToRemovalList(this);
+		BulletManager::GetInstance()->Circle(this->transform->position, "eBullet_mob");
+		GameManager::GetInstance()->addToRemovalList(this);
+		GameManager::GetInstance()->mobCount++;
 	}
 }
 
-
 void MobExplodeBullet::Update(float deltaTime)
 {
+	if (GetComponent<HP>()->dead) {
+		if (((Player*)(GameManager::GetInstance()->player))->SpeedBoost)
+		{
+			((Player*)(GameManager::GetInstance()->player))->speedIncrease = TRUE;
+		}
+		SetState(&MobExplodeBullet::Death);
+	}
+
 	if (activeState != NULL)
 		(this->*activeState)();
 
 	b2Vec2 bodyPos = GetComponent<Collision2D>()->body->GetPosition();
-	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, 1);
+	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, transform->position.z);
 	CalculateVelocity();
-	
-	cout << distance << endl;
+
 	if (distance <= 100.0f) {
 		AddToPosition(0.0f, 0.0f);
 		SetState(&MobExplodeBullet::Death);
 		isExploding = true;
 	}
-	if(!isExploding)
+	if (!isExploding)
 		AddToPosition(velX, velY);
 	GameObject::Update(deltaTime);
 }
 
 void MobExplodeBullet::checkCollision(GameObject * tempObj)
 {
-	if (strcmp(tempObj->name, "pBullet_red") == 0 || strcmp(tempObj->name, "pBullet_blue") == 0) {
+	if (strcmp(tempObj->name, "pBullet_red") == 0 
+		|| strcmp(tempObj->name, "pBullet_blue") == 0
+		|| strcmp(tempObj->name, "pBullet_blue_crit") == 0
+		|| strcmp(tempObj->name, "pBullet_red_crit") == 0) {
 		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
-		SetState(&MobExplodeBullet::Death);
+		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 	}
 	if (strcmp(tempObj->name, "explosion") == 0) {
-		SetState(&MobExplodeBullet::Death);
+		GetComponent<HP>()->Damage(((Explosion*)tempObj)->damage);
 	}
 }
 

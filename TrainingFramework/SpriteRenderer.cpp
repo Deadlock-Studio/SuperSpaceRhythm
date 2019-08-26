@@ -54,7 +54,7 @@ void SpriteRenderer::Draw()
 
 	//MvP matrix
 	glUniformMatrix4fv(shaders->mvpLoc, 1, GL_FALSE, (GLfloat*)&mvp.m[0][0]);
-	glUniform1f(shaders->alphaLoc, alpha);
+	glUniform1f(shaders->alphaLoc, alpha * alphaMod);
 
 	//Texture
 	glBindTexture(GL_TEXTURE_2D, text->texId);
@@ -69,16 +69,21 @@ void SpriteRenderer::LateUpdate(float deltaTime)
 	if (fadeOut) {
 		if (alpha > 0) {
 			alpha -= fadeOut * deltaTime;
-			if (alpha < 0)
+			if (alpha < 0) {
 				alpha = 0;
+				FadeOff();
+			}
+				
 		}
 	}
 
 	if (fadeIn) {
 		if (alpha < 1) {
 			alpha += fadeIn * deltaTime;
-			if (alpha > 1)
+			if (alpha > 1) {
 				alpha = 1;
+				FadeOff();
+			}
 		}
 	}
 }

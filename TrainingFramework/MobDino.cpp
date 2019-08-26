@@ -9,16 +9,15 @@ MobDino::MobDino(Blueprint* blueprint, Vector3 pos, Vector3 scale, Vector3 rotat
 {
 	name = _strdup(blueprint->name);
 
-
 	//Clone components
 	for (vector<Component*>::iterator it = blueprint->componentList.begin(); it != blueprint->componentList.end(); ++it) {
 		AddComponent((*it)->Clone());
 	}
+
 	//Update transform
 	UpdatePosition(pos.x, pos.y, pos.z);
 	UpdateRotation(rotation.x, rotation.y, rotation.z);
 	UpdateScale(scale.x, scale.y, scale.z);
-
 
 	Init();
 }
@@ -37,16 +36,12 @@ void MobDino::Init()
 	//type of body
 	filter.categoryBits = MOB;
 	//collide with what
-	filter.maskBits = PLAYER | BULLET_RED | BULLET_BLUE | WALL | EXPLOSION | BOSS | CRATE | MOB | MOB_RED | MOB_BLUE;
+	filter.maskBits =  BULLET_RED | BULLET_BLUE | WALL | EXPLOSION  | CRATE | SHIELD;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
-	srand(time(NULL));
-	mX = -69 + (std::rand() % (1347 - (-69) + 1));
-	mY = -101 + (std::rand() % (811 - (-101) + 1));
+	mX = (int)X_MIN + (std::rand() % ((int)X_MAX - (int)X_MIN + 1));
+	mY = (int)Y_MIN + (std::rand() % ((int)Y_MAX - (int)Y_MIN + 1));
 	CalculateVelocity(mX, mY);
 }
-
-
-
 
 void MobDino::AddComponent(Component* comp)
 {
@@ -93,6 +88,10 @@ void MobDino::Idle()
 {
 	//Transition
 	if (GetComponent<HP>()->dead) {
+		if (((Player*)(GameManager::GetInstance()->player))->SpeedBoost)
+		{
+			((Player*)(GameManager::GetInstance()->player))->speedIncrease = TRUE;
+		}
 		SetState(&MobDino::Death);
 		return;
 	}
@@ -110,22 +109,43 @@ void MobDino::Death()
 		Vector3(transform->position.x, transform->position.y, EFFECT_LAYER),
 		Vector3(1.0f, 1.0f, 1.0f),
 		Vector3());
-	SceneManager::GetInstance()->addToRemovalList(this);
+	GameManager::GetInstance()->addToRemovalList(this);
+	GameManager::GetInstance()->mobCount++;
 }
 
 void MobDino::Update(float deltaTime)
 {
+	//Transition
+	if (GetComponent<HP>()->dead) {
+		SetState(&MobDino::Death);
+	}
+
 	if (activeState != NULL)
 		(this->*activeState)();
+	CalculateVelocity(mX, mY);
 
 	b2Vec2 bodyPos = GetComponent<Collision2D>()->body->GetPosition();
-	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, transform->position.z);
-	if (abs(transform->position.x - mX) <= 10 && abs(transform->position.y - mY) <= 10)
+	SetState(&MobDino::Idle);
+	
+	if (mineCoolDown != 0)
 	{
-		srand(time(NULL));
-		mX = -69 + (std::rand() % (1347 - (-69) + 1));
-		mY = -101 + (std::rand() % (811 - (-101) + 1));
-		CalculateVelocity(mX, mY);
+		mineCoolDown--;
+	}
+	else if (mineCoolDown == 0)
+	{
+		mineCoolDown = 500;
+		GameManager::GetInstance()->SpawnToRoom("mine",
+			SceneManager::GetInstance()->GetBlueprintByName("mine"),
+			Vector3(transform->position.x, transform->position.y, TRAP_LAYER),
+			Vector3(1, 1, 1),
+			Vector3());
+	}
+
+	transform->setPosition(bodyPos.x * PIXEL_RATIO, bodyPos.y * PIXEL_RATIO, transform->position.z);
+	if (abs(transform->position.x - mX) <= 15 && abs(transform->position.y - mY) <= 15)
+	{
+		mX = (int)X_MIN + (std::rand() % ((int)X_MAX - (int)X_MIN + 1));
+		mY = (int)Y_MIN + (std::rand() % ((int)Y_MAX - (int)Y_MIN + 1));
 	}
 	else
 		AddToPosition(velX, velY);
@@ -134,16 +154,18 @@ void MobDino::Update(float deltaTime)
 
 void MobDino::checkCollision(GameObject* tempObj)
 {
-	if (strcmp(tempObj->name, "tnt") == 0) {
-		((TNT*)tempObj)->SetState(&TNT::Exploding);
-	}
-	if (strcmp(tempObj->name, "pBullet_red") == 0) {
+	if (strcmp(tempObj->name, "pBullet_red") == 0
+		|| strcmp(tempObj->name, "pBullet_blue_crit") == 0
+		|| strcmp(tempObj->name, "pBullet_red_crit") == 0) {
 		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
 	}
 	if (strcmp(tempObj->name, "pBullet_blue") == 0) {
 		GetComponent<HP>()->Damage(((Bullet*)tempObj)->damage);
 		((Bullet*)tempObj)->SetState(&Bullet::Despawn);
+	}
+	if (strcmp(tempObj->name, "explosion") == 0) {
+		GetComponent<HP>()->Damage(((Explosion*)tempObj)->damage);
 	}
 }
 

@@ -24,3 +24,4 @@
 #include"ShopKeeper.h"
 #include"Smoke.h"
 #include"BulletDespawn.h"
+#include"Ladder.h"

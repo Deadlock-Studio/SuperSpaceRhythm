@@ -10,6 +10,7 @@ public:
 	void UpdateCamera();
 	void LookAt();
 	void UpdatePosition(float x, float y, float deltaTime);
+	void SnapPosition(float x, float y);
 
 	float nearPlane;
 	float farPlane;

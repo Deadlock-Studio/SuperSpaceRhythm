@@ -1,4 +1,5 @@
 #pragma once
+#include "Font.h"
 class Text
 {
 public:
@@ -15,6 +16,7 @@ public:
 	void FadeOut(float fadeSpeed);
 	void FadeIn(float fadeSpeed);
 	void FadeOff();
+	void UpdatePosition(float x, float y);
 
 	bool isActive = true;
 	bool dying = false;

@@ -18,8 +18,8 @@ public:
 	void Idle();
 	void Spawn();
 	void Death();
+	void Delay();
 	void Update(float deltaTime) override;
-	void Stop();
 	void checkCollision(GameObject * tempObj);
 	void Init();
 	void ShieldUp();

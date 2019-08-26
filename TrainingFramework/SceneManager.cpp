@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Boss.h"
 #include "HealthPotion.h"
+#include "PowerUp.h"
 #include "Collision2D.h"
 #include "Bullet.h"
 #include "Room.h"
@@ -23,6 +24,8 @@ void SceneManager::Init()
 	SceneManager::GetInstance()->LoadScene("../Resources/Templates/Template1.txt");
 	SceneManager::GetInstance()->LoadScene("../Resources/Templates/GUI.txt");
 	SceneManager::GetInstance()->LoadScene("../Resources/Templates/Mob.txt");
+	SceneManager::GetInstance()->LoadScene("../Resources/Templates/Room.txt");
+	SceneManager::GetInstance()->LoadScene("../Resources/Templates/PerkList.txt");
 
 	SceneManager::GetInstance()->UseCamera(0);
 }
@@ -46,12 +49,36 @@ void SceneManager::LoadScene(char * filename)
 			else if (sscanf(line.c_str(), "BLUEPRINT %d", &id)) {
 				Blueprint * blueprint = new Blueprint();
 
-				//Get Object name
+				//Get Blueprint name
 				blueprint->name = GetName(file);
 
 				GetComponent(file, blueprint);
 
 				blueprintList.push_back(blueprint);
+			}
+			else if (sscanf(line.c_str(), "SCRIPT %d", &id)) {
+				Script * script = new Script();
+
+				//Get room name
+				script->name = GetName(file);
+
+				float time = 0;
+				char constructor[20];
+				char blueprint[20];
+				int layer = 0;
+				while (getline(file, line)) {
+					if (line.compare("") == 0) break;
+
+					sscanf(line.c_str(), "%f %s %s %d", &time, constructor, blueprint, &layer);
+
+					if (layer == 4)
+						script->clearCount++;
+
+					spawnInfo info = { time, strdup(constructor), strdup(blueprint), layer };
+					script->spawnInfos.push_back(info);
+				}
+
+				scriptList.push_back(script);
 			}
 		}
 		file.close();
@@ -84,6 +111,9 @@ void SceneManager::GetComponent(ifstream & file, Blueprint * blueprint)
 		}
 		else if (!line.compare("BUTTON")) {
 			blueprint->AddComponent(new Button());
+		}
+		else if (!line.compare("POWER")) {
+			blueprint->AddComponent(GetPowerUp(file));
 		}
 	}
 }
@@ -178,6 +208,17 @@ Collision2D * SceneManager::GetCollision(ifstream & file)
 	return new Collision2D(colW, colH, mass,res, colType);
 }
 
+PowerUp * SceneManager::GetPowerUp(ifstream & file) {
+	string line;
+	char* desc;
+	char* name;
+	getline(file, line);
+	name = _strdup(line.c_str());
+	getline(file, line);
+	desc = _strdup(line.c_str());
+	return new PowerUp(name, desc);
+}
+
 HP * SceneManager::GetHP(ifstream & file)
 {
 	string line;
@@ -202,13 +243,17 @@ void SceneManager::UnloadAll()
 {
 	UnloadObjects();
 
-	for (std::vector<Blueprint*>::iterator it = blueprintList.begin(); it != blueprintList.end(); ++it)
+	for (std::list<Blueprint*>::iterator it = blueprintList.begin(); it != blueprintList.end(); ++it)
 		delete *it;
 	blueprintList.clear();
 
 	for (std::vector<Camera*>::iterator it = cameraList.begin(); it != cameraList.end(); ++it)
 		delete *it;
 	cameraList.clear();
+
+	for (std::vector<Script*>::iterator it = scriptList.begin(); it != scriptList.end(); ++it)
+		delete *it;
+	scriptList.clear();
 
 	usedCamera = NULL;
 	delete shaders;
@@ -257,13 +302,25 @@ GUI * SceneManager::SpawnGUI(Blueprint * blueprint, Vector3 pos, Vector3 scale, 
 GameObject * SceneManager::SpawnBullet(float x, float y, float mX, float mY, char* type)
 {
 	GameObject * pBullet = nullptr;
-		pBullet = new Bullet(x, y, mX, mY, type);
-		objectList.push_back(pBullet);
+	pBullet = new Bullet(x, y, mX, mY, type);
+	objectList.push_back(pBullet);
+
+	GameManager::GetInstance()->roomObject.push_back(pBullet);
 	return pBullet;
 }
 
+GameObject * SceneManager::SpawnBomb(float x, float y, float mX, float mY)
+{
+	GameObject * pBomb = nullptr;
+	pBomb = new Bomb(x, y, mX, mY);
+	objectList.push_back(pBomb);
+
+	GameManager::GetInstance()->roomObject.push_back(pBomb);
+	return pBomb;
+}
+
 Blueprint* SceneManager::GetBlueprintByName(char* name) {
-	for (std::vector<Blueprint*>::iterator it = blueprintList.begin(); it != blueprintList.end(); ++it) {
+	for (std::list<Blueprint*>::iterator it = blueprintList.begin(); it != blueprintList.end(); ++it) {
 		if (!strcmp((*it)->name, name)) return (*it);
 	}
 	return NULL;
@@ -272,6 +329,14 @@ Blueprint* SceneManager::GetBlueprintByName(char* name) {
 GameObject * SceneManager::GetObjectByName(char * name)
 {
 	for (std::list<GameObject*>::iterator it = objectList.begin(); it != objectList.end(); ++it) {
+		if (!strcmp((*it)->name, name)) return (*it);
+	}
+	return NULL;
+}
+
+Script * SceneManager::GetScriptByName(char * name)
+{
+	for (std::vector<Script*>::iterator it = scriptList.begin(); it != scriptList.end(); ++it) {
 		if (!strcmp((*it)->name, name)) return (*it);
 	}
 	return NULL;

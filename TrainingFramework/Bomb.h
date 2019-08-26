@@ -6,8 +6,10 @@ class Bomb :
 {
 public:
 	Bomb();
-	Bomb(Blueprint* blueprint, Vector3 pos, Vector3 scale, Vector3 rotation);
+	Bomb(float x, float y, float mX, float mY);
 	~Bomb();
+
+	void CalculateVelocity();
 
 	void AddComponent(Component* comp);
 	void SetState(void(Bomb::* state)()) {
@@ -21,6 +23,7 @@ public:
 	void Update(float deltaTime) override;
 	void checkCollision(GameObject* tempObj);
 	void Init();
+	float x, y, mX, mY, distance = 0, velX = 0, velY = 0;
 	void(Bomb::* activeState)() = NULL;
 	int activeAnimation = -1;
 	vector<Animation*> animeList{};

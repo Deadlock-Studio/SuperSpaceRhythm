@@ -3,12 +3,14 @@
 #include "Collision2D.h"
 #include "Globals.h"
 #include"Bullet.h"
-#define DASH_TICK 15
-#define COL_TICK 35
+#include "SoundManager.h"
+#define DASH_TICK 20
+#define COL_TICK 25
 
 bool shoot = FALSE;
 bool dash = FALSE;
 bool reform = FALSE;
+bool voidshell = FALSE;
 
 Control::Control()
 {
@@ -25,6 +27,7 @@ void Control::Update(float deltaTime)
 {
 	//Movement
 	//
+	Vector2 moveOffset;
 	Vector2 moveVector;
 	Vector2 zero = Vector2();
 	moveVector = (ActionCheck(MoveForward) ? Vector2(0, 1) : zero)
@@ -33,16 +36,42 @@ void Control::Update(float deltaTime)
 		+ (ActionCheck(MoveRight) ? Vector2(1, 0) : zero);
 	if (!(moveVector == zero))
 		moveVector.Normalize();
-	Vector2 moveOffset = moveVector * speed;
+	if (((Player*)(GameManager::GetInstance()->player))->speedIncrease && spdBoostCounter < SPD_BOOST_TIME)
+	{
+		 moveOffset = moveVector * speed * 1.5;
+		 spdBoostCounter++;
+	}
+	else if (spdBoostCounter >= SPD_BOOST_TIME)
+	{
+		((Player*)(GameManager::GetInstance()->player))->speedIncrease = FALSE;
+		spdBoostCounter = 0;
+	} 
+	else moveOffset = moveVector * speed;
 
 	//Dash
 	//
 	if (ActionCheck(Dash)) {
 		if (!dash && !(moveVector == zero) && dashTick == 0 && (SoundManager::GetInstance()->signalPass == 2 || SoundManager::GetInstance()->signalPass == 3)) {
 			dashTick = DASH_TICK;
+			if (Globals::chance(((Player*)(GameManager::GetInstance()->player))->SideGunChance))
+			{
+				float x, y;
+				x = ((GameObject*)parentObj)->transform->position.x;
+				y = ((GameObject*)parentObj)->transform->position.y;
+
+				float camPosX, camPosY;
+				camPosX = SceneManager::GetInstance()->usedCamera->position.x;
+				camPosY = SceneManager::GetInstance()->usedCamera->position.y;
+
+				if (isReforming)
+					SceneManager::GetInstance()->SpawnBullet(x, y, inputMan->mX + camPosX, Globals::screenHeight - inputMan->mY + camPosY, "pBullet_red");
+				if (!isReforming)
+					SceneManager::GetInstance()->SpawnBullet(x, y, inputMan->mX + camPosX, Globals::screenHeight - inputMan->mY + camPosY, "pBullet_blue");
+			}
 			dashVec = moveVector;
 			dash = TRUE;
 			((Player*)parentObj)->SetState(&Player::Dashing);
+			
 		}
 	}
 	else dash = FALSE;
@@ -72,44 +101,88 @@ void Control::Update(float deltaTime)
 			camPosY = SceneManager::GetInstance()->usedCamera->position.y;
 			if (SoundManager::GetInstance()->signalPass == 2 || SoundManager::GetInstance()->signalPass == 3)
 			{
-				if (isReforming)
-					SceneManager::GetInstance()->SpawnBullet(x, y, inputMan->mX + camPosX, Globals::screenHeight - inputMan->mY + camPosY, "pBullet_red");
-				if (!isReforming)
-					SceneManager::GetInstance()->SpawnBullet(x, y, inputMan->mX + camPosX, Globals::screenHeight - inputMan->mY + camPosY, "pBullet_blue");
+				if (isReforming) {
+					if (!Globals::chance(((Player*)(GameManager::GetInstance()->player))->CritChance))
+					{
+						SceneManager::GetInstance()->SpawnBullet(x, y, inputMan->mX + camPosX, Globals::screenHeight - inputMan->mY + camPosY, "pBullet_red");
+					}
+					else SceneManager::GetInstance()->SpawnBullet(x, y, inputMan->mX + camPosX, Globals::screenHeight - inputMan->mY + camPosY, "pBullet_red_crit");
+				}
+				if (!isReforming) {
+					if (!Globals::chance(((Player*)(GameManager::GetInstance()->player))->CritChance))
+					{
+						SceneManager::GetInstance()->SpawnBullet(x, y, inputMan->mX + camPosX, Globals::screenHeight - inputMan->mY + camPosY, "pBullet_blue");
+					}
+					else SceneManager::GetInstance()->SpawnBullet(x, y, inputMan->mX + camPosX, Globals::screenHeight - inputMan->mY + camPosY, "pBullet_blue_crit");
+				}
 			}
 			shoot = TRUE;
 		}
 	}
 	else shoot = FALSE;
+
+	//Activate VoidShell
+	//
+	if (ActionCheck(VoidShell) && (SoundManager::GetInstance()->signalPass == 2 || SoundManager::GetInstance()->signalPass == 3))
+	{
+		vector<GameObject*>temp;
+		if (!voidshell)
+		{
+			if (((Player*)(GameManager::GetInstance()->player))->voidShell > 0)
+			{
+				((Player*)(GameManager::GetInstance()->player))->voidShell--;
+				for (std::list<GameObject*>::iterator it = GameManager::GetInstance()->roomObject.begin(); it != GameManager::GetInstance()->roomObject.end(); ++it) {
+					if (strcmp((*it)->name, "eBullet") == 0 || strcmp((*it)->name, "eBullet_mob") == 0)
+					{
+						temp.push_back(*it);
+					}
+				}
+				for (std::vector<GameObject*>::iterator it = temp.begin(); it != temp.end(); ++it) {
+					((Bullet*)(*it))->SetState(&Bullet::Despawn);
+				}
+			}
+		}
+		voidshell = TRUE;
+	}
+	else voidshell = FALSE;
+	//
+
 	//Reform
 	//
-	if (ActionCheck(Reform)) {
+	if (inputMan->isRightMouseDown) {
 		if (!reform && !disableControl && SoundManager::GetInstance()->signalPass == 4) {
 			reform = TRUE;
 			isReforming = !isReforming;
+			if (strcmp(SoundManager::GetInstance()->currentlyPlaying->songname, "level") == 0)
+			{
+				if (!isReforming)
+				{
+					SoundManager::GetInstance()->currentlyPlaying->music.setVolume(SoundManager::GetInstance()->musicVolume);
+					SoundManager::GetInstance()->getTrack("level_half")->music.setVolume(0);
+				}
+				else {
+					SoundManager::GetInstance()->currentlyPlaying->music.setVolume(0);
+					SoundManager::GetInstance()->getTrack("level_half")->music.setVolume(SoundManager::GetInstance()->musicVolume);
+				}
+			}
 		}
 	}
 	else reform = FALSE;
 	//execute logic if player touch boss
 	//
-	if (colTick != 0) {
+	if (colTick > 0) {
 		colTick--;
 
 		//player being pushed back for amount of time
 		((GameObject*)parentObj)->GetComponent<Collision2D>()->
 			body->SetLinearVelocity(b2Vec2(-colVec.x * colSpeed, -colVec.y * colSpeed));
 		//after pushed stun in place
-		if (colTick <= 10) {
-			((GameObject*)parentObj)->GetComponent<Collision2D>()->
-				body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
-		}
 		//regain control
 		if (colTick <= 0) {
 			colTick = 0;
 			isColliding = FALSE;
 		}
 	}
-
 
 	//if player are dashing or colliding then disable control
 	if (isDashing || isColliding) {

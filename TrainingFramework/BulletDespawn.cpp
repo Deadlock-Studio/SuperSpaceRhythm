@@ -69,7 +69,7 @@ void BulletDespawn::Idle()
 
 void BulletDespawn::Destroyed()
 {
-	SceneManager::GetInstance()->addToRemovalList(this);
+	GameManager::GetInstance()->addToRemovalList(this);
 }
 
 void BulletDespawn::Update(float deltaTime)

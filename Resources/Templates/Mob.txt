@@ -1,4 +1,28 @@
 BLUEPRINT 0
+NAME: boss
+COMPONENT:
+ANIMATION
+pixelsPerUnit: 18
+anim: 0, 196, 66, 98, 3
+anim_spd: 20
+../Resources/Textures/boss_ghost.tga
+ANIMATION
+pixelsPerUnit: 18
+anim: 0, 98, 66, 98, 3
+anim_spd: 20
+../Resources/Textures/boss_ghost.tga
+ANIMATION
+pixelsPerUnit: 18
+anim: 0, 0, 66, 98, 3
+anim_spd: 20
+../Resources/Textures/boss_ghost.tga
+COLLISION
+body: 142, 210, 1000, 0
+body_type: DYNAMIC
+HP
+health: 1000
+
+BLUEPRINT 0
 NAME: mob_white
 COMPONENT:
 ANIMATION
@@ -111,10 +135,10 @@ COLLISION
 body: 65, 80, 1000, 0
 body_type: DYNAMIC
 HP
-health: 20
+health: 50
 
 BLUEPRINT 0
-NAME: mob_mask
+NAME: mob_shoot
 COMPONENT:
 ANIMATION
 pixelsPerUnit: 8
@@ -162,6 +186,8 @@ anim_spd: 10
 COLLISION
 body: 60, 66, 10000, 0
 body_type: DYNAMIC
+HP
+health: 5
 
 BLUEPRINT 0
 NAME: mob_explode_bullet
@@ -193,6 +219,8 @@ anim_spd: 10
 COLLISION
 body: 60, 66, 10000, 0
 body_type: DYNAMIC
+HP
+health: 5
 
 BLUEPRINT 0
 NAME: mob_knight
@@ -222,5 +250,5 @@ anim: 0, 0, 27, 27, 1
 anim_spd: 5
 ../Resources/Textures/shield.tga
 COLLISION
-body: 155,155, 1000000000, 0
-body_type: DYNAMIC
+body: 155,155, 1000000, 0
+body_type: STATIC
