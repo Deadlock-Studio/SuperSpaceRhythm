@@ -53,7 +53,7 @@ void Trap::InitActive()
 	//type of body
 	filter.categoryBits = TRAP;
 	//collide with what
-	filter.maskBits = PLAYER;
+	filter.maskBits = PLAYER | CRATE;
 	GetComponent<Collision2D>()->body->GetFixtureList()->SetFilterData(filter);
 }
 
