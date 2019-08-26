@@ -97,8 +97,8 @@ public:
 	std::vector<Sfx*> SfxList;
 	bool hit = FALSE;
 	bool destroyed = FALSE;
-	bool audioCalibrated = FALSE;
-	bool visualCalibrated = FALSE;
+	bool audioCalibrated = TRUE;
+	bool visualCalibrated = TRUE;
 	int counter = 0;
 	float timing[20], total = 0;
 	DWORD play, press, begin, time;

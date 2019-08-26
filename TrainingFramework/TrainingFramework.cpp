@@ -60,17 +60,15 @@ void Update(ESContext *esContext, float deltaTime)
 	PhysicManager::GetInstance()->Update(deltaTime);
 	TextManager::GetInstance()->Update(deltaTime);
 
-	if (GameManager::GetInstance()->calibrate)
+	if (!SoundManager::GetInstance()->audioCalibrated)
 	{
-		if (!SoundManager::GetInstance()->audioCalibrated)
-		{
-			SoundManager::GetInstance()->CalibrateAudio();
-		}
-		else if (!SoundManager::GetInstance()->visualCalibrated)
-		{
-			SoundManager::GetInstance()->CalibrateVisual();
-		}
+		SoundManager::GetInstance()->CalibrateAudio();
 	}
+	else if (!SoundManager::GetInstance()->visualCalibrated)
+	{
+		SoundManager::GetInstance()->CalibrateVisual();
+	}
+	
 
 	//Always bottom
 	SceneManager::GetInstance()->LateUpdate(deltaTime);

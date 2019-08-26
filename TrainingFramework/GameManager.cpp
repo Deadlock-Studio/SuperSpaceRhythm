@@ -601,6 +601,7 @@ void GameManager::Option(float deltaTime)
 	}
 
 	if (calPressed) {
+		calibrate = FALSE;
 		menuBG->GetComponent<SpriteRenderer>()->FadeOut(FADE_SPEED);
 		backButton->GetComponent<SpriteRenderer>()->FadeOut(FADE_SPEED);
 		calibrateButton->GetComponent<SpriteRenderer>()->FadeOut(FADE_SPEED);
@@ -639,12 +640,17 @@ void GameManager::Option(float deltaTime)
 
 void GameManager::LoadCalibrate(float deltaTime)
 {
-	calibrate = true;
+	if (!calibrate)
+	{
+		SoundManager::GetInstance()->audioCalibrated = FALSE;
+		SoundManager::GetInstance()->visualCalibrated = FALSE;
+	}
 	SoundManager::GetInstance()->startConductor = FALSE;
 	backButton->isActive = true;
 	menuBG->isActive = true;
 	calBeat->isActive = true;
 	calComplete->isActive = true;
+	calibrate = TRUE;
 
 	menuBG->GetComponent<SpriteRenderer>()->FadeIn(FADE_SPEED);
 	backButton->GetComponent<SpriteRenderer>()->FadeIn(FADE_SPEED);
@@ -655,9 +661,6 @@ void GameManager::LoadCalibrate(float deltaTime)
 		backPressed = true;
 	
 	if (backPressed) {
-		calibrate = false;
-		SoundManager::GetInstance()->audioCalibrated = FALSE;
-		SoundManager::GetInstance()->visualCalibrated = FALSE;
 		SoundManager::GetInstance()->counter = 0;
 		SoundManager::GetInstance()->startConductor = TRUE;
 		menuBG->GetComponent<SpriteRenderer>()->FadeOut(FADE_SPEED);

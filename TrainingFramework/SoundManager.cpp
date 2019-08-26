@@ -9,7 +9,7 @@
 #include "HandyString.h"
 #include <algorithm>
 
-SoundManager * SoundManager::ms_pInstance = NULL;
+SoundManager* SoundManager::ms_pInstance = NULL;
 int sp = 0;
 bool del = FALSE;
 
@@ -243,7 +243,7 @@ int SoundManager::RhythmConductor(Track* track, float FrameTime) {
 		if (musicVolume >= 100) musicVolume = 100;
 		track->music.setVolume(musicVolume);
 	}
-	
+
 	if (startConductor)
 	{
 		sf::Time temp;
@@ -280,16 +280,19 @@ int SoundManager::RhythmConductor(Track* track, float FrameTime) {
 			track->prevBeatTime = track->beatmap[0];
 			getTrack("level_half")->music.setLoop(false);
 			getTrack("level_half")->music.play();
-			if (GameManager::GetInstance()->player != NULL)
+			if (strcmp(track->songname, "boss") != 0)
 			{
-				if (GameManager::GetInstance()->player->GetComponent<Control>()->isReforming)
+				if (GameManager::GetInstance()->player != NULL)
 				{
-					getTrack("level_half")->music.setVolume(musicVolume);
+					if (GameManager::GetInstance()->player->GetComponent<Control>()->isReforming)
+					{
+						getTrack("level_half")->music.setVolume(musicVolume);
 
+					}
+					else getTrack("level_half")->music.setVolume(0);
 				}
 				else getTrack("level_half")->music.setVolume(0);
 			}
-			else getTrack("level_half")->music.setVolume(0);
 			track->music.play();
 			float tm = track->music.getPlayingOffset().asSeconds();
 
@@ -300,7 +303,7 @@ int SoundManager::RhythmConductor(Track* track, float FrameTime) {
 
 			for (int i = 1; i <= beatonscreen; i++)
 			{
-				Beat *temp;
+				Beat* temp;
 				if (i % 4 == 0)
 				{
 					temp = new Beat(InitPosX, track->index, track->beatmap[track->index], TRUE);
@@ -499,7 +502,7 @@ int SoundManager::RhythmConductor(Track* track, float FrameTime) {
 					safePop(&BeatList);
 					if (track->index <= track->beatnum)
 					{
-						Beat *tmp;
+						Beat* tmp;
 
 						if (halftime == FALSE)
 						{
@@ -553,7 +556,7 @@ int SoundManager::RhythmConductor(Track* track, float FrameTime) {
 		perfect->GetComponent<SpriteRenderer>()->isActive = FALSE;
 		miss->GetComponent<SpriteRenderer>()->isActive = FALSE;
 		good->GetComponent<SpriteRenderer>()->isActive = FALSE;
-		while (BeatList.size() !=  0)
+		while (BeatList.size() != 0)
 		{
 			safePop(&BeatList);
 		}
